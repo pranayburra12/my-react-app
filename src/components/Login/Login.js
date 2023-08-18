@@ -9,8 +9,13 @@ import Linehori from "../../assets/linehorizontal.svg";
 import Lottie from "react-lottie";
 import ButtonLottieAnimation from "../../utils/Button.json";
 
-const Login = () => {
+const Login = (props) => {
   const [isHovered, setIsHovered] = React.useState(false);
+
+  const [email, setEmail] = React.useState("");
+  const [emailValid, setEmailValid] = React.useState(true);
+  const [password, setPassword] = React.useState("");
+  const [passwordValid, setPasswordValid] = React.useState(true);
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -28,6 +33,35 @@ const Login = () => {
       preserveAspectRatio: "xMidYMid slice",
     },
   };
+
+  const handleLogin = () => {
+    if (!validateEmail(email) )  {
+      setEmailValid(false);
+    } 
+     if (!validatePassword(password)) {
+      setPasswordValid(false);
+    } else {
+      let payload = {
+        email: email,
+        password: password,
+      };
+  
+     props.onsubmit(payload);
+    }
+  };
+  
+  
+
+  const validateEmail = (email) => {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+  };
+
+  const validatePassword = (password) => {
+    const letterRegex = /[a-zA-Z]/;
+    return letterRegex.test(password);
+  };
+  
 
   return (
     <div className="Login__container">
@@ -55,13 +89,26 @@ const Login = () => {
         <input
           type="email"
           placeholder="Email"
-          className="input-cred text-cred"
+          className={`input-cred text-cred ${!emailValid ? "invalid" : ""}`}
+          value={email}
+          onChange={(e) => {
+            setEmail(e.target.value);
+            setEmailValid(true); // Reset validation when input changes
+          }}
         />
+        {!emailValid && <p className="error-message">Please enter a valid email address.</p>}
         <input
           type="password"
           placeholder="Password"
-          className="input-cred pass-cred"
+          className={`input-cred pass-cred ${!passwordValid ? "invalid" : ""}`}
+          value={password}
+          onChange={(e) => {
+            setPassword(e.target.value);
+            setPasswordValid(true); // Reset validation when input changes
+          }}
         />
+        {!passwordValid && <p className="error-message">Password must contain at least one letter.</p>}
+
         <div className="input__checkand__forgetpass">
           <input type="checkbox" name="Remember Me" id="Remember-Me" />
           <label htmlFor="Remember-Me"></label>
@@ -72,6 +119,7 @@ const Login = () => {
           <button
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
+            onClick={handleLogin}
           >
             <div style={{ width: 315, height: 45 }}>
               <Lottie

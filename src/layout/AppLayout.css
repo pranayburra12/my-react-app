@@ -1,3 +1,12 @@
+.layout{
+    display: flex;
+    background: rgb(20, 20, 20);
+    height: 100vh;
+}
 .applayout{
     display: flex;
 }
+.app-body{
+    width: 100%;
+}
+

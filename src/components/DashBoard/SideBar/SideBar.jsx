@@ -45,6 +45,7 @@ const SideBar = () => {
   }
 
   return (
+    <div style={{display:"flex"}}>
     <div
       className={`sidebar ${isOpen ? "open" : ""}`}
       onMouseEnter={handleMouseEnter}
@@ -105,6 +106,8 @@ const SideBar = () => {
           <h3>Logout</h3>
         </div>
       </div>
+    </div>
+    <hr className="hr-line-dashbord" />
     </div>
   );
 };
