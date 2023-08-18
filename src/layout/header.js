@@ -34,23 +34,18 @@ const Header = () => {
             )
           })}
         </div>
-        <div className="header-right-body">
-          <div>
+        <div className="header-right-body">          
+          <div className="notification-bill">
           {showInput && (
             <input
               type="text"
-              className="Search-box-top-bar "
+              className=" "
               value={inputValue}
               onChange={handleInputChange}
               onBlur={handleInputBlur}
               autoFocus />
           )}
           <img src={Search} alt="" onClick={toggleInput} />
-          </div>
-          <div className="">
-
-          </div>
-          <div className="notification-bill">
             <img src={NotificationBell} alt="" />
           <span>Harvey Spectre</span>
             <img src={UserProfile} alt="" />

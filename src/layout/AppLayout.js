@@ -21,7 +21,7 @@ function AppLayout() {
 
   return (
     <div>
-      <div style={{display:'flex',background:"#141414",height:"100vh"}}>
+      <div className='layout'>
       <div className='applayout'>
         <SideBar />
         {/* <DashBoard /> */}
