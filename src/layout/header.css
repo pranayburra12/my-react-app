@@ -1,8 +1,31 @@
-.header-component{
+.header-component {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 60px;
 }
- .header-left-body{
-        color: #fff;
-    }
+
+.header-left-body {
+    color: #fff;
+}
+
+.header-right-body {
+    color: #fff;
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+}
+
+.header-left {
+    padding-right: 60px;
+    padding-right: 60px;
+    color: #FFF;
+    font-family: Manrope;
+    font-size: 17.175px;
+}
+
+.notification-bill {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}

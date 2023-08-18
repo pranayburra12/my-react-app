@@ -1,3 +1,6 @@
 .applayout{
     display: flex;
 }
+.app-body{
+    width: 100%;
+}

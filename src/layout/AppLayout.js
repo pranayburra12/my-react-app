@@ -20,12 +20,14 @@ function AppLayout() {
   // }, [navigate]);
 
   return (
-    <div style={{display:'flex'}}>
+    <div>
+      <div style={{display:'flex',background:"#141414",height:"100vh"}}>
       <div className='applayout'>
         <SideBar />
-        <DashBoard />
-        {/* <Header /> */}
+        {/* <DashBoard /> */}
       </div>
+      <div className='app-body'>
+      <Header />
       <Routes>
         <Route path="/home" element={<Home />} />
         <Route path="/sidenav" element={<SideNav />} />
@@ -35,6 +37,8 @@ function AppLayout() {
         <Route path="/inverstment-tracker" element={<InverstmentTracker />} />
         <Route path="/sip-calculater" element={<Sipcalculater />} />
       </Routes>
+      </div>
+    </div>
     </div>
   );
 }

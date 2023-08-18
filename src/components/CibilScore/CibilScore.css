@@ -1,14 +1,36 @@
 .cibil_score_container {
-  display: flex;
+  /* display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  align-items: center;
-  height: 100vh;
+  align-items: center; */
+  /* height: 100vh; */
 }
-.cibil_score_container.component{
-  padding-left: 10%;
-  gap: 17%;
+
+.cibil_score_container.component {
+  /* padding-left: 10%; */
+  /* gap: 17%; */
+  padding-left: 60px;
+  padding-right: 60px;
 }
+.cibil-score-check{
+  color: #FFF;
+  font-family: Inter;
+  font-size: 36.427px;
+  padding-bottom: 8px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.sibil-score{
+  color: #FFF;
+  font-family: Manrope;
+  font-size: 77px;
+  font-style: normal;
+  padding-bottom: 150px;
+  font-weight: 700;
+  line-height: normal;
+}
+
 
 .cibil_score_main h3,
 .cibil_score_main h1,

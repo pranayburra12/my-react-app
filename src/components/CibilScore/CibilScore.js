@@ -7,14 +7,13 @@ import "./CibilScore.css";
 
 const CibilScore = () => {
   return (
-    <div className="cibil_score_container component">
-      {/* Sidebar */}
-      {/* <div className="cibil_score_main">
-        <h3>Check your</h3>
-        <h1>CIBIL Score</h1>
+    <div className="col-md-8 cibil_score_container component">
+      <div className="cibil_score_main">
+        <div className="cibil-score-check">Check your</div>
+        <div className="sibil-score">CIBIL Score</div>
         <div className="cibilScore_box"></div>
       </div>
-      <div className="cibil_score_partners">
+      {/* <div className="cibil_score_partners">
         <div className="cibil_score_partners_heading">
           <h4>Our Partners</h4>
           <h6>Select Below</h6>
