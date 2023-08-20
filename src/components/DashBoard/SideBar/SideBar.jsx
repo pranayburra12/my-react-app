@@ -11,7 +11,12 @@ import Tax from "../../../assets/Tax.svg";
 import discord from "../../../assets/discord.svg";
 import Logout from "../../../assets/Logout.svg";
 import { useNavigate } from "react-router-dom";
-
+import { NavLink } from "react-router-dom/dist";
+import IconButton from "@mui/material/IconButton";
+import Menu from "@mui/icons-material/Menu";
+import Box from "@mui/material/Box";
+// import Typography from "@mui/material/Typography";
+import Drawer from "@mui/material/Drawer";
 const SideBar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -43,10 +48,100 @@ const SideBar = () => {
   const navigateDemart=()=>{
     navigate("./dmart")
   }
+  const sidebarmenu=[{
+    label:'Demat',
+    logo:Dmat,
+    navigate:'./dmart'
+  },
+{
+  label:'Cibil score',
+  logo:Invest,
+  navigate:'./dmart'
+},
+{label:'SIP calculator',
+logo:Sip,
+navigate:'./sip-calculator'
+},
+{
+  label:'Investment Tracker',
+  logo:SideRound,
+  navigate:'./dmart'
+},
+{
+  label:'Expense Management',
+  logo:Wallet,
+  navigate:'./dmart'
+}
+,{
+  label:'Tax Calculator',
+  logo:Tax,
+  navigate:'./dmart'
+}
+];
+   const [state, setState] = useState(false);
+ const toggleDrawer = (anchor, open, event) => {
+  if (
+    event &&
+    event.type === "keydown" &&
+    (event.key === "Tab" || event.key === "Shift")
+  ) {
+    return;
+  }
+
+  setState(!state);
+};
+
 
   return (
-    <div style={{display:"flex"}}>
-    <div
+    <div >
+       <div className="flex gap-10 md:hidden"> <IconButton
+        edge="end"
+        aria-label="menu"
+        onClick={(event) => toggleDrawer("right", true, event)}
+        sx={{
+          color: `white`,
+          display: { xs: `inline`, md: `inline`, lg: `none` },
+          width: "10%",
+          textAlign: "end",
+        }}
+      >
+   
+        <Menu fontSize="large" />
+      
+      </IconButton>
+      <Drawer
+        anchor="left"
+        open={state}
+        onClose={(event) => toggleDrawer("right", false, event)}
+        sx={{
+          ".MuiDrawer-paper": {
+            bgcolor: "black",
+          },
+        }}
+        color="primary.dark"
+        
+      >
+        <div className="m-2 flex flex-col gap-3"><img src={LogoBig} width='200px'/>
+          {sidebarmenu?.map((each)=>{
+          return <div className="flex items-center gap-4 p-2 mt-2 cursor-pointer opacity-50 hover:opacity-100"><img src={each.logo} width='40px'/><div className={`text-left w-full text-slate-100`}>{each.label}</div></div>
+        })}
+        </div>
+      </Drawer>
+    
+        <img src={LogoBig} width='200px'/>
+      </div>
+       {/* <div className=""><img src={LogoBig} width='200px' className="" onClick={toggleSidebar}/></div> */}
+      <div className={`sidebar ${isOpen ? "open" : ""} md:block md:w-100 fixed`}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+      >
+        <div className="flex items-center w-20"><img src={Logo} width='50px'/></div>
+
+         {sidebarmenu?.map((each)=>{
+          return <div className="flex items-center gap-2 p-2 mt-2 cursor-pointer opacity-50 hover:opacity-100" onClick={()=>navigate(each.navigate)}><img src={each.logo} width='40px'/><div className={`text-center w-full text-slate-100 ${isOpen ? "" : "hidden"} md:text-left`}>{each.label}</div></div>
+        })}
+      </div>
+    {/* <div
       className={`sidebar ${isOpen ? "open" : ""}`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
@@ -58,13 +153,13 @@ const SideBar = () => {
         <li>
           <a href="# " className="inner_li" onClick={navigateDemart}>
             <img src={Dmat} alt="dmat" />
-            <button className="cibil-score" >{"DMart"}</button>
+            <button className="cibil-score" >{"Demat"}</button>
           </a>
         </li>
         <li>
           <a href="" className="inner_li" onClick={handleChange}>
             <img src={Invest} alt="invest" />
-            {/* <h3>CBIL Score</h3> */}
+          
             <button className="cibil-score" >{"CBIL Score"}</button>
           </a>
         </li>
@@ -102,12 +197,12 @@ const SideBar = () => {
         </div>
         <hr />
         <div className="sidebarr-botton-logout">
-          <img src={Logout} alt="" />
+          <img src={Logout} alt="" width="50px"/>
           <h3>Logout</h3>
         </div>
       </div>
-    </div>
-    <hr className="hr-line-dashbord" />
+    </div> */}
+    {/* <hr className="hr-line-dashbord" /> */}
     </div>
   );
 };

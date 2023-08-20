@@ -11,11 +11,11 @@ function App() {
     try {
       const myHeaders = new Headers()
       myHeaders.append("Content-Type", "application/json");
-  
-      const raw = JSON.stringify({
-        "email": "likhith1234@gmail.com",
-        "password": "Test@12345"
-      });
+      var payload={
+        "email": "likhith2901@gmail.com",
+        "password": "on"
+      }
+      const raw = JSON.stringify(payload);
 
       console.log("Request Headers:", myHeaders);
 
@@ -27,14 +27,20 @@ function App() {
         redirect: 'follow'
       };
   
-      const response = await fetch(`https://findemybackedcode.onrender.com/auth/login`, requestOptions);
+      fetch(`https://findemybackedcode.onrender.com/auth/login`, requestOptions)
+      .then((res)=>{
+        return res.json();
+      })
+      .then((res)=>{
+        console.log(res)
+      })
   
-      if (!response.ok) {
-        throw new Error(`Request failed with status ${response.status}`);
-      }
+      // if (!response.ok) {
+      //   throw new Error(`Request failed with status ${response.status}`);
+      // }
   
-      const data = await response.json();
-      console.log("Response data:", data);
+      // const data = await res.json();
+      // console.log("Response data:", data);
     } catch (error) {
       console.log("Error:", error);
     }
@@ -44,8 +50,8 @@ function App() {
     <Router>
       {/* <Login
         onsubmit={onsubmit}
-      /> */}
-      {/* <SignUp /> */}
+      />
+      <SignUp /> */}
       <AppLayout />
     </Router>
   );

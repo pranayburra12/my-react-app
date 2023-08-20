@@ -20,13 +20,11 @@ function AppLayout() {
   // }, [navigate]);
 
   return (
-    <div>
-      <div className='layout'>
-      <div className='applayout'>
-        <SideBar />
-        {/* <DashBoard /> */}
-      </div>
+    <div className='w-screen'>
+      <div className='layout md:flex flex-col'>
+     <SideBar />
       <div className='app-body'>
+      
       <Header />
       <Routes>
         <Route path="/home" element={<Home />} />
@@ -35,7 +33,7 @@ function AppLayout() {
         <Route path="/dmart" element={<Dmart />} />
         <Route path="/expence-mangement" element={<ExpenceMangement />} />
         <Route path="/inverstment-tracker" element={<InverstmentTracker />} />
-        <Route path="/sip-calculater" element={<Sipcalculater />} />
+        <Route path="/sip-calculator" element={<Sipcalculater />} />
       </Routes>
       </div>
     </div>

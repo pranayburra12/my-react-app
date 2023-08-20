@@ -1,7 +1,7 @@
 .Dashboard__container {
-  /* height: 100vh; */
+  height: 100vh;
   background-color: #141414;
-  /* display: flex; */
+  display: flex;
 }
 
 .hr-line-dashbord {

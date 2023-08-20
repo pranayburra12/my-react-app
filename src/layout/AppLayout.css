@@ -5,8 +5,20 @@
 }
 .applayout{
     display: flex;
+  
 }
 .app-body{
     width: 100%;
+    /* margin-left: 130px; */
+    display: flex;
+    flex-direction: column;
 }
 
+@media (max-width: 767px) {
+  .app-body{
+    flex-direction: column-reverse;
+    margin-left: 0px;
+    max-width: 100%;
+  }
+  
+}
