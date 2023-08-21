@@ -52,7 +52,7 @@ navigate:'./sip-calculator'
 {
   label:'Investment Tracker',
   logo:SideRound,
-  navigate:'./investment-tracker'
+  navigate:'./inverstment-tracker'
 },
 {
   label:'Expense Management',
@@ -63,6 +63,11 @@ navigate:'./sip-calculator'
   label:'Tax Calculator',
   logo:Tax,
   navigate:'./tax-calculator'
+},
+{
+  label:'Exit',
+  logo:Logout,
+  navigate:'/'
 }
 ];
    const [state, setState] = useState(false);
@@ -77,6 +82,50 @@ navigate:'./sip-calculator'
 
   setState(!state);
 };
+
+  const onLogOut = () =>{
+    try {
+
+      const token = localStorage.getItem("access_token")
+
+      const myHeaders = new Headers()
+      myHeaders.append("Content-Type", "application/json"); 
+      
+      myHeaders.append("Authorization", `Bearer ${JSON.parse(token)}`);   
+
+      const requestOptions = {
+        method: 'DELETE',
+        headers: myHeaders
+      };
+      
+      fetch(`https://findemybackedcode.onrender.com/auth/logout`,requestOptions)
+      .then((res)=>{
+        return res.json();
+      })
+      .then((res)=>{
+       if(res.status === 200){
+        localStorage.clear();
+        navigate("/")
+        window.location.reload()
+        console.log(res)
+       }
+      })
+
+    } catch (error) {
+      console.log("Error:", error);
+    }
+  }
+
+
+
+  const onSubmit = (each) => {
+      if(each.label === "Exit"){
+          // localStorage.clear();
+          onLogOut()
+      }else{
+        navigate(each.navigate)
+      }
+  }
 
 
   return (
@@ -126,7 +175,7 @@ navigate:'./sip-calculator'
         <div className="flex items-center w-20"><img src={Logo} width='50px'/></div>
 
          {sidebarmenu?.map((each)=>{
-          return <div className="flex items-center gap-2 p-2 mt-2 cursor-pointer opacity-50 hover:opacity-100" onClick={()=>navigate(each.navigate)}><img src={each.logo} width='40px'/><div className={`text-center w-full text-slate-100 ${isOpen ? "" : "hidden"} md:text-left`}>{each.label}</div></div>
+          return <div className={`flex items-center gap-2 p-2 mt-2 cursor-pointer opacity-50 hover:opacity-100  ${each.label}`} onClick={()=>{onSubmit(each)}}><img src={each.logo} width='40px'/><div className={`text-center w-full text-slate-100 ${isOpen ? "" : "hidden"} md:text-left`}>{each.label}</div></div>
         })}
       </div>
     {/* <div

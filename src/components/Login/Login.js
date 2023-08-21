@@ -88,10 +88,12 @@ const Login = (props) => {
        if(res.status === 200){
         toast.success("Login successful!");
         setDesabled(res);
-        localStorage.setItem("token", res.data);
+        localStorage.setItem("access_token", JSON.stringify(res.data.accessToken));
+        localStorage.setItem("refresh_token", JSON.stringify(res.data.accessToken));
         window.instance=res.data
         setIsSubmitting(false);
-        navigate("/inverstment-tracker")
+        navigate("/sip-calculator")
+        window.location.reload()
         console.log(res)
        }
       })

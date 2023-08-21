@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import "./InverstmentTracker.css"
 import group from "../../assets/Group.svg"
 import add from "../../assets/add.svg"
@@ -10,9 +10,13 @@ import savings from "../../assets/saings.svg"
 import pff from "../../assets/pff.svg"
 import stocks from "../../assets/stocks.svg"
 import arrow from "../../assets/arrow.svg"
+import CustomTracker from "./trackers/CustomTracker";
 
 const InverstmentTracker = () => {
 
+    const [changeTracker,setChangeTracket] = useState();
+
+    const isMobileResolution = window.innerWidth <= 768 ? false : true;
 
     const data=[
         {
@@ -21,12 +25,42 @@ const InverstmentTracker = () => {
         values: "₹ 21.9K",
         persentage: "11.5%",
         },
-        // {
-        //     img: mutualfunds,
-        //     name: "savings",
-        //     values: "₹ 21.9K",
-        //     persentage: "11.5%",
-        //     },
+        {
+            img: stocks,
+            name: "savings",
+            values: "₹ 21.9K",
+            persentage: "11.5%",
+        },
+        {
+            img: stocks,
+            name: "savings",
+            values: "₹ 21.9K",
+            persentage: "11.5%",
+        },
+        {
+            img: stocks,
+            name: "savings",
+            values: "₹ 21.9K",
+            persentage: "11.5%",
+        },
+        {
+            img: stocks,
+            name: "savings",
+            values: "₹ 21.9K",
+            persentage: "11.5%",
+        },
+        {
+            img: stocks,
+            name: "savings",
+            values: "₹ 21.9K",
+            persentage: "11.5%",
+        },
+        {
+            img: stocks,
+            name: "savings",
+            values: "₹ 21.9K",
+            persentage: "11.5%",
+        },
     ]
     const lottieOptions = {
         animationData: ButtonLottieAnimation,
@@ -37,10 +71,11 @@ const InverstmentTracker = () => {
         },
       };
 
-      const handleDivClick = () => {
+      const onChangeTracker = (values) => {
         console.log(`Clicked on item at index `);
-        // You can perform any actions you want here when the div is clicked
-      };
+        setChangeTracket(values)
+
+      };    
     
     return (
         <div className="it-grid">
@@ -56,17 +91,19 @@ const InverstmentTracker = () => {
                         </div>
                         
                     </div>
-                    <div className="it-amount">
+                    <div className={ !isMobileResolution && changeTracker?.name? "remove" : `it-amount`}>
                         <div className="net-amount">Your net worth increase by ₹12,000than last month</div>
                         <div className="updated">Last Updated Mar 29,2023</div>
                       </div>
                 </div>
+                <div className="scroll-container">
+                    <hr  className="hr-tag"></hr>
                 <div className="it-left-body-footer">   
                     {
                         data.map((item)=>{
                             return(
                                 <>
-                                    <a className="it-data" onClick={() => handleDivClick()}>
+                                    <a className="it-data" onClick={() => {onChangeTracker(item)}}>
                                         <div><img src={item.img} /></div>
                                         <div className="stocks">
                                             <div className="name">{item.name}</div>
@@ -83,9 +120,11 @@ const InverstmentTracker = () => {
                     }
 
                 </div>
+                </div>
             </div>  
-            <div className="side-bar" > <hr /> </div>
-             <div className="it-right-body">
+            <div className="side-bar" > <div style={{background:"#141414",zIndex:"20",transition:"width 0.4s ease-out",borderRight:"2px solid #e2e2e2"}}></div></div>
+             {
+               !changeTracker?.name ? <div className="it-right-body">
                     <div className="add-tracker">
                         <div className="heading">Add a tracker</div>
                         <button className="add"><img  src={add}/></button>
@@ -111,7 +150,10 @@ const InverstmentTracker = () => {
                                 </div>
                         </div>
                     </div>
-            </div>         
+            </div>    
+            : 
+            changeTracker?.name === "savings" && <div className="it-right-body"> <CustomTracker /> </div>
+            }     
 
         </div>
     )

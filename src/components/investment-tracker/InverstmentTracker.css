@@ -3,234 +3,315 @@
     grid-template-columns: auto auto auto;
     grid-gap: 10px;
     padding-left: 150px;
-    padding-top: 100px;
+    padding-top: 50px;
     padding-right: 40px;
-    height: 100vh;
-   }
-   
-   .it-grid > div {
+    /* height: 100vh; */
+}
+.it-grid .side-bar{
+    grid-column: 4;
+    padding-left: 50px;
+} 
+
+
+.it-grid>div {
     text-align: center;
     padding: 20px 0;
     font-size: 30px;
-   }
-   
-   .it-grid .it-left-body{
+}
+
+.it-grid .it-left-body {
     grid-row: 1 / span 10;
     grid-column: 1 / span 3;
     display: inherit;
-    gap: 80px;
-   }
-   .it-grid .it-right-body{
+    gap: 60px;
+}
+
+.it-grid .it-right-body {
     grid-row: 1 / span 10;
     display: inherit;
     gap: 20px;
-   }
-   .it-grid .it-left-body .it-body-data{
+}
+
+.it-grid .it-left-body .it-body-data {
     padding: 20px;
     background-color: #1C1C1C;
     border: 1px solid #707070;
     border-radius: 11px;
-   }
-   
-   .it-grid .it-left-body .it-body-data .net-worth{
+}
+
+.it-grid .it-left-body .it-body-data .net-worth {
     float: right;
     color: #FFF;
     font-family: Manrope;
     font-size: 15.984px;
     font-weight: 700;
-   }
-   
-   .it-grid .it-left-body .it-body-data  .data{
+}
+
+.it-grid .it-left-body .it-body-data .data {
     display: flex;
     align-items: center;
-   }
-   
-   .it-grid .it-left-body .it-body-data  .data  .investment{
+}
+
+.it-grid .it-left-body .it-body-data .data .investment {
     color: #FFF;
     font-family: Inter;
     font-size: 84.546px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-   }
-   .it-grid .it-left-body .it-body-data  .data  .group{
+}
+
+.it-grid .it-left-body .it-body-data .data .group {
     display: flex;
     background: #08382b;
     align-items: baseline;
     padding: 5px;
-   }
-   .it-grid .it-left-body .it-body-data  .data  .persentage {
+}
+
+.it-grid .it-left-body .it-body-data .data .persentage {
     color: #0BD19D;
-       font-family: Manrope;
-       font-size: 17.444px;
-       font-style: normal;
-       font-weight: 400;
-       line-height: normal;
-   }
-   
-   .it-grid .it-left-body .it-body-data  .it-amount{
+    font-family: Manrope;
+    font-size: 17.444px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.it-grid .it-left-body .it-body-data .it-amount {
     padding-top: 47px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-   }
-   .it-grid .it-left-body .it-body-data  .net-amount{
+}
+
+.remove{
+    padding-top: 47px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.it-grid .it-left-body .it-body-data .remove .net-amount {
     color: #FFF;
     font-family: Inter;
     font-size: 17.159px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-   }
-   .it-grid .it-left-body .it-body-data  .it-amount{
+}
+
+.it-grid .it-left-body .it-body-data .net-amount {
+    color: #FFF;
+    font-family: Inter;
+    font-size: 17.159px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.it-grid .it-left-body .it-body-data .net-amount {
+    color: #FFF;
+    font-family: Inter;
+    font-size: 17.159px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+
+.it-grid .it-left-body .it-body-data .it-amount {
     color: #A5A5A5;
     font-family: Manrope;
     font-size: 10.817px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-   }
-   
-   .side-bar{
+}
+
+.side-bar {
     grid-row: 1 / span 10;
     display: flex;
-   }
-   
-   .it-right-body .add-tracker{
+}
+
+.it-right-body .add-tracker {
     border: 1px solid #FEC008;
     padding: 29px 60px 40px 60px;
     border-radius: 8px;
-   }
-   .it-right-body .heading{
+}
+
+.it-right-body .heading {
     color: #FFF;
-       font-family: Inter;
-       font-size: 19.923px;
-       font-style: normal;
-       font-weight: 400;
-       line-height: normal;
-       padding-bottom: 29px;
-   }
-   .it-right-body .add{
+    font-family: Inter;
+    font-size: 19.923px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    padding-bottom: 29px;
+}
+
+.it-right-body .add {
     border: none;
     background: none;
     cursor: pointer;
-   }
-   .learn-investment{
-       border: 1px solid #70706F;
-       border-radius: 8px;
-       padding: 20px;
-   }
-   
-   .learn-investment .learn{
-       width: auto;
-   }
-   .learn-investment .data{
-       float: left;
-       color: #FFF;
-       font-family: Manrope;
-       font-size: 18.143px;
-       font-style: normal;
-       font-weight: 700;
-       line-height: normal;
-   }
-   .learn-more{
-       top: -42px !important;
-       left: 96px !important;
-       width: 70px !important;
-   }
-   .it-left-body-footer{
-       display: grid;
-       grid-template-columns: repeat(3, 1fr);
-       grid-gap: 10px; 
-   }
-   
-   .it-left-body-footer .it-data{
-       display: flex;
-       text-align: center;
-       border-radius: 10px;
-       background-color: #282828;
-       cursor: pointer;
-   }
-   .it-left-body-footer .it-data .stocks{
-       padding-left: 20px;
-       padding-top: 20px;
-       padding-right: 20px;
-   }
-   .it-left-body-footer .it-data .name{
-       color: #707070;
-       font-family: Manrope;
-       font-size: 11.545px;
-       font-style: normal;
-       font-weight: 700;
-       line-height: normal;
-   }
-   .it-left-body-footer .it-data .value{
-       color: #FFF;
-       font-family: Inter;
-       padding-top: 10px;
-       font-size: 19px;
-       font-style: normal;
-       font-weight: 400;
-       line-height: normal;
-   }
-   
-   .it-left-body-footer .it-data .value-1{
-       display: flex;
-       color: #0BD19D;
-       padding-top: 20px;
-       font-family: Manrope;
-       font-size: 10.123px;
-       font-style: normal;
-       font-weight: 400;
-       line-height: normal;
-   }
-   .navigation{
-   
-       padding-top: 67px;
-       padding-left: 20px;
-   }
-   .navigate-button{
-       border: none;
-       background: none;
-       cursor: pointer;
-   }
-   
-   @media only screen and (max-width: 600px) {
-       .it-grid{
-           display: block;
-           height: auto;
-           padding: 30px;
-       }
-       .it-grid .it-body-data .it-body-data{
-           display: block;
-       }
-       .net-worth{
-           font-size: 10px  !important;
-           padding-top: 5px;
-       }
-       .investment{
-           font-size: 20px !important
-       }
-       .group{
-           padding: 2px !important;
-       }
-       .data{
-           gap: 10px;
-       }
-       .persentage{
-           font-size: 10px !important;
-       }
-       .group-img{
-           width: 11px;
-       }
-       .it-amount{  
-           display: flex;
-           flex-direction: column;
-           align-items: flex-start !important;
-           gap: 20px;
-       }
-       .net-amount{
-           padding-right: 165px;
-           font-size: 10px !important;
-       }
-     }
+}
+
+.learn-investment {
+    border: 1px solid #70706F;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.learn-investment .learn {
+    width: auto;
+}
+
+.learn-investment .data {
+    float: left;
+    color: #FFF;
+    font-family: Manrope;
+    font-size: 18.143px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.learn-more {
+    top: -42px !important;
+    left: 96px !important;
+    width: 70px !important;
+}
+
+.it-left-body-footer {
+    padding-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+}
+
+.it-left-body-footer .it-data {
+    display: flex;
+    text-align: center;
+    border-radius: 10px;
+    background-color: #282828;
+    cursor: pointer;
+}
+
+.it-left-body-footer .it-data .stocks {
+    padding-left: 20px;
+    padding-top: 20px;
+    padding-right: 20px;
+}
+
+.it-left-body-footer .it-data .name {
+    color: #707070;
+    font-family: Manrope;
+    font-size: 11.545px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.it-left-body-footer .it-data .value {
+    color: #FFF;
+    font-family: Inter;
+    padding-top: 10px;
+    font-size: 19px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.it-left-body-footer .it-data .value-1 {
+    display: flex;
+    color: #0BD19D;
+    padding-top: 20px;
+    font-family: Manrope;
+    font-size: 10.123px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.navigation {
+
+    padding-top: 67px;
+    padding-left: 20px;
+}
+
+.navigate-button {
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 768px) {
+    .it-grid {
+        display: block;
+        height: auto;
+        padding: 30px;
+    }
+
+    .it-grid .it-body-data .it-body-data {
+        display: block;
+    }
+
+    .net-worth {
+        font-size: 10px !important;
+        padding-top: 5px;
+    }
+
+    .investment {
+        font-size: 20px !important
+    }
+
+    .group {
+        padding: 2px !important;
+    }
+
+    .data {
+        gap: 10px;
+    }
+
+    .persentage {
+        font-size: 10px !important;
+    }
+
+    .group-img {
+        width: 11px;
+    }
+
+    .it-amount {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start !important;
+        gap: 20px;
+    }
+
+    .net-amount {
+        padding-right: 165px;
+        font-size: 10px !important;
+    }
+
+    .it-left-body-footer {
+        padding-top: 20px !important;
+        display: grid;
+        grid-auto-flow: column;
+        gap: 10px;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+    .it-data{
+        width: 300px;
+    }
+    .scroll-container{
+        padding-top: 40px;
+    }
+    .hr-tag{
+        margin: 10px 0;
+        /* padding-top: 40px; */
+    }
+    .remove{
+        display: none;
+    }
+}

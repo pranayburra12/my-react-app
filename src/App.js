@@ -8,11 +8,16 @@ import Registration from './registration/registration';
 
 function App() {
 
+  const tokenData = localStorage.getItem("access_token"); 
+
+  console.log("aaaaaaaaaaaaaaa",tokenData)
+
 
   return (
     <Router>
-      {/* <Registration /> */}
-      <AppLayout />
+      {
+        tokenData ?  <AppLayout /> : <Registration />
+      }
     </Router>
   );
 }  
