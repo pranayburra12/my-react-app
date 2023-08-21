@@ -3,6 +3,12 @@
     background: rgb(20, 20, 20);
     height: 100vh;
 }
+@media (max-width:767px) {
+    .layout{
+        height: 100%;
+    }
+}
+
 .applayout{
     display: flex;
   

@@ -22,9 +22,7 @@ const SideBar = () => {
 
   const navigate = useNavigate();
 
-  const toggleSidebar = () => {
-    setIsOpen(!isOpen);
-  };
+  
   const handleMouseEnter = () => {
     setIsOpen(true);
   };
@@ -33,17 +31,6 @@ const SideBar = () => {
     setIsOpen(false);
   };
 
-  const handleChange= () =>{
-    navigate("/cibilscrore")
-  }
-
-  const navigettoSip=() =>{
-    navigate("/sip-calculater")
-  }
-
-  const navigettoInvestmeTracker = () =>{
-    navigate("/inverstment-tracker")
-  } 
 
   const navigateDemart=()=>{
     navigate("./dmart")
@@ -51,12 +38,12 @@ const SideBar = () => {
   const sidebarmenu=[{
     label:'Demat',
     logo:Dmat,
-    navigate:'./dmart'
+    navigate:'./demat'
   },
 {
   label:'Cibil score',
   logo:Invest,
-  navigate:'./dmart'
+  navigate:'./cibilscore'
 },
 {label:'SIP calculator',
 logo:Sip,
@@ -65,17 +52,17 @@ navigate:'./sip-calculator'
 {
   label:'Investment Tracker',
   logo:SideRound,
-  navigate:'./dmart'
+  navigate:'./investment-tracker'
 },
 {
   label:'Expense Management',
   logo:Wallet,
-  navigate:'./dmart'
+  navigate:'./expence-management'
 }
 ,{
   label:'Tax Calculator',
   logo:Tax,
-  navigate:'./dmart'
+  navigate:'./tax-calculator'
 }
 ];
    const [state, setState] = useState(false);
@@ -94,7 +81,7 @@ navigate:'./sip-calculator'
 
   return (
     <div >
-       <div className="flex gap-10 md:hidden"> <IconButton
+       <div className="flex flex-row-reverse justify-around h-20 gap-10 w-full fixed bg-[rgb(23,23,23)] md:hidden"> <IconButton
         edge="end"
         aria-label="menu"
         onClick={(event) => toggleDrawer("right", true, event)}
@@ -123,7 +110,8 @@ navigate:'./sip-calculator'
       >
         <div className="m-2 flex flex-col gap-3"><img src={LogoBig} width='200px'/>
           {sidebarmenu?.map((each)=>{
-          return <div className="flex items-center gap-4 p-2 mt-2 cursor-pointer opacity-50 hover:opacity-100"><img src={each.logo} width='40px'/><div className={`text-left w-full text-slate-100`}>{each.label}</div></div>
+          return <div className="flex items-center gap-4 p-2 mt-2 cursor-pointer opacity-50 hover:opacity-100" onClick={(event)=>{navigate(each.navigate)
+          toggleDrawer("right", false, event)}}><img src={each.logo} width='40px'/><div className={`text-left w-full text-slate-100`}>{each.label}</div></div>
         })}
         </div>
       </Drawer>

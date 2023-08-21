@@ -23,14 +23,14 @@ function AppLayout() {
     <div className='w-screen'>
       <div className='layout md:flex flex-col'>
      <SideBar />
-      <div className='app-body'>
+      <div className='app-body mt-20 mb-24 md:mt-24'>
       
       <Header />
       <Routes>
         <Route path="/home" element={<Home />} />
         <Route path="/sidenav" element={<SideNav />} />
-        <Route path="/cibilscrore" element={<CibilScore />} />
-        <Route path="/dmart" element={<Dmart />} />
+        <Route path="/cibilscore" element={<CibilScore />} />
+        <Route path="/demat" element={<Dmart />} />
         <Route path="/expence-mangement" element={<ExpenceMangement />} />
         <Route path="/inverstment-tracker" element={<InverstmentTracker />} />
         <Route path="/sip-calculator" element={<Sipcalculater />} />
