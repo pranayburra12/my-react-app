@@ -6,8 +6,8 @@ import Login from './components/Login/Login';
 function App() {
   return (
     <Router>
-      <Login />
-      {/* <AppLayout /> */}
+      <Login />  
+      <AppLayout />
     </Router>
   );
 }
