@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Login.css";
 import Logo from "../../assets/LogoFindemy.svg";
 import GoogleLogo from "../../assets/Google.svg";
@@ -8,14 +8,25 @@ import Linehori from "../../assets/linehorizontal.svg";
 
 import Lottie from "react-lottie";
 import ButtonLottieAnimation from "../../utils/Button.json";
+import { useNavigate } from "react-router-dom";
+
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const Login = (props) => {
+
+  const navigate = useNavigate();
+
   const [isHovered, setIsHovered] = React.useState(false);
 
   const [email, setEmail] = React.useState("");
   const [emailValid, setEmailValid] = React.useState(true);
   const [password, setPassword] = React.useState("");
   const [passwordValid, setPasswordValid] = React.useState(true);
+
+  const [desabled,setDesabled] = useState({})
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -38,15 +49,57 @@ const Login = (props) => {
     if (!validateEmail(email) )  {
       setEmailValid(false);
     } 
-     if (!validatePassword(password)) {
-      setPasswordValid(false);
-    } else {
+     else {
       let payload = {
         email: email,
         password: password,
       };
   
-     props.onsubmit(payload);
+      setIsSubmitting(true)
+     onsubmit(payload);
+    }
+  };
+
+  const onsubmit = async (values) => {
+    try {
+      const myHeaders = new Headers()
+      myHeaders.append("Content-Type", "application/json");
+      var payload={
+        "email": values.email,
+        "password": values.password
+      }
+      const raw = JSON.stringify(payload);
+
+      console.log("Request Headers:", myHeaders);
+
+  
+      const requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+      };
+  
+      fetch(`https://findemybackedcode.onrender.com/auth/login`, requestOptions)
+      .then((res)=>{
+        return res.json();
+      })
+      .then((res)=>{
+       if(res.status === 200){
+        toast.success("Login successful!");
+        setDesabled(res);
+        localStorage.setItem("token", res.data);
+        window.instance=res.data
+        setIsSubmitting(false);
+        navigate("/inverstment-tracker")
+        console.log(res)
+       }
+      })
+
+    } catch (error) {
+      console.log("Error:", error);
+      setIsSubmitting(false)
+      toast.error("Login failed. Please check your credentials.");
     }
   };
   
@@ -120,6 +173,7 @@ const Login = (props) => {
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             onClick={handleLogin}
+            disabled={isSubmitting}
           >
             <div style={{ width: 315, height: 45 }}>
               <Lottie
@@ -132,7 +186,7 @@ const Login = (props) => {
           </button>
         </div>
         <hr />
-        <a className="create__an_account" href="">
+        <a className="create__an_account" href="" onClick={()=>{ navigate("/signin") }}>
           Create An Account
         </a>
         <footer className="Login__footer">

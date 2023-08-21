@@ -6,6 +6,7 @@ import OTPSection from "./OtpSection";
 
 const SignUp = () => {
   const [formSubmit, setFormSubmit] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -16,6 +17,9 @@ const SignUp = () => {
     confirmPassword: "",
     phoneNumber: "",
   });
+
+  const [data,setData]=useState()
+
   const [touched, setTouched] = useState({
     email: false,
     password: false,
@@ -88,11 +92,97 @@ const SignUp = () => {
     if (Object.keys(errors).length === 0) {
       setFormSubmit(true);
     }
+
+    const payload ={
+      email:email,
+      fullName:"Pranay Burra",
+      password:password,
+      confirmPassword:confirmPassword,
+      phoneNumber:phoneNumber
+  }
+
+  setIsSubmitting(true)
+  onSubmit(payload)
+
   };
 
+  const onSubmit = (values) =>{
+    try {
+      const myHeaders = new Headers()
+      myHeaders.append("Content-Type", "application/json");
+      const raw = JSON.stringify(values);
+
+      console.log("Request Headers:", myHeaders);
+
+  
+      const requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+      };
+  
+      fetch(`https://findemybackedcode.onrender.com/auth/register`, requestOptions)
+      .then((res)=>{
+        return res.json();
+      })
+      .then((res)=>{
+        console.log(res)
+        if(res.data.id){
+          let payload={
+            email:res.data.email,
+            id:res.data.id
+          }
+          sendOtp(payload)
+        }
+        setData(res)
+      })
+  
+      // if (!response.ok) {
+      //   throw new Error(`Request failed with status ${response.status}`);
+      // }
+  
+      // const data = await res.json();
+      // console.log("Response data:", data);
+    } catch (error) {
+      console.log("Error:", error);
+    }
+
+  }
+
+  const sendOtp = (values) =>{
+    try {
+      const myHeaders = new Headers()
+      myHeaders.append("Content-Type", "application/json");
+      const raw = JSON.stringify(values);
+
+      console.log("Request Headers:", myHeaders);
+
+  
+      const requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+      };
+
+      let api=`https://findemybackedcode.onrender.com/auth/sendOtp`
+  
+      fetch(api, requestOptions)
+      .then((res)=>{
+        return res.json();
+      })
+      .then((res)=>{
+        console.log(res)
+        setIsSubmitting(false)
+      })
+    } catch (error) {
+      console.log("Error:", error);
+      setIsSubmitting(false)
+    }
+  }
+
   const isValidEmail = (email) => {
-    // Add your email validation logic here
-    // For a simple validation, you can use a regular expression
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
@@ -111,7 +201,10 @@ const SignUp = () => {
 
         <hr />
         {formSubmit ? (
-          <OTPSection />
+          <OTPSection 
+            email={email}
+            data={data}
+          />
         ) : (
           <>
             <input
@@ -163,14 +256,16 @@ const SignUp = () => {
             )}
 
             <img
+              className={isSubmitting ? "enabled" : "desabled"}
               src={SignUpArrow}
               alt="Signup-arrow"
               onClick={handleFormSubmit}
             />
           </>
         )}
+        
 
-        <a className="create__an_account" href="/login">
+        <a className="create__an_account" href="/">
           Back to Login
         </a>
         <footer className="SignUp__footer">

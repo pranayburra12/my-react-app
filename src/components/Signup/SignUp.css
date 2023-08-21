@@ -59,6 +59,7 @@
 
 .SignUp__second__section img {
   position: absolute;
+  cursor: pointer;
   top: 500px;
 }
 .SignUp__second__section input {
