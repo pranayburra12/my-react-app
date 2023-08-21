@@ -19,6 +19,7 @@ import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 const SideBar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const logoutChannel = new BroadcastChannel("logout-channel");
 
   const navigate = useNavigate();
 
@@ -104,6 +105,7 @@ navigate:'./sip-calculator'
       })
       .then((res)=>{
        if(res.status === 200){
+        logoutChannel.postMessage("logout");
         localStorage.clear();
         navigate("/")
         window.location.reload()
@@ -116,6 +118,14 @@ navigate:'./sip-calculator'
     }
   }
 
+  logoutChannel.onmessage = (event) => {
+    if (event.data === "logout") {
+      localStorage.clear();
+      window.location.href = "/"; 
+      navigate("/")
+      window.location.reload()
+    }
+  };
 
 
   const onSubmit = (each) => {
