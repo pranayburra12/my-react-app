@@ -40,7 +40,7 @@ const CibilScore = () => {
             <div className="m-2 flex flex-col gap-5">
             {
                 partners.map((each)=>{
-                    return <div className="text-lg pl-10 border-white border-b-[1px] p-10">{each.name}</div>
+                    return <div className="text-lg pl-5 border-white border-b-[1px] p-5">{each.name}</div>
                 })
                } 
                 </div>   

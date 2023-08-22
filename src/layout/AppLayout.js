@@ -23,7 +23,7 @@ function AppLayout() {
     <div className='w-screen'>
       <div className='layout md:flex flex-col'>
      <SideBar />
-      <div className='app-body mt-20 mb-24 md:mt-24'>
+      <div className='app-body pt-20 pb-24 md:pt-24'>
       
       <Header />
       <Routes>

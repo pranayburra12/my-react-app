@@ -1,6 +1,6 @@
 .it-grid {
     display: grid;
-    grid-template-columns: auto auto auto;
+    grid-template-columns: auto auto;
     grid-gap: 10px;
     padding-left: 150px;
     padding-top: 50px;
@@ -95,35 +95,18 @@
 .it-grid .it-left-body .it-body-data .remove .net-amount {
     color: #FFF;
     font-family: Inter;
-    font-size: 17.159px;
+    /* font-size: 17.159px; */
     font-style: normal;
     font-weight: 400;
     line-height: normal;
 }
 
-.it-grid .it-left-body .it-body-data .net-amount {
-    color: #FFF;
-    font-family: Inter;
-    font-size: 17.159px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-}
-
-.it-grid .it-left-body .it-body-data .net-amount {
-    color: #FFF;
-    font-family: Inter;
-    font-size: 17.159px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-}
 
 
 .it-grid .it-left-body .it-body-data .it-amount {
     color: #A5A5A5;
     font-family: Manrope;
-    font-size: 10.817px;
+    /* font-size: 10.817px; */
     font-style: normal;
     font-weight: 400;
     line-height: normal;
@@ -141,13 +124,13 @@
 }
 
 .it-right-body .heading {
-    color: #FFF;
+    /* color: #FFF;
     font-family: Inter;
     font-size: 19.923px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    padding-bottom: 29px;
+    padding-bottom: 29px; */
 }
 
 .it-right-body .add {
@@ -248,10 +231,7 @@
 .highlighted {
     background-color: yellow;
 }
-.savings{
-    border: 3px solid #F1CA00;
-}
-.bonds{
+.selected{
     border: 3px solid #F1CA00;
 }
 
