@@ -18,6 +18,14 @@ const InverstmentTracker = () => {
 
     const isMobileResolution = window.innerWidth <= 768 ? false : true;
 
+    document.addEventListener('DOMContentLoaded', () => {
+        const component = document.querySelector('.it-data');
+      
+        component.addEventListener('click', () => {
+          component.classList.toggle('highlighted');
+        });
+      });
+
     const data=[
         {
         img: savings,
@@ -27,37 +35,37 @@ const InverstmentTracker = () => {
         },
         {
             img: stocks,
-            name: "savings",
+            name: "bonds",
             values: "₹ 21.9K",
             persentage: "11.5%",
         },
         {
             img: stocks,
-            name: "savings",
+            name: "gold",
             values: "₹ 21.9K",
             persentage: "11.5%",
         },
         {
             img: stocks,
-            name: "savings",
+            name: "savings5",
             values: "₹ 21.9K",
             persentage: "11.5%",
         },
         {
             img: stocks,
-            name: "savings",
+            name: "mutual-funds",
             values: "₹ 21.9K",
             persentage: "11.5%",
         },
         {
             img: stocks,
-            name: "savings",
+            name: "savings 1",
             values: "₹ 21.9K",
             persentage: "11.5%",
         },
         {
             img: stocks,
-            name: "savings",
+            name: "savings2",
             values: "₹ 21.9K",
             persentage: "11.5%",
         },
@@ -103,7 +111,7 @@ const InverstmentTracker = () => {
                         data.map((item)=>{
                             return(
                                 <>
-                                    <a className="it-data" onClick={() => {onChangeTracker(item)}}>
+                                    <a className={item.name !== changeTracker?.name ? "it-data" : `it-data ${changeTracker?.name}`} onClick={() => {onChangeTracker(item)}}>
                                         <div><img src={item.img} /></div>
                                         <div className="stocks">
                                             <div className="name">{item.name}</div>
@@ -152,7 +160,16 @@ const InverstmentTracker = () => {
                     </div>
             </div>    
             : 
-            changeTracker?.name === "savings" && <div className="it-right-body"> <CustomTracker /> </div>
+            changeTracker?.name === "savings" && 
+                <div className="it-right-body"> 
+                    <CustomTracker 
+                        subHEading = {"Edit/Manage"}
+                        heading = {"Saving"}
+                        currentValue = {"Current Saving"}
+                        addSaving = {"Add Saving"}
+                        removeSaving = {"Remove Saving"}
+                    /> 
+                </div>
             }     
 
         </div>

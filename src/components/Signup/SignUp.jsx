@@ -3,8 +3,12 @@ import Logo from "../../assets/LogoFindemy.svg";
 import SignUpArrow from "../../assets/SignUpArrow.svg";
 import "./SignUp.css";
 import OTPSection from "./OtpSection";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
+
+  const navigate = useNavigate();
+
   const [formSubmit, setFormSubmit] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [email, setEmail] = useState("");
@@ -128,12 +132,14 @@ const SignUp = () => {
       })
       .then((res)=>{
         console.log(res)
-        if(res.data.id){
+        if(res?.data?.id){
           let payload={
             email:res.data.email,
             id:res.data.id
           }
           sendOtp(payload)
+        }else{
+          console.log("aaaaaaaa")
         }
         setData(res)
       })

@@ -1,10 +1,15 @@
 import React, { useState, useRef } from "react";
 import SignUpArrow from "../../assets/SignUpArrow.svg";
 import "./OtpSection.css";
+import { useNavigate } from "react-router-dom";
 
 const OTPSection = (props) => {
-  const [otp, setOTP] = useState(["", "", "", "", ""]); // Array to store OTP digits
-  const otpInputRefs = [useRef(null), useRef(null), useRef(null), useRef(null), useRef(null)]; // Refs for input fields
+
+  const navigate = useNavigate();
+
+
+  const [otp, setOTP] = useState(["", "", "", "", "" , ""]); // Array to store OTP digits
+  const otpInputRefs = [useRef(null), useRef(null), useRef(null), useRef(null), useRef(null) ,useRef(null)]; // Refs for input fields
 
   const handleOTPChange = (index, value) => {
     if (isNaN(value)) return; // Allow only numeric input
@@ -72,6 +77,9 @@ const OTPSection = (props) => {
       })
       .then((res)=>{
         console.log(res)
+        if(res){
+          navigate("/")
+        }
       })
   
       // if (!response.ok) {

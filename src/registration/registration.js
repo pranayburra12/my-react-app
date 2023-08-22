@@ -12,7 +12,7 @@ function Registration() {
       <div className='layout md:flex flex-col'>
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/signin" element={<SignUp />} />
+        <Route path="/sign-up" element={<SignUp />} />
       </Routes>
       </div>
     </div>

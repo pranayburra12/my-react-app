@@ -245,6 +245,16 @@
     cursor: pointer;
 }
 
+.highlighted {
+    background-color: yellow;
+}
+.savings{
+    border: 3px solid #F1CA00;
+}
+.bonds{
+    border: 3px solid #F1CA00;
+}
+
 @media only screen and (max-width: 768px) {
     .it-grid {
         display: block;

@@ -46,17 +46,18 @@ const Login = (props) => {
   };
 
   const handleLogin = () => {
-    if (!validateEmail(email) )  {
+    if (!validateEmail(email) && !validatePassword(password) )  {
       setEmailValid(false);
+      setPasswordValid(false);
     } 
      else {
-      let payload = {
-        email: email,
-        password: password,
-      };
-  
+        let payload = {
+          email: email,
+          password: password,
+        };
+    
       setIsSubmitting(true)
-     onsubmit(payload);
+      onsubmit(payload);
     }
   };
 
@@ -95,6 +96,8 @@ const Login = (props) => {
         navigate("/sip-calculator")
         window.location.reload()
         console.log(res)
+       }else{
+        setIsSubmitting(false);
        }
       })
 
@@ -175,7 +178,7 @@ const Login = (props) => {
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             onClick={handleLogin}
-            disabled={isSubmitting}
+            disabled={emailValid && passwordValid ? false : true}
           >
             <div style={{ width: 315, height: 45 }}>
               <Lottie
@@ -188,7 +191,7 @@ const Login = (props) => {
           </button>
         </div>
         <hr />
-        <a className="create__an_account" href="" onClick={()=>{ navigate("/signin") }}>
+        <a className="create__an_account" href="" onClick={()=>{ navigate("/sign-up") }}>
           Create An Account
         </a>
         <footer className="Login__footer">
