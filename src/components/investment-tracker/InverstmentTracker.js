@@ -171,7 +171,7 @@ const InverstmentTracker = () => {
                       </div>
                 </div>
                 <div className="scroll-container">
-                    <hr  className="hr-tag"></hr>
+                    {/* <hr  className="hr-tag"></hr> */}
                 <div className="it-left-body-footer">   
                     {
                         listOfTrackers?.map((item)=>{

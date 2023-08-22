@@ -234,9 +234,9 @@
 
 @media only screen and (max-width: 768px) {
     .it-grid {
-        display: block;
-        height: auto;
-        padding: 30px;
+        display: block !important;
+    height: auto;
+    padding: 30px !important;
     }
 
     .it-grid .it-body-data .it-body-data {
@@ -301,4 +301,12 @@
     .remove{
         display: none;
     }
+}
+@media only screen and (max-width: 875px) {
+    .it-grid {
+        display: contents ;
+        padding-left: 150px;
+        padding-right: 40px;
+    }
+    
 }
