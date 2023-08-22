@@ -1,23 +1,11 @@
-import React from "react" 
-// import { Form } from "react-final-form"
+import React from "react"
 
 
-const CustomTracker = (props) =>{
+const CustomTracker = (props) => {
 
-    return(
-        <div>
-            {/* <Form 
-                onSubmit={ () => {} }
-                // initialValues={mokeData}
-                render={({
-                    handleSubmit, form, submitting, pristine, values   
-                })=>(
-                    <form onSubmit={handleSubmit}>
-                        Heloafdsvcadf
-                    </form>
-                )}
-            ></Form> */}
-
+    return (
+        <div className="it-right-body">
+            hidsfdjvcad
         </div>
     )
 

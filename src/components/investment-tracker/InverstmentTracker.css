@@ -1,15 +1,12 @@
 .it-grid {
-    display: grid;
-    grid-template-columns: auto auto;
-    grid-gap: 10px;
+    display: flex;
     padding-left: 150px;
-    padding-top: 50px;
     padding-right: 40px;
-    /* height: 100vh; */
 }
 .it-grid .side-bar{
     grid-column: 4;
     padding-left: 50px;
+    padding-right: 8%;
 } 
 
 
@@ -19,18 +16,18 @@
     font-size: 30px;
 }
 
-.it-grid .it-left-body {
+/* .it-grid .it-left-body {
     grid-row: 1 / span 10;
     grid-column: 1 / span 3;
     display: inherit;
     gap: 60px;
-}
+} */
 
-.it-grid .it-right-body {
+/* .it-grid .it-right-body {
     grid-row: 1 / span 10;
     display: inherit;
     gap: 20px;
-}
+} */
 
 .it-grid .it-left-body .it-body-data {
     padding: 20px;

@@ -19,13 +19,6 @@ const InverstmentTracker = () => {
 
     const isMobileResolution = window.innerWidth <= 768 ? false : true;
 
-    document.addEventListener('DOMContentLoaded', () => {
-        const component = document.querySelector('.it-data');
-      
-        component.addEventListener('click', () => {
-          component.classList.toggle('highlighted');
-        });
-      });
 
     const listOfTrackers=[
         {
@@ -95,9 +88,13 @@ const InverstmentTracker = () => {
             case 'Gold':return <div className="it-right-body"> 
             <h1>Gold</h1>
                         </div>
-            case 'Savings':return <div className="it-right-body"> 
-            <h1>Savings</h1>
-                        </div>
+            case 'Savings':return <CustomTracker 
+                                        subHEading = {"Edit/Manage"}
+                                        heading = {"Saving"}
+                                        currentValue = {"Current Saving"}
+                                        addSaving = {"Add Saving"}
+                                        removeSaving = {"Remove Saving"}
+                                    /> 
             case 'PPF':return <><div className="it-right-body"> 
             <h1>PPF</h1>
                         </div></>
@@ -118,7 +115,7 @@ const InverstmentTracker = () => {
             <div className="learn-investment">
                 <div>
                     <div>
-                    <span className="data" >Learn</span><br />
+                    <span className="data">Learn</span><br />
                     <span className="data">How to choose</span><br />
                     <span className="data">right investment</span><br />
                     </div>
@@ -199,7 +196,7 @@ const InverstmentTracker = () => {
                 </div>
                 </div>
             </div>  
-            {/* <div className="side-bar" > <div style={{background:"#141414",zIndex:"20",transition:"width 0.4s ease-out",borderRight:"2px solid #e2e2e2"}}></div></div> */}
+            <div className="side-bar" > <div style={{background:"#141414",zIndex:"20",transition:"width 0.4s ease-out",borderRight:"2px solid #e2e2e2"}}></div></div>
              {
             //    !changeTracker?.name ?
             //     <div className="it-right-body">
