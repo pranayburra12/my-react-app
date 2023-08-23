@@ -90,7 +90,7 @@ const Login = (props) => {
         toast.success("Login successful!");
         setDesabled(res);
         localStorage.setItem("access_token", JSON.stringify(res.data.accessToken));
-        localStorage.setItem("refresh_token", JSON.stringify(res.data.accessToken));
+        localStorage.setItem("refresh_token", res.data.refreshToken);
         window.instance=res.data
         setIsSubmitting(false);
         navigate("/sip-calculator")
