@@ -1,6 +1,6 @@
 
 import React, { useState } from "react";
-
+import TextField from '@mui/material/TextField';
 const NewTracker = (props) => {
 
     const [trackerName,setTrackerName] =useState("")
@@ -55,25 +55,47 @@ const NewTracker = (props) => {
 
 
     return (
-        <div className="text-center pl-40 pr-40 pt-5 md: p-0">
-            <div className="pt-5 flex flex-col items-start gap-2">
-                <div className="" style={{ color: "#ffff" }}>Tracker name</div>
-                <input
-                    className=" focus:outline-none w-3/4 rounded-3xl border-none p-6 border-2 border-solid border-white rounded-10 h-15 text-white bg-black"
-                    style={{ color: "#ffff", background: "#2B2B2B" }}
-                    placeholder="Tracker name"
-                    onChange={(e) => {
-                        setTrackerName(e.target.value);
-                        renderTrackerDetail("Tracker name");
-                    }}
-                />
-            </div>
+        <div className="flex flex-col items-center pt-5 md:p-0">
+         <div className="flex flex-col">  
+            <span className="text-slate-300 pb-2">Tracker Name</span> <TextField
+           
+          value={trackerName}
+          placeholder="Tracker Name"
+        //   name="average-price"
+          // margin="dense"
+          disabled={false}
+         
+          variant='outlined'
+
+                sx={{ color:'white',  
+            "& input": {
+              color: 'white',
+            },
+            "& fieldset": {
+              border: "1px solid white",
+            },'& .MuiOutlinedInput-root': {
+              '& fieldset': {
+                borderColor: 'white',
+              },
+              '&:hover fieldset': {
+                borderColor: 'white',
+              },
+              '&.Mui-focused fieldset': {
+                borderColor: '#0BD19D',
+              },
+            },
+
+          }}
+
+                onChange={(e) => setTrackerName(e.target.value)  }
+        />
+        </div>
 
 
             <div className="pt-5 flex flex-col items-start gap-2">
             <div className="" style={{ color: "#ffff" }}>Invested Amount</div>
                 <input
-                    className=" focus:outline-none w-3/4 rounded-3xl border-none p-6 border-2 border-solid border-white rounded-10 h-15 text-white bg-black"
+                    className="rounded-lg p-6 h-10 text-white bg-black"
                     style={{ color: "#ffff", background: "#2B2B2B" }}
                     placeholder="Invested amount"
                     onChange={(e)=>{setInvestedAmount(e.target.value)}}
@@ -84,7 +106,7 @@ const NewTracker = (props) => {
             <div  className="pt-5 flex flex-col items-start gap-2">
             <div className="" style={{ color: "#ffff" }}>Value Time of Investment</div>
                 <input
-                    className=" focus:outline-none w-3/4 rounded-3xl border-none p-6 border-2 border-solid border-white rounded-10 h-15 text-white bg-black"
+                    className="rounded-lg p-6 border-2 h-10 text-white bg-black"
                     style={{ color: "#ffff", background: "#2B2B2B" }}
                     placeholder="Value time of investment"
                     onChange={(e)=>{setvalueTimeofInvestment(e.target.value)}}
@@ -95,7 +117,7 @@ const NewTracker = (props) => {
             <div className="pt-5 flex flex-col items-start gap-2">
             <div className="" style={{ color: "#ffff" }}>Current Value</div>
                 <input
-                    className=" focus:outline-none w-3/4 rounded-3xl border-none p-6 border-2 border-solid border-white rounded-10 h-15 text-white bg-black"
+                    className=" focus:outline-none rounded-lg p-6 border-2 border-solid border-white rounded-10 h-15 text-white bg-black"
                     style={{ color: "#ffff", background: "#2B2B2B" }}
                     placeholder="Current value"
                     onChange={(e)=>{setcurrentValue(e.target.value)}}

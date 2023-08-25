@@ -288,7 +288,7 @@ const InverstmentTracker = () => {
                     {
                         listOfTrackers?.map((item)=>{
                             return(
-                                <div className={item.name !== changeTracker?.name ? "flex m-2 min-w-[80%] bg-slate-700 rounded-2xl	md:w-44" : "flex m-2 min-w-[80%] bg-slate-700 rounded-2xl	md:w-44 border border-[#F1CA00]"} onClick={() => {onChangeTracker(item)}}>
+                                <div className={item.name !== changeTracker?.name ? "flex m-2 min-w-[80%] bg-slate-700 rounded-2xl	md:w-44 hover:cursor-pointer" : "flex m-2 min-w-[80%] bg-slate-700 rounded-2xl	md:w-44 border border-[#F1CA00]"} onClick={() => {onChangeTracker(item)}}>
                                 
                                        <img src={item.img} alt={item.name} className="w-2/5"/>
                                         <div className="text-white pt-2 pb-2 flex flex-col items-end justify-around">
@@ -312,10 +312,11 @@ const InverstmentTracker = () => {
             </div>  
             {/* <div className="side-bar" >
                  <div style={{background:"#141414",zIndex:"20",transition:"width 0.4s ease-out",borderRight:"2px solid #e2e2e2"}}></div></div> */}
-  
+  <div className="col-span-2">
             {
                addTracker ? <NewTracker navugateToOldView={changeTooldView} /> : renderTrackerDetail(changeTracker)
             }
+            </div>
         </div>
     )
 }
