@@ -12,12 +12,12 @@ import stocks from "../../assets/stocks.svg"
 import arrow from "../../assets/arrow.svg"
 import CustomTracker from "./trackers/CustomTracker";
 import Stocks from "./trackers/Stocks";
+import MutualFunds from "./trackers/MutualFunds";
 
 const InverstmentTracker = () => {
 
     const [changeTracker,setChangeTracket] = useState();
 
-    const isMobileResolution = window.innerWidth <= 768 ? false : true;
 
 
     const listOfTrackers=[
@@ -99,11 +99,7 @@ const InverstmentTracker = () => {
             <h1>PPF</h1>
                         </div></>
 
-            case 'Mutual Funds':return <><div className="it-right-body"> 
-            <h1>Mutual funds</h1>
-                        </div>
-            
-            </>
+            case 'Mutual Funds':return <MutualFunds/>
             case 'Custom':return <div className="it-right-body"> 
             <h1>{tracker.name}</h1>
                         </div>

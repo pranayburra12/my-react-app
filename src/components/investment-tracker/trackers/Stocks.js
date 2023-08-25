@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import {
-
-  Autocomplete, Button
-
+ 
+  Autocomplete, Button,Backdrop,CircularProgress
+ 
 } from "@mui/material";
 import TextField from '@mui/material/TextField';
 import { GenerateNewToken } from '../../utils/api';
@@ -20,6 +20,7 @@ export default function Stocks() {
   const [buyAveragePrice,setBuyAveragePrice]=useState();
   const [viewStocks,setViewStocks]=useState(false);
   const [allStocks,setAllStocks]=useState([]);
+  const [loader,setLoader]=useState(false);
   const handleStocks=(e)=>{
 
 
@@ -53,7 +54,9 @@ export default function Stocks() {
 
   }
   const addStock=()=>{
+    
     if(stockDetail){
+      setLoader(true)
       var myHeaders = new Headers();
       myHeaders.append("Authorization",`Bearer ${JSON.parse(localStorage.getItem('access_token'))}` );
       myHeaders.append("Content-Type", "application/json");
@@ -77,13 +80,18 @@ export default function Stocks() {
         .then(response => response.json())
         .then(result => {console.log(result)
           setViewStocks(true)
+        setLoader(false)
         })
         .catch(error => console.log('error', error));
 
     }
   }
       useEffect(()=>{
-    var myHeaders = new Headers();
+       
+       if(viewStocks)
+       { 
+        setLoader(true)
+        var myHeaders = new Headers();
 myHeaders.append("Authorization", `Bearer ${JSON.parse(localStorage.getItem('access_token'))}` );
 
     var requestOptions = {
@@ -107,11 +115,24 @@ myHeaders.append("Authorization", `Bearer ${JSON.parse(localStorage.getItem('acc
           GenerateNewToken(route,payload,navigate)
         }else{
           setAllStocks(result?.data)
+
         }
+        setLoader(false)
       })
       .catch((error) => { console.log('error', error)});
+    }
   },[viewStocks])
+  const editStock=(each)=>{
+    console.log(each)
+  }
   return ( <>
+  {loader&& <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={loader}
+        
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>}
     {!viewStocks?<div className="it-right-body">
       <div>
         <div className='text-[#FEC008] font-bold'>Stocks</div>
@@ -204,10 +225,10 @@ myHeaders.append("Authorization", `Bearer ${JSON.parse(localStorage.getItem('acc
       <div className="it-right-body text-white">
     <Button onClick={()=>setViewStocks(false)} > Go Back</Button>
    {allStocks?.map(each=>{
-          return <div>{each.stockSymbol}</div>
-        })}
-      </div>
-    }
+    return <div className='border border-slate-300 p-3 flex justify-between' onClick={()=>editStock(each)}><span>{each.stockSymbol}</span><span>{each.currentTotalValue    }</span></div>
+   })}
+  </div>
+  }
   </>
   )
 }

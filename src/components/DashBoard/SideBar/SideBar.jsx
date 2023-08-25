@@ -131,6 +131,9 @@ navigate:'./sip-calculator'
   const onSubmit = (each) => {
       if(each.label === "Exit"){
           // localStorage.clear();
+          // navigate(each.navigate)
+          // window.location.reload()
+
           onLogOut()
       }else{
         navigate(each.navigate)
@@ -169,7 +172,7 @@ navigate:'./sip-calculator'
       >
         <div className="m-2 flex flex-col gap-3"><img src={LogoBig} width='200px'/>
           {sidebarmenu?.map((each)=>{
-          return <div className="flex items-center gap-4 p-2 mt-2 cursor-pointer opacity-50 hover:opacity-100" onClick={(event)=>{navigate(each.navigate)
+          return <div className="flex items-center gap-4 p-2 mt-2 cursor-pointer opacity-50 hover:opacity-100" onClick={(event)=>{onSubmit(each)
           toggleDrawer("right", false, event)}}><img src={each.logo} width='40px'/><div className={`text-left w-full text-slate-100`}>{each.label}</div></div>
         })}
         </div>
