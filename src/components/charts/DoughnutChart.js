@@ -6,6 +6,11 @@ import {Chart as ChartJS} from 'chart.js/auto'
 export default function DoughnutChart({chartData,textCenter}) {
     
   return (
-   <Doughnut data={chartData} plugins={[textCenter]} options={{cutout:'50%'}}/>
+   <Doughnut data={chartData} plugins={[textCenter]} options={{cutout:'50%',backgroundColor: [
+    '#0BD19D',
+    '#FEC008'   
+  ],
+  borderColor:'transparent'
+}}/>
   )
 }

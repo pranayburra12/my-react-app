@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect,useRef } from 'react'
 import {
  
   Autocomplete, Button,Backdrop,CircularProgress
@@ -7,11 +7,19 @@ import {
 import TextField from '@mui/material/TextField';
 import { GenerateNewToken } from '../../utils/api';
 import { useNavigate } from "react-router-dom";
+import arrow from "../../../assets/arrow.svg"
+import { makeStyles } from "@material-ui/core/styles";
 
+const useStyles = makeStyles({
+  paper: {
+    backgroundColor: "#2B2B2B",
+    color:'white'
+  }
+});
 export default function Stocks() {
-
+  const classes = useStyles();
   const navigate = useNavigate();
-
+  const viewRef=useRef();
   const [StockName,setStockName]=useState('');
   const [stockDetail,setStockDetail]=useState();
   const [stocksNameData,setStocksNameData]=useState([]);
@@ -80,11 +88,19 @@ export default function Stocks() {
         .then(response => response.json())
         .then(result => {console.log(result)
           setViewStocks(true)
+          scrollToResults();
         setLoader(false)
         })
         .catch(error => console.log('error', error));
 
     }
+  }
+  const scrollToResults=()=>{
+    window.scrollTo({
+      top:0,
+      behavior:"smooth"
+  
+    })
   }
       useEffect(()=>{
        
@@ -133,13 +149,13 @@ myHeaders.append("Authorization", `Bearer ${JSON.parse(localStorage.getItem('acc
       >
         <CircularProgress color="inherit" />
       </Backdrop>}
-    {!viewStocks?<div className="it-right-body">
-      <div>
-        <div className='text-[#FEC008] font-bold'>Stocks</div>
-        <div className='text-slate-300 flex w-full border border-cyan-50 p-3 font-thin'><span>Stocks Value</span><span>+21k</span> </div>
-          <div><Button variant='contained' onClick={()=>setViewStocks(true)}>View Your Stocks</Button></div>
+    {!viewStocks?<div className="flex flex-col justify-between gap-10">
+      <div className='flex flex-col gap-3'>
+        <div className='text-[#FEC008] font-bold text-2xl'>Stocks</div>
+        <div className='text-slate-300 flex justify-between w-full rounded-lg p-3 bg-[#2B2B2B]'><span className=''>Stocks Value</span><span className='text-[#0BD19D] font-bold text-xl'>₹ 21K</span> </div>
+          <div className='text-slate-200 flex justify-between w-full rounded-lg p-3 bg-[#2B2B2B] hover:cursor-pointer' onClick={()=>setViewStocks(true)}><span>View Your Stocks</span><img src={arrow} /></div>
       </div>
-      <div className='w-full flex flex-col gap-5'>
+      <div className='max-w-full flex flex-col gap-5'>
         <Autocomplete
 
           {...stockOptions}
@@ -150,11 +166,10 @@ myHeaders.append("Authorization", `Bearer ${JSON.parse(localStorage.getItem('acc
           // includeInputInList
           defaultValue={StockName}
         value={StockName?StockName:null}
-
+     classes={{paper:classes.paper}}
           // loadingText='Loading'
           renderInput={(params) => (
             <TextField {...params}
-
            InputProps={{...params.InputProps, disableUnderline: true}} 
               placeholder='Stock Name'
               variant="outlined"
@@ -164,6 +179,17 @@ myHeaders.append("Authorization", `Bearer ${JSON.parse(localStorage.getItem('acc
                 },
                 "& fieldset": {
                   border: "1px solid white",
+                },
+                '& .MuiOutlinedInput-root': {
+                  '& fieldset': {
+                    borderColor: 'white',
+                  },
+                  '&:hover fieldset': {
+                    borderColor: 'white',
+                  },
+                  '&.Mui-focused fieldset': {
+                    borderColor: '#0BD19D',
+                  },
                 },
 
               }}
@@ -188,6 +214,16 @@ myHeaders.append("Authorization", `Bearer ${JSON.parse(localStorage.getItem('acc
             },
             "& fieldset": {
               border: "1px solid white",
+            },'& .MuiOutlinedInput-root': {
+              '& fieldset': {
+                borderColor: 'white',
+              },
+              '&:hover fieldset': {
+                borderColor: 'white',
+              },
+              '&.Mui-focused fieldset': {
+                borderColor: '#0BD19D',
+              },
             },
 
           }}
@@ -211,7 +247,17 @@ myHeaders.append("Authorization", `Bearer ${JSON.parse(localStorage.getItem('acc
             "& fieldset": {
               border: "1px solid white",
             },
-
+            '& .MuiOutlinedInput-root': {
+              // '& fieldset': {
+              //   borderColor: 'white',
+              // },
+              '&:hover fieldset': {
+                borderColor: 'white',
+              },
+              '&.Mui-focused fieldset': {
+                borderColor: '#0BD19D',
+              },
+            },
 
           }}
 
@@ -222,11 +268,13 @@ myHeaders.append("Authorization", `Bearer ${JSON.parse(localStorage.getItem('acc
         > Add</Button>
       </div>
     </div>:
-      <div className="it-right-body text-white">
+      <div className="text-white min-h-screen" ref={viewRef}>
     <Button onClick={()=>setViewStocks(false)} > Go Back</Button>
+   <div className='flex flex-col gap-2' >
    {allStocks?.map(each=>{
-    return <div className='border border-slate-300 p-3 flex justify-between' onClick={()=>editStock(each)}><span>{each.stockSymbol}</span><span>{each.currentTotalValue    }</span></div>
+    return <div className='text-slate-200 flex justify-between w-full rounded-sm h-16 items-center p-3 bg-[#2B2B2B]' onClick={()=>editStock(each)}><span>{each.stockName}</span><span className='text-[#0BD19D]'>₹ {each.currentTotalValue    }</span></div>
    })}
+   </div>
   </div>
   }
   </>

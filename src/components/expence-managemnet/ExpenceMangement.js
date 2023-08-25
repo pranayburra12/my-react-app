@@ -5,7 +5,7 @@ const ExpenceMangement =()=>{
 
     return(
         <>
-        <div>
+        <div className="text-white">
             ExpenceMangement
         </div>
         </>

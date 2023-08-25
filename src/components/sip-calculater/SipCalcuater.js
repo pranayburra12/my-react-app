@@ -89,11 +89,11 @@ let m=Number(sip)*((Math.pow(1+i,12*Number(years))-1)/i)*(1+i)
 setExpectedValue(m)
 setDoughnutData(
   {
-    labels:['SIP','expected returns'],
+    // labels:['SIP','expected returns'],
     datasets:[
      { 
       label:'Expected Returns',
-      data:[sip*Number(years*12),m-sip*Number(years*12)],
+      data:[sip*Number(years*12),m],
        cutout:'90%'
       }
       ,
@@ -109,26 +109,38 @@ console.log(expectedValue)
   const {ctx,data,width}=chart;
  
   ctx.save();
-  ctx.font='20px sans-sarif';
+  
+  ctx.font='15px sans-sarif';
   ctx.textBaseline='middle'
   ctx.textAlign='center'
-  ctx.fillStyle='#FEC008'
+  ctx.fillStyle='white'
 
-
-  ctx.fillText(`SIP ${data.datasets[0].data[0]} `,width/2,100)
+ 
+  ctx.fillText("Your Investment",width/2,80)
   ctx.restore()
-  ctx.font='20px sans-sarif';
+  ctx.font='30px sans-sarif';
   ctx.textBaseline='middle'
   ctx.textAlign='center'
   ctx.fillStyle='#FEC008'
+  ctx.fillText(`₹ ${data.datasets[0].data[0]} `,width/2,110)
+  ctx.restore()
+  ctx.font='15px sans-sarif';
+  ctx.textBaseline='middle'
+  ctx.textAlign='center'
+  ctx.fillStyle='white'
   
 
-  ctx.fillText(`Expected amount ${Math.round(data.datasets[0].data[1])}`,width/2,150)
-  }
+  ctx.fillText(`Future value of investment`,width/2,150)
+  ctx.font='30px sans-sarif';
+  ctx.textBaseline='middle'
+  ctx.textAlign='center'
+  ctx.fillStyle='#0BD19D'
+  ctx.fillText(`₹ ${data.datasets[0].data[0]+Math.round(data.datasets[0].data[1])}`,width/2,180)  
+}
   }
 
     const [doughnutData,setDoughnutData]=useState({
-        labels:['SIP','expected returns'],
+        // labels:['SIP','expected returns'],
         datasets:[
          { 
           label:'sip',
@@ -143,7 +155,7 @@ console.log(expectedValue)
 
     return(
         <>
-            <div className="sipCalculator md:pl-32">
+            <div className="sipCalculator md:pl-32 ">
                 <div className="sip-section1">
                    <div className="sip-section1-1">
                  
@@ -161,9 +173,22 @@ console.log(expectedValue)
           min= {500}
           max= {500000}
          
+         
         sx={{
+          // zIndex:0,
           color:'#FEC008',
-
+          // backgroundColor:'white'
+          '& .MuiSlider-thumb':{
+            color:'white'
+          },
+          '& .MuiSlider-rail':{
+            color:'white',
+            height:10
+          },
+          '& .MuiSlider-track': {
+            height: 10,
+            borderRadius: 2,
+        },
         }}
       />
     </Box>
@@ -184,8 +209,21 @@ console.log(expectedValue)
           min= {5}
           max= {25}
          
+       
         sx={{
-          color:'#F34437'
+          color:'#F34437',
+          // backgroundColor:'white'
+          '& .MuiSlider-thumb':{
+            color:'white'
+          },
+          '& .MuiSlider-rail':{
+            color:'white',
+            height:10
+          },
+          '& .MuiSlider-track': {
+            height: 10,
+            borderRadius: 2,
+        },
         }}
       />
     </Box>
@@ -204,9 +242,21 @@ console.log(expectedValue)
        
           min= {2}
           max= {10}
-         
+        
         sx={{
-          color:'#0BD19D'
+          color:'#0BD19D',
+          // backgroundColor:'white'
+          '& .MuiSlider-thumb':{
+            color:'white'
+          },
+          '& .MuiSlider-rail':{
+            color:'white',
+            height:10
+          },
+          '& .MuiSlider-track': {
+            height: 10,
+            borderRadius: 2,
+        },
         }}
       />
     </Box></div>

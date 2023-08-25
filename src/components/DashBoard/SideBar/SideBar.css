@@ -12,8 +12,9 @@
   /* display: flex;
   flex-direction: column; */
   /* position: fixed; */
-  border-right: 2px solid #e2e2e2;
+  border-right: 1px solid #999;
   height: 100vh;
+  padding-left: 20px;
   /* Add more styling as needed */
 }
 .sidebar.open {

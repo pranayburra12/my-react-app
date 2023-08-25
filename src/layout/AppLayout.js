@@ -7,6 +7,7 @@ import DashBoard from '../components/DashBoard/DashBoard';
 import CibilScore from '../components/CibilScore/CibilScore';
 import SideBar from '../components/DashBoard/SideBar/SideBar';
 import Dmart from '../components/demart/Dmart';
+
 import ExpenceMangement from '../components/expence-managemnet/ExpenceMangement';
 import InverstmentTracker from '../components/investment-tracker/InverstmentTracker';
 import Sipcalculater from '../components/sip-calculater/SipCalcuater';
@@ -31,7 +32,7 @@ function AppLayout() {
         <Route path="/sidenav" element={<SideNav />} />
         <Route path="/cibilscore" element={<CibilScore />} />
         <Route path="/demat" element={<Dmart />} />
-        <Route path="/expence-mangement" element={<ExpenceMangement />} />
+        <Route path="/expence-management" element={<ExpenceMangement />} />
         <Route path="/inverstment-tracker" element={<InverstmentTracker />} />
         <Route path="/sip-calculator" element={<Sipcalculater />} />
       </Routes>

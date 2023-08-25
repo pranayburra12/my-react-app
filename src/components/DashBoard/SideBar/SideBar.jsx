@@ -17,6 +17,7 @@ import Menu from "@mui/icons-material/Menu";
 import Box from "@mui/material/Box";
 // import Typography from "@mui/material/Typography";
 import Drawer from "@mui/material/Drawer";
+import { GenerateNewToken } from '../../utils/api';
 const SideBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const logoutChannel = new BroadcastChannel("logout-channel");
@@ -110,7 +111,17 @@ navigate:'./sip-calculator'
         navigate("/")
         window.location.reload()
         console.log(res)
-       }
+       }else if( res?.message === "Token Invalid/Expired"){
+        let payload = {
+          refreshToken  : localStorage.getItem('refresh_token')
+        }
+        let route = {
+          payload :{ refreshToken  : localStorage.getItem('refresh_token')},
+          route:window.location.pathname,
+          navigate : navigate
+        }
+        GenerateNewToken(route,payload,navigate)
+      }
       })
 
     } catch (error) {
@@ -143,7 +154,7 @@ navigate:'./sip-calculator'
 
   return (
     <div >
-       <div className="flex flex-row-reverse justify-around h-20 gap-10 w-full fixed bg-[rgb(23,23,23)] md:hidden"> <IconButton
+       <div className="flex flex-row-reverse justify-around h-20 gap-10 w-full fixed bg-[rgb(23,23,23)] z-10	md:hidden"> <IconButton
         edge="end"
         aria-label="menu"
         onClick={(event) => toggleDrawer("right", true, event)}
@@ -172,20 +183,20 @@ navigate:'./sip-calculator'
       >
         <div className="m-2 flex flex-col gap-3"><img src={LogoBig} width='200px'/>
           {sidebarmenu?.map((each)=>{
-          return <div className="flex items-center gap-4 p-2 mt-2 cursor-pointer opacity-50 hover:opacity-100" onClick={(event)=>{onSubmit(each)
+          return <div className="flex items-center gap-4 p-2 mt-2 cursor-pointer " onClick={(event)=>{onSubmit(each)
           toggleDrawer("right", false, event)}}><img src={each.logo} width='40px'/><div className={`text-left w-full text-slate-100`}>{each.label}</div></div>
         })}
         </div>
       </Drawer>
     
-        <img src={LogoBig} width='200px'/>
+        <img src={LogoBig} width='200px' />
       </div>
        {/* <div className=""><img src={LogoBig} width='200px' className="" onClick={toggleSidebar}/></div> */}
       <div className={`sidebar ${isOpen ? "open" : ""} md:block md:w-100 fixed`}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
       >
-        <div className="flex items-center w-20"><img src={Logo} width='50px'/></div>
+        <div className="flex  w-20"><img src={Logo} width='50px' /></div>
 
          {sidebarmenu?.map((each)=>{
           return <div className={`flex items-center gap-2 p-2 mt-2 cursor-pointer opacity-50 hover:opacity-100  ${each.label}`} onClick={()=>{onSubmit(each)}}><img src={each.logo} width='40px'/><div className={`text-center w-full text-slate-100 ${isOpen ? "" : "hidden"} md:text-left`}>{each.label}</div></div>

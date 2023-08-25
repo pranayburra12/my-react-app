@@ -10,34 +10,48 @@
 .sip-section1{
     color: aliceblue;
     grid-column: 1 / span 3;
-    border:2px solid aliceblue;
+    border:1px solid #999;
     display: grid;
     grid-template-columns: auto auto auto;
-    margin: 10px;
-    border-radius: 15px;
+    margin: 20px;
+    border-radius: 5px;
     gap:1.2rem;
+    padding: 1.5em;
 }
 .sip-section2{
     color: aliceblue;
-    border:2px solid aliceblue;
- 
+    border:1px solid #999;
+    margin-left: 20px;
+    margin-right: 20px;
+    border-radius: 5px;
 
 }
 
 .sip-section3{
     color: aliceblue;
     grid-column: 1 / span 2;
-    border:2px solid aliceblue;
+    border:1px solid #999;
+    margin-left: 20px;
+    margin-right: 20px;
+    border-radius: 5px;
+
 }
 
 .sip-section4{
     color: aliceblue;
-    border:2px solid aliceblue;
+    border:1px solid #999;
+    margin-left: 20px;
+    margin-right: 20px;
+    border-radius: 5px;
+
 }
 .sip-section5{
     color: aliceblue;
-    border:2px solid aliceblue;
-    
+    border:1px solid #999;
+    margin-left: 20px;
+    margin-right: 20px;
+    border-radius: 5px;
+
 }
 .sip-section1-1{
     /* border: 2px solid red; */
