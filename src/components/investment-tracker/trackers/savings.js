@@ -3,7 +3,7 @@ import rightarrow from "../../../assets/Group 1260.svg"
 import { GenerateNewToken } from "../../utils/api";
 import { useNavigate } from "react-router-dom";
 
-const CustomTracker = (props) => {
+const Savings = (props) => {
 
     const navigate = useNavigate();
 
@@ -107,14 +107,13 @@ const CustomTracker = (props) => {
             .catch(error => console.log('error', error));
       }
 
-    const remove = (value) =>{
+    const remove = () =>{
 
         var myHeaders = new Headers();
           myHeaders.append("Authorization",`Bearer ${JSON.parse(localStorage.getItem('access_token'))}` );
           myHeaders.append("Content-Type", "application/json");
     
           var raw = JSON.stringify({
-            removeSavings: value,
             savingsAmount:addSaving
           });
     
@@ -137,9 +136,9 @@ const CustomTracker = (props) => {
 
     return (
         <div className="text-center pl-40 pr-40 pt-5 md: p-0">
-            <div className="w-96">
+            <div className="w-10">
                 <div class="text-gray-500 font-manrope text-sm float-left" style={{color: "#969696"}}>{props.subHEading}</div>
-                <div class="text-gray-500  float-left text-4xl pt-2.5 pb-7" style={{color: "#FEC008"}}>{props.heading}</div>
+                <div class="text-gray-500  font-manrope  float-left text-4xl pt-2.5 pb-7" style={{color: "#FEC008"}}>{props.heading}</div>
             </div>
             <div className='w-full flex flex-col gap-5'>
             <div className="flex justify-between  rounded-3xl   border-white rounded-10 h-auto items-baseline  bg-black mb-12" style={{background:"#2B2B2B"}}>
@@ -154,23 +153,6 @@ const CustomTracker = (props) => {
                         className="mr-8  pl-2.5 text-green-500"
                      >{`₹ ${currentSavings}`}</div>
                 </div>
-                <div className="flex justify-between  rounded-3xl  border-2 border-solid border-white rounded-10 h-16  bg-black " >
-                    <input
-                        className=" focus:outline-none w-3/4 rounded-3xl border-none p-6 border-2 border-solid border-white rounded-10 h-15  bg-black"
-                        style={{color:"#ffff"}}
-                        type="text"
-                        id="addStockInput"
-                        placeholder="Add Stock"
-                        value={addSaving}
-                        onChange={handleInputChange}
-                    />
-                      <img
-                        className="mr-8 cursor-pointer pl-2.5"
-                        src={rightarrow}
-                        alt="Right Arrow"
-                        onClick ={()=>{addSavings(addSaving)}}
-                     />
-                </div>
                 <hr className="sm:felx-none" />
                 <div className="flex justify-between  rounded-3xl  border-2 border-solid border-white rounded-10 h-16  bg-black " >
                     <input
@@ -178,7 +160,7 @@ const CustomTracker = (props) => {
                         style={{color:"#ffff"}}
                         type="text"
                         id="addStockInput"
-                        placeholder="Add Stock"
+                        placeholder="Add Savings"
                         value={addSaving}
                         onChange={handleInputChange}
                     />
@@ -197,15 +179,16 @@ const CustomTracker = (props) => {
                         className=" focus:outline-none w-3/4 rounded-3xl border-none p-6 border-2 border-solid border-white rounded-10 h-15  bg-black"
                         style={{color:"#ffff"}}
                         type="text"
-                        placeholder="Remove Stock"
+                        placeholder="Remove Savings"
                         value={removesavings}
                         onChange={handleInputChangevalues}
+                        disabled={true}
                     />
                     <img
                         className="mr-8 cursor-pointer pl-2.5"
                         src={rightarrow}
                         alt="Right Arrow"
-                        onClick = {()=>{remove(removesavings)}}
+                        onClick = {remove}
                      />
                    </div>
                     {!isRemoveStockValid &&
@@ -216,4 +199,4 @@ const CustomTracker = (props) => {
     )
 }
 
-export default CustomTracker;
+export default Savings;

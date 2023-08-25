@@ -10,13 +10,19 @@ import savings from "../../assets/saings.svg"
 import pff from "../../assets/pff.svg"
 import stocks from "../../assets/stocks.svg"
 import arrow from "../../assets/arrow.svg"
-import CustomTracker from "./trackers/CustomTracker";
+import Savings from "./trackers/savings";
 import Stocks from "./trackers/Stocks";
+import CustomTracker from "./trackers/CustomTracker";
+import NewTracker from "./trackers/newTracker";
+import PPF from "./trackers/ppf";
+import Gold from "./trackers/goid";
+import Bonds from "./trackers/bonds";
 import MutualFunds from "./trackers/MutualFunds";
 
 const InverstmentTracker = () => {
 
     const [changeTracker,setChangeTracket] = useState();
+    const [addTracker,setAddTracker] = useState(false)
 
 
 
@@ -27,7 +33,7 @@ const InverstmentTracker = () => {
             label:'Stocks',
             values: "₹ 21.9K",
             persentage: "11.5%",
-            },
+        },
         {
         img: savings,
         name: "savings",
@@ -80,32 +86,47 @@ const InverstmentTracker = () => {
     ]
    
     const renderTrackerDetail=(tracker)=>{
+        // setAddTracker(false)
         switch(tracker?.label){
             case 'Stocks':return <Stocks/>
-            case 'Bonds':return <><div className="it-right-body"> 
-          <h1>Bonds</h1>
-                      </div></>
-            case 'Gold':return <div className="it-right-body"> 
-            <h1>Gold</h1>
-                        </div>
-            case 'Savings':return <CustomTracker 
+            case 'Bonds':return   <Bonds 
+                                    subHEading = {"Edit/Manage"}
+                                    heading = {"Bonds"}
+                                    />
+                case 'Gold':return <Gold 
+                                    subHEading = {"Edit/Manage"}
+                                    heading = {"Gold"}
+                                    currentValue = {"Current Saving"}
+                                    addSaving = {"Add Saving"}
+                                    removeSaving = {"Remove Saving"}   
+                                />
+            case 'Savings':return <Savings 
                                         subHEading = {"Edit/Manage"}
                                         heading = {"Saving"}
                                         currentValue = {"Current Saving"}
                                         addSaving = {"Add Saving"}
                                         removeSaving = {"Remove Saving"}
                                     /> 
-            case 'PPF':return <><div className="it-right-body"> 
-            <h1>PPF</h1>
-                        </div></>
+            case 'PPF':return   <PPF 
+                                    subHEading = {"Edit/Manage"}
+                                    heading = {"Public Provide Fund"}
+                                    currentValue = {"PPF Value"}
+                                    addSaving = {"Invested Amount"}
+                                    removeSaving = {"Remove Founds"}
+                                />
 
             case 'Mutual Funds':return <MutualFunds/>
-            case 'Custom':return <div className="it-right-body"> 
-            <h1>{tracker.name}</h1>
-                        </div>
+            case 'Custom':return <CustomTracker 
+                                    subHEading = {"Edit/Manage"}
+                                    heading = {"Custom Tracker Name"}
+                                    currentValue = {"Current Saving"}
+                                    addSaving = {"Value at the time of investment"}
+                                    removeSaving = {"Current Value"}
+                                    />
+            case "newTracker" : 
             default:return <div className="flex flex-col items-center text-white gap-5">
-            <div className="border border-[#F1CA00] p-5 rounded-2xl w-[50%] flex flex-col items-center	">
-                <div className="heading">Add a tracker</div>
+            <div className="border border-[#F1CA00] p-5 rounded-2xl w-[50%] flex flex-col items-center	cursor-pointer" onClick={()=>{setAddTracker(true)}}>
+                <div className="heading"  >Add a tracker</div>
                 <img  src={add} />
             </div>
             <div className="flex flex-col items-center border border-white rounded-3xl">
@@ -142,8 +163,14 @@ const InverstmentTracker = () => {
       const onChangeTracker = (values) => {
         console.log(`Clicked on item at index `);
         setChangeTracket(values)
+        setAddTracker(false)
         console.log(changeTracker)
-      };    
+      };   
+      
+      const changeTooldView=()=>{
+        setAddTracker(false)
+      }
+      
     
     return (
         // <div className="it-grid">
@@ -286,10 +313,9 @@ const InverstmentTracker = () => {
             {/* <div className="side-bar" >
                  <div style={{background:"#141414",zIndex:"20",transition:"width 0.4s ease-out",borderRight:"2px solid #e2e2e2"}}></div></div> */}
   
-          <div className="md:col-span-2">  {
-                renderTrackerDetail(changeTracker)
+            {
+               addTracker ? <NewTracker navugateToOldView={changeTooldView} /> : renderTrackerDetail(changeTracker)
             }
-</div>
         </div>
     )
 }

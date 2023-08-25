@@ -3,7 +3,7 @@ import rightarrow from "../../../assets/Group 1260.svg"
 import { GenerateNewToken } from "../../utils/api";
 import { useNavigate } from "react-router-dom";
 
-const CustomTracker = (props) => {
+const PPF = (props) => {
 
     const navigate = useNavigate();
 
@@ -146,30 +146,13 @@ const CustomTracker = (props) => {
                     <input
                         className=" focus:outline-none w-3/4 rounded-3xl border-none p-6 border-2 border-solid border-white rounded-10 h-15 text-white bg-black"
                         style={{color:"#ffff",background:"#2B2B2B"}}
-                        value={"Current Savings"}
+                        value={"PPF  Value"}
                         disabled={true}
                         onChange={handleInputChange}
                     />
                       <div
                         className="mr-8  pl-2.5 text-green-500"
                      >{`₹ ${currentSavings}`}</div>
-                </div>
-                <div className="flex justify-between  rounded-3xl  border-2 border-solid border-white rounded-10 h-16  bg-black " >
-                    <input
-                        className=" focus:outline-none w-3/4 rounded-3xl border-none p-6 border-2 border-solid border-white rounded-10 h-15  bg-black"
-                        style={{color:"#ffff"}}
-                        type="text"
-                        id="addStockInput"
-                        placeholder="Add Stock"
-                        value={addSaving}
-                        onChange={handleInputChange}
-                    />
-                      <img
-                        className="mr-8 cursor-pointer pl-2.5"
-                        src={rightarrow}
-                        alt="Right Arrow"
-                        onClick ={()=>{addSavings(addSaving)}}
-                     />
                 </div>
                 <hr className="sm:felx-none" />
                 <div className="flex justify-between  rounded-3xl  border-2 border-solid border-white rounded-10 h-16  bg-black " >
@@ -178,7 +161,7 @@ const CustomTracker = (props) => {
                         style={{color:"#ffff"}}
                         type="text"
                         id="addStockInput"
-                        placeholder="Add Stock"
+                        placeholder="Invested Amount"
                         value={addSaving}
                         onChange={handleInputChange}
                     />
@@ -197,7 +180,7 @@ const CustomTracker = (props) => {
                         className=" focus:outline-none w-3/4 rounded-3xl border-none p-6 border-2 border-solid border-white rounded-10 h-15  bg-black"
                         style={{color:"#ffff"}}
                         type="text"
-                        placeholder="Remove Stock"
+                        placeholder="Remove Funds"
                         value={removesavings}
                         onChange={handleInputChangevalues}
                     />
@@ -216,4 +199,4 @@ const CustomTracker = (props) => {
     )
 }
 
-export default CustomTracker;
+export default PPF;
