@@ -12,3 +12,12 @@
       background-color: #FEC008;
       border-radius: 6px;
     }
+
+    input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+.Flipped, .Flipped .Content{
+  transform: rotateX(180deg);
+}

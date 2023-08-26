@@ -139,12 +139,12 @@ const Bonds = (props) => {
         <div className="text-center pl-40 pr-40 pt-5 md: p-0">
             <div className="w-96">
                 <div class="text-gray-500 font-manrope text-sm float-left absolute" style={{color: "#969696"}}>{props.subHEading}</div>
-                <div class="text-gray-500  float-left text-4xl pt-2.5 pb-7 pt-7" style={{color: "#FEC008"}}>{props.heading}</div>
+                <div class="text-gray-500  float-left text-4xl pb-7 pt-7" style={{color: "#FEC008"}}>{props.heading}</div>
             </div>
             <div className='w-full flex flex-col gap-5'>
             <div className="flex justify-between  rounded-3xl   border-white rounded-10 h-auto items-baseline  bg-black mb-12" style={{background:"#2B2B2B"}}>
                     <input
-                        className=" focus:outline-none w-3/4 rounded-3xl border-none p-6 border-2 border-solid border-white rounded-10 h-15 text-white bg-black"
+                        className=" focus:outline-none w-3/4 rounded-3xl p-6 border-2 border-solid border-white rounded-10 h-15 text-white bg-black"
                         style={{color:"#ffff",background:"#2B2B2B"}}
                         value={"Bond Value"}
                         disabled={true}
@@ -156,7 +156,7 @@ const Bonds = (props) => {
                 </div>
                 <div className="flex justify-between  rounded-3xl  border-2 border-solid border-white rounded-10 h-16  bg-black " >
                     <input
-                        className=" focus:outline-none w-3/4 rounded-3xl border-none p-6 border-2 border-solid border-white rounded-10 h-15  bg-black"
+                        className=" focus:outline-none w-3/4 rounded-3xl p-6 border-2 border-white rounded-10 h-15  bg-black"
                         style={{color:"#ffff"}}
                         type="text"
                         id="addStockInput"
@@ -173,7 +173,7 @@ const Bonds = (props) => {
                 </div>
                 <div className="flex justify-between  rounded-3xl  border-2 border-solid border-white rounded-10 h-16  bg-black " >
                     <input
-                        className=" focus:outline-none w-3/4 rounded-3xl border-none p-6 border-2 border-solid border-white rounded-10 h-15  bg-black"
+                        className=" focus:outline-none w-3/4 rounded-3xl p-6 border-2 border-solid border-white rounded-10 h-15  bg-black"
                         style={{color:"#ffff"}}
                         type="text"
                         id="addStockInput"
@@ -193,7 +193,7 @@ const Bonds = (props) => {
                     }
                <div className="flex justify-between  rounded-3xl  border-2 border-solid border-white rounded-10 h-16  bg-black" >
                    <input
-                        className=" focus:outline-none w-3/4 rounded-3xl border-none p-6 border-2 border-solid border-white rounded-10 h-15  bg-black"
+                        className=" focus:outline-none w-3/4 rounded-3xl p-6 border-2 border-solid border-white rounded-10 h-15  bg-black"
                         style={{color:"#ffff"}}
                         type="text"
                         placeholder="Bond Type"

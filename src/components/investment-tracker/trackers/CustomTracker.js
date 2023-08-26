@@ -144,7 +144,7 @@ const CustomTracker = (props) => {
             <div className='w-full flex flex-col gap-5'>
             <div className="flex justify-between  rounded-3xl   border-white rounded-10 h-auto items-baseline  bg-black mb-12" style={{background:"#2B2B2B"}}>
                     <input
-                        className=" focus:outline-none w-3/4 rounded-3xl border-none p-6 border-2 border-solid border-white rounded-10 h-15 text-white bg-black"
+                        className=" focus:outline-none w-3/4 rounded-3xl p-6 border-2 border-solid border-white rounded-10 h-15 text-white bg-black"
                         style={{color:"#ffff",background:"#2B2B2B"}}
                         value={"Current Savings"}
                         disabled={true}
@@ -156,7 +156,7 @@ const CustomTracker = (props) => {
                 </div>
                 <div className="flex justify-between  rounded-3xl  border-2 border-solid border-white rounded-10 h-16  bg-black " >
                     <input
-                        className=" focus:outline-none w-3/4 rounded-3xl border-none p-6 border-2 border-solid border-white rounded-10 h-15  bg-black"
+                        className=" focus:outline-none w-3/4 rounded-3xl p-6 border-2 border-solid border-white rounded-10 h-15  bg-black"
                         style={{color:"#ffff"}}
                         type="text"
                         id="addStockInput"
@@ -174,7 +174,7 @@ const CustomTracker = (props) => {
                 <hr className="sm:felx-none" />
                 <div className="flex justify-between  rounded-3xl  border-2 border-solid border-white rounded-10 h-16  bg-black " >
                     <input
-                        className=" focus:outline-none w-3/4 rounded-3xl border-none p-6 border-2 border-solid border-white rounded-10 h-15  bg-black"
+                        className=" focus:outline-none w-3/4 rounded-3xl p-6 border-2 border-solid border-white rounded-10 h-15  bg-black"
                         style={{color:"#ffff"}}
                         type="text"
                         id="addStockInput"
@@ -194,7 +194,7 @@ const CustomTracker = (props) => {
                     }
                <div className="flex justify-between  rounded-3xl  border-2 border-solid border-white rounded-10 h-16  bg-black" >
                    <input
-                        className=" focus:outline-none w-3/4 rounded-3xl border-none p-6 border-2 border-solid border-white rounded-10 h-15  bg-black"
+                        className=" focus:outline-none w-3/4 rounded-3xl p-6 border-2 border-solid border-white rounded-10 h-15  bg-black"
                         style={{color:"#ffff"}}
                         type="text"
                         placeholder="Remove Stock"

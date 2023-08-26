@@ -264,14 +264,14 @@ const InverstmentTracker = () => {
         //     }
 
         // </div>
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-10 p-4 md:p-1 md:pl-40  items-start justify-center">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-10 p-4 md:p-1 md:pl-40 items-start justify-center">
             
              <div className="flex flex-col md:col-span-3">
-                <div className="flex flex-row-reverse text-white border border-slate-200 items-center justify-between p-8 rounded-xl ">
+                <div className="flex flex-row-reverse text-white border border-slate-200 items-center justify-between p-8 rounded-xl md:h-48">
                     <div className="">Net Worth</div>
                     <div className="flex gap-2 items-center">
                         <div className="text-3xl font-semibold">₹ 41.9K</div>
-                        <div className="bg-green-700 rounded-sm p-0.25">
+                        <div className="bg-green-700 rounded-sm p-0.25 flex">
                             <div className="inline text-green-200 text-sm">11.5%</div>
                             <img className="inline" src={group} />
                         </div>
@@ -284,16 +284,16 @@ const InverstmentTracker = () => {
                 </div>
                 {/* <div className="flex"> */}
                     {/* <hr  className="hr-tag"></hr> */}
-                <div className="flex overflow-scroll w-full md:grid md:grid-rows-2 md:grid-flow-col md:gap-4">   
+                <div className="flex overflow-scroll w-full md:grid md:grid-rows-2 md:grid-flow-col md:gap-4 md:p-4 Flipped mt-4">   
                     {
                         listOfTrackers?.map((item)=>{
                             return(
-                                <div className={item.name !== changeTracker?.name ? "flex m-2 min-w-[80%] bg-slate-700 rounded-2xl	md:w-44 hover:cursor-pointer" : "flex m-2 min-w-[80%] bg-slate-700 rounded-2xl	md:w-44 border border-[#F1CA00]"} onClick={() => {onChangeTracker(item)}}>
+                                <div className={item.name !== changeTracker?.name ? "flex m-2 min-w-[80%] bg-[#2B2B2B] rounded-2xl	md:w-44 hover:cursor-pointer Content" : "flex m-2 min-w-[80%] bg-[#2B2B2B] rounded-2xl	md:w-44 border border-[#F1CA00] Content"} onClick={() => {onChangeTracker(item)}}>
                                 
                                        <img src={item.img} alt={item.name} className="w-2/5"/>
                                         <div className="text-white pt-2 pb-2 flex flex-col items-end justify-around">
                                            <div>
-                                                <div className="text-slate-300">{item.name}</div>
+                                                <div className="text-[#707070]">{item.name}</div>
                                                 <div className="text-2xl">{item.values}</div>
                                             </div>
                                             <div className="flex bg-green-700 rounded p-0.25"><span className="text-green-200">{item.persentage}</span><img src={group} /></div>
