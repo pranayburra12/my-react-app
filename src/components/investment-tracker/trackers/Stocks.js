@@ -27,6 +27,7 @@ export default function Stocks() {
 
   const [buyAveragePrice,setBuyAveragePrice]=useState();
   const [viewStocks,setViewStocks]=useState(false);
+  const [isEdit,setIsEdit]=useState(false);
   const [allStocks,setAllStocks]=useState([]);
   const [loader,setLoader]=useState(false);
   const handleStocks=(e)=>{
@@ -55,7 +56,7 @@ export default function Stocks() {
     options: stocksNameData,
     getOptionLabel: (each) => each['2. name']?each['2. name']:'',
   };
-  const handleSelectedStock=(e,option)=>{
+  const handleSelectedStock=(option)=>{
     console.log(option)
     setStockDetail(option)
     setStockName(option)
@@ -140,6 +141,101 @@ myHeaders.append("Authorization", `Bearer ${JSON.parse(localStorage.getItem('acc
   },[viewStocks])
   const editStock=(each)=>{
     console.log(each)
+    setViewStocks(false)
+    setLoader(true)
+    // setStockName(each.stockName);
+    setBuyAveragePrice(each.totalInvestedAmount/each.numberOfShares)
+    setInvestedValue(each.totalInvestedAmount)
+    if(each.stockSymbol){
+      // console.log(e.target.value);
+      fetch(`https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${each.stockSymbol}&apikey=SDFU2BDW50I9JYIN`)
+        .then(response=>{
+          return response.json();
+        })
+        .then((result)=>{
+          console.log(result);
+          setStocksNameData(result.bestMatches)
+          setStockDetail(result.bestMatches[0])
+          setStockName(result.bestMatches[0]['2. name'])
+          handleSelectedStock(result.bestMatches[0])
+          setIsEdit(true)
+          
+        })
+        .catch(error =>{
+          console.log(error.message)
+          //  setError(error.message)
+        }
+        );
+    }
+    setLoader(false)
+  }
+  const goBack=()=>{
+    setViewStocks(false)
+    setBuyAveragePrice('');
+    setInvestedValue('');
+    setStockName('')
+  }
+  const editStockHandle=()=>{
+    if(stockDetail){
+      setLoader(true)
+      var myHeaders = new Headers();
+      myHeaders.append("Authorization",`Bearer ${JSON.parse(localStorage.getItem('access_token'))}` );
+      myHeaders.append("Content-Type", "application/json");
+
+      var raw = JSON.stringify({
+        "stockSymbol": stockDetail['1. symbol'],
+        "stockName": stockDetail['2. name'],
+        "perSharePrice": buyAveragePrice,
+        "numberOfShares": Math.round(investedValue/buyAveragePrice),
+        "totalAmount": investedValue
+      });
+
+      var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+      };
+
+      fetch("https://findemybackedcode.onrender.com/stock/editStock", requestOptions)
+        .then(response => response.json())
+        .then(result => {console.log(result)
+          setViewStocks(true)
+          scrollToResults();
+        setLoader(false)
+        })
+        .catch(error => console.log('error', error));
+
+    }
+  }
+  const deleteStock=()=>{
+    if(stockDetail){
+      setLoader(true)
+      var myHeaders = new Headers();
+      myHeaders.append("Authorization",`Bearer ${JSON.parse(localStorage.getItem('access_token'))}` );
+      myHeaders.append("Content-Type", "application/json");
+
+      var raw = JSON.stringify({
+          "stockSymbol":stockDetail.stockSymbol
+      });
+
+      var requestOptions = {
+        method: 'Delete',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+      };
+
+      fetch("https://findemybackedcode.onrender.com/stock/deleteStock", requestOptions)
+        .then(response => response.json())
+        .then(result => {console.log(result)
+          setViewStocks(true)
+          scrollToResults();
+        setLoader(false)
+        })
+        .catch(error => console.log('error', error));
+
+    }
   }
   return ( <>
   {loader&& <Backdrop
@@ -162,7 +258,7 @@ myHeaders.append("Authorization", `Bearer ${JSON.parse(localStorage.getItem('acc
           id="stockSearch"
           autoComplete
           onInputChange={handleStocks}
-        onChange={(event,option)=>handleSelectedStock(event,option)}
+        onChange={(event,option)=>handleSelectedStock(option)}
           // includeInputInList
           defaultValue={StockName}
         value={StockName?StockName:null}
@@ -263,16 +359,16 @@ myHeaders.append("Authorization", `Bearer ${JSON.parse(localStorage.getItem('acc
 
                 onChange={(e) =>  setInvestedValue(e.target.value) }
         />
-        <Button onClick={addStock}
+        {isEdit?<div className='flex flex-row-reverse justify-between'><Button variant='contained' color='success' onClick={editStockHandle}>Save changes</Button> <Button variant='outlined' color='error' onClick={deleteStock}>Delete</Button></div>:<Button onClick={addStock}
           variant='outlined' color='success'
-        > Add</Button>
+        > Add</Button>}
       </div>
     </div>:
       <div className="text-white min-h-screen" ref={viewRef}>
-    <Button onClick={()=>setViewStocks(false)} > Go Back</Button>
+    <Button onClick={goBack} > Go Back</Button>
    <div className='flex flex-col gap-2' >
    {allStocks?.map(each=>{
-    return <div className='text-slate-200 flex justify-between w-full rounded-sm h-16 items-center p-3 bg-[#2B2B2B]' onClick={()=>editStock(each)}><span>{each.stockName}</span><span className='text-[#0BD19D]'>₹ {each.currentTotalValue.toFixed(1)    }</span></div>
+    return <div className='text-slate-200 flex justify-between w-full rounded-sm h-16 items-center p-3 bg-[#2B2B2B] gap-2 hover:cursor-pointer' onClick={()=>editStock(each)}><span>{each.stockName}</span><span className='text-[#0BD19D]'>₹{each.currentTotalValue.toFixed(1)    }</span></div>
    })}
    </div>
   </div>

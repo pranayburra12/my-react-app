@@ -289,7 +289,7 @@ const InverstmentTracker = () => {
                 </div>
                 {/* <div className="flex"> */}
                     {/* <hr  className="hr-tag"></hr> */}
-                <div className="flex overflow-scroll w-full md:grid md:grid-rows-2 md:grid-flow-col md:gap-4 md:p-4 Flipped mt-4">   
+                <div className="flex overflow-scroll w-full md:grid md:grid-rows-2 md:grid-flow-col md:gap-4 md:p-4 Flipped mt-4 pt-4 p-4">   
                     {
                         listOfTrackersData?.map((item)=>{
                             return(

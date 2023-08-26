@@ -93,7 +93,7 @@ const Login = (props) => {
       })
       .then((res)=>{
        if(res.status === 200){
-        setLoader(false)
+        
         toast.success("Login successful!");
         setDesabled(res);
         localStorage.setItem("access_token", JSON.stringify(res.data.accessToken));
@@ -106,6 +106,7 @@ const Login = (props) => {
        }else{
         setIsSubmitting(false);
        }
+       setLoader(false)
       })
 
     } catch (error) {
