@@ -136,83 +136,77 @@ const Bonds = (props) => {
     
 
     return (
-        <div className="text-center pl-40 pr-40 pt-5 md: p-0">
-            <div className="w-96">
-                <div class="text-gray-500 font-manrope text-sm float-left absolute" style={{color: "#969696"}}>{props.subHEading}</div>
-                <div class="text-gray-500  float-left text-4xl pb-7 pt-7" style={{color: "#FEC008"}}>{props.heading}</div>
+      <><div className=" flex flex-col">
+        <div class="text-gray-500 font-manrope text-sm float-left " style={{ color: "#969696" }}>{props.subHEading}</div>
+        <div class="text-gray-500  float-left text-4xl pt-1 pb-7 pt-7" style={{ color: "#FEC008" }}>{props.heading}</div>
+      </div><div className="text-center pt-5 md: p-0">
+
+          <div className='w-full flex flex-col gap-5'>
+            <div className="flex rounded-3xl   border-white rounded-10 h-auto items-baseline  bg-black mb-12" style={{ background: "#2B2B2B" }}>
+              <input
+                className=" focus:outline-none w-3/4 rounded-3xl border-none p-6 border-2 border-solid border-white rounded-10 h-15 text-white bg-black"
+                style={{ color: "#ffff", background: "#2B2B2B" }}
+                value={"Bond Value"}
+                disabled={true}
+                onChange={handleInputChange} />
+              <div
+                className="  pl-2.5 text-green-500"
+              >{`₹ ${currentSavings}`}</div>
             </div>
-            <div className='w-full flex flex-col gap-5'>
-            <div className="flex justify-between  rounded-3xl   border-white rounded-10 h-auto items-baseline  bg-black mb-12" style={{background:"#2B2B2B"}}>
-                    <input
-                        className=" focus:outline-none w-3/4 rounded-3xl p-6 border-2 border-solid border-white rounded-10 h-15 text-white bg-black"
-                        style={{color:"#ffff",background:"#2B2B2B"}}
-                        value={"Bond Value"}
-                        disabled={true}
-                        onChange={handleInputChange}
-                    />
-                      <div
-                        className="mr-8  pl-2.5 text-green-500"
-                     >{`₹ ${currentSavings}`}</div>
-                </div>
-                <div className="flex justify-between  rounded-3xl  border-2 border-solid border-white rounded-10 h-16  bg-black " >
-                    <input
-                        className=" focus:outline-none w-3/4 rounded-3xl p-6 border-2 border-white rounded-10 h-15  bg-black"
-                        style={{color:"#ffff"}}
-                        type="text"
-                        id="addStockInput"
-                        placeholder="Bond Name"
-                        value={addSaving}
-                        onChange={handleInputChange}
-                    />
-                      {/* <img
-                        className="mr-8 cursor-pointer pl-2.5"
-                        src={rightarrow}
-                        alt="Right Arrow"
-                        onClick ={()=>{addSavings(addSaving)}}
-                     /> */}
-                </div>
-                <div className="flex justify-between  rounded-3xl  border-2 border-solid border-white rounded-10 h-16  bg-black " >
-                    <input
-                        className=" focus:outline-none w-3/4 rounded-3xl p-6 border-2 border-solid border-white rounded-10 h-15  bg-black"
-                        style={{color:"#ffff"}}
-                        type="text"
-                        id="addStockInput"
-                        placeholder="Amount Invested"
-                        value={addSaving}
-                        onChange={handleInputChange}
-                    />
-                      {/* <img
-                        className="mr-8 cursor-pointer pl-2.5"
-                        src={rightarrow}
-                        alt="Right Arrow"
-                        onClick ={()=>{addSavings(addSaving)}}
-                     /> */}
-                </div>
-                   {!isAddStockValid &&
-                        <span style={{ color: 'red' }}>{validationMessage}</span>
-                    }
-               <div className="flex justify-between  rounded-3xl  border-2 border-solid border-white rounded-10 h-16  bg-black" >
-                   <input
-                        className=" focus:outline-none w-3/4 rounded-3xl p-6 border-2 border-solid border-white rounded-10 h-15  bg-black"
-                        style={{color:"#ffff"}}
-                        type="text"
-                        placeholder="Bond Type"
-                        value={removesavings}
-                        onChange={handleInputChangevalues}
-                    />
-                    {/* <img
-                        className="mr-8 cursor-pointer pl-2.5"
-                        src={rightarrow}
-                        alt="Right Arrow"
-                        onClick = {()=>{remove(removesavings)}}
-                     /> */}
-                   </div>
-                    {!isRemoveStockValid &&
-                        <span style={{ color: 'red' }}>{validationMessage}</span>
-                    }
-                    <div><button className="text-xs mt-5 p-3 ml-20 rounded-xl" style={{    backgroundColor: "#00838f",color: "#fff", border: "solid 1px #00838"}}  >Add new bond</button></div>
+            <div className="flex justify-between  rounded-3xl  border-2 border-solid border-white rounded-10 h-16  bg-black ">
+              <input
+                className=" focus:outline-none w-3/4 rounded-3xl border-none p-6 border-2 border-solid border-white rounded-10 h-15  bg-black"
+                style={{ color: "#ffff" }}
+                type="text"
+                id="addStockInput"
+                placeholder="Bond Name"
+                value={addSaving}
+                onChange={handleInputChange} />
+              {/* <img
+      className="mr-8 cursor-pointer pl-2.5"
+      src={rightarrow}
+      alt="Right Arrow"
+      onClick ={()=>{addSavings(addSaving)}}
+   /> */}
             </div>
-        </div>
+            <div className="flex justify-between  rounded-3xl  border-2 border-solid border-white rounded-10 h-16  bg-black ">
+              <input
+                className=" focus:outline-none w-3/4 rounded-3xl border-none p-6 border-2 border-solid border-white rounded-10 h-15  bg-black"
+                style={{ color: "#ffff" }}
+                type="text"
+                id="addStockInput"
+                placeholder="Amount Invested"
+                value={addSaving}
+                onChange={handleInputChange} />
+              {/* <img
+      className="mr-8 cursor-pointer pl-2.5"
+      src={rightarrow}
+      alt="Right Arrow"
+      onClick ={()=>{addSavings(addSaving)}}
+   /> */}
+            </div>
+            {!isAddStockValid &&
+              <span style={{ color: 'red' }}>{validationMessage}</span>}
+            <div className="flex justify-between  rounded-3xl  border-2 border-solid border-white rounded-10 h-16  bg-black">
+              <input
+                className=" focus:outline-none w-3/4 rounded-3xl border-none p-6 border-2 border-solid border-white rounded-10 h-15  bg-black"
+                style={{ color: "#ffff" }}
+                type="text"
+                placeholder="Bond Type"
+                value={removesavings}
+                onChange={handleInputChangevalues} />
+              {/* <img
+        className="mr-8 cursor-pointer pl-2.5"
+        src={rightarrow}
+        alt="Right Arrow"
+        onClick = {()=>{remove(removesavings)}}
+     /> */}
+            </div>
+            {!isRemoveStockValid &&
+              <span style={{ color: 'red' }}>{validationMessage}</span>}
+            <div><button className="text-xs mt-5 p-3 ml-20 rounded-xl" style={{ backgroundColor: "#00838f", color: "#fff", border: "solid 1px #00838" }}>Add new bond</button></div>
+          </div>
+        </div></>
     )
 }
 

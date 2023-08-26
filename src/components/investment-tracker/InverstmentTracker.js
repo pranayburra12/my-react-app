@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import "./InverstmentTracker.css"
 import group from "../../assets/Group.svg"
 import add from "../../assets/add.svg"
@@ -15,7 +15,7 @@ import Stocks from "./trackers/Stocks";
 import CustomTracker from "./trackers/CustomTracker";
 import NewTracker from "./trackers/newTracker";
 import PPF from "./trackers/ppf";
-import Gold from "./trackers/goid";
+import Gold from "./trackers/gold";
 import Bonds from "./trackers/bonds";
 import MutualFunds from "./trackers/MutualFunds";
 
@@ -29,61 +29,63 @@ const InverstmentTracker = () => {
     const listOfTrackers=[
         {
             img: savings,
-            name: "stocks",
+            trackerName: "stocks",
             label:'Stocks',
-            values: "₹ 21.9K",
+            investedAmount: "₹ 21.9K",
             persentage: "11.5%",
         },
         {
         img: savings,
-        name: "savings",
+        trackerName: "savings",
         label:'Savings',
-        values: "₹ 21.9K",
+        investedAmount: "₹ 21.9K",
         persentage: "11.5%",
         },
         {
             img: stocks,
-            name: "bonds",
+            trackerName: "bonds",
             label:'Bonds',
-            values: "₹ 21.9K",
+            investedAmount: "₹ 21.9K",
             persentage: "11.5%",
         },
         {
             img: stocks,
-            name: "gold",
+            trackerName: "gold",
             label:'Gold',
-            values: "₹ 21.9K",
+            investedAmount: "₹ 21.9K",
             persentage: "11.5%",
         },
         {
             img: stocks,
-            name: "ppf",
+            trackerName: "ppf",
             label:'PPF',
-            values: "₹ 21.9K",
+            investedAmount: "₹ 21.9K",
             persentage: "11.5%",
         },
         {
             img: stocks,
-            name: "mutual-funds",
+            trackerName: "mutual-funds",
             label:'Mutual Funds',
-            values: "₹ 21.9K",
+            investedAmount: "₹ 21.9K",
             persentage: "11.5%",
         },
         {
             img: stocks,
-            name: "lands",
+            trackerName: "lands",
             label:'Custom',
-            values: "₹ 21.9K",
+            investedAmount: "₹ 21.9K",
             persentage: "11.5%",
         },
         {
             img: stocks,
-            name: "fix deposit",
+            trackerName: "fix deposit",
             label:'Custom',
-            values: "₹ 21.9K",
+            investedAmount: "₹ 21.9K",
             persentage: "11.5%",
         },
     ]
+
+    const [listOfTrackersData,setListOfTrackers]=useState(listOfTrackers)
    
     const renderTrackerDetail=(tracker)=>{
         // setAddTracker(false)
@@ -167,9 +169,12 @@ const InverstmentTracker = () => {
         console.log(changeTracker)
       };   
       
-      const changeTooldView=()=>{
+      const changeTooldView=(values)=>{
         setAddTracker(false)
+        setListOfTrackers((prev)=> [...prev,values.data] )
       }
+
+      console.log("aaaaaaaaaaaaaaaaaaaaaaa",listOfTrackersData)
       
     
     return (
@@ -286,15 +291,15 @@ const InverstmentTracker = () => {
                     {/* <hr  className="hr-tag"></hr> */}
                 <div className="flex overflow-scroll w-full md:grid md:grid-rows-2 md:grid-flow-col md:gap-4 md:p-4 Flipped mt-4">   
                     {
-                        listOfTrackers?.map((item)=>{
+                        listOfTrackersData?.map((item)=>{
                             return(
-                                <div className={item.name !== changeTracker?.name ? "flex m-2 min-w-[80%] bg-[#2B2B2B] rounded-2xl	md:w-44 hover:cursor-pointer Content" : "flex m-2 min-w-[80%] bg-[#2B2B2B] rounded-2xl	md:w-44 border border-[#F1CA00] Content"} onClick={() => {onChangeTracker(item)}}>
+                                <div className={item.trackerName !== changeTracker?.trackerName ? "flex m-2 min-w-[80%] bg-[#2B2B2B] rounded-2xl	md:w-44 hover:cursor-pointer Content" : "flex m-2 min-w-[80%] bg-[#2B2B2B] rounded-2xl	md:w-44 border border-[#F1CA00] Content"} onClick={() => {onChangeTracker(item)}}>
                                 
                                        <img src={item.img} alt={item.name} className="w-2/5"/>
                                         <div className="text-white pt-2 pb-2 flex flex-col items-end justify-around">
                                            <div>
-                                                <div className="text-[#707070]">{item.name}</div>
-                                                <div className="text-2xl">{item.values}</div>
+                                                <div className="text-[#707070]">{item.trackerName}</div>
+                                                <div className="text-2xl">{item.investedAmount}</div>
                                             </div>
                                             <div className="flex bg-green-700 rounded p-0.25"><span className="text-green-200">{item.persentage}</span><img src={group} /></div>
                                             {/* <button className=""><img src={arrow} /></button> */}

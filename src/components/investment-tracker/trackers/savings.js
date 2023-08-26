@@ -113,7 +113,7 @@ const Savings = (props) => {
           myHeaders.append("Content-Type", "application/json");
     
           var raw = JSON.stringify({
-            savingsAmount:addSaving
+            savingsAmount:removesavings
           });
     
           var requestOptions = {
@@ -180,7 +180,28 @@ const Savings = (props) => {
                      />
                    </div>
             </div>
-        </div>
+            {/* {!isAddStockValid &&
+              <span style={{ color: 'red' }}>{validationMessage}</span>} */}
+            {/* <div className="flex justify-between  rounded-3xl  border-2 border-solid border-white rounded-10 h-16  bg-black">
+              <input
+                className=" focus:outline-none w-3/4 rounded-3xl border-none p-6 border-2 border-solid border-white rounded-10 h-15  bg-black"
+                style={{ color: "#ffff" }}
+                type="text"
+                placeholder="Remove Savings"
+                value={removesavings}
+                onChange={handleInputChangevalues}
+                disabled={true} />
+              <img
+                className="mr-8 cursor-pointer pl-2.5"
+                src={rightarrow}
+                alt="Right Arrow"
+                onClick={remove} />
+            </div> */}
+            {/* {!isRemoveStockValid &&
+              <span style={{ color: 'red' }}>{validationMessage}</span>} */}
+          </div>
+        // </div>
+        // </div>
     )
 }
 

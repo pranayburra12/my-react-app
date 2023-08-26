@@ -32,6 +32,7 @@ const PPF = (props) => {
     const handleInputChange = (event) => {
         const newValue = event.target.value;
         setAddSvaings(newValue);
+        setRemoveSavings(newValue)
         setIsAddStockValid(validateInput(newValue));
     };
 
@@ -60,7 +61,7 @@ const PPF = (props) => {
             redirect: 'follow'
           };
     
-          fetch("https://findemybackedcode.onrender.com/saving/getTotalSavings", requestOptions)
+          fetch("https://findemybackedcode.onrender.com/ppf/getTotalPPF", requestOptions)
             .then(response => response.json())
             .then(result => {console.log(result)
                 if( result?.message === "Token Invalid/Expired"){
@@ -74,9 +75,9 @@ const PPF = (props) => {
                     }
                     GenerateNewToken(route,payload,navigate)
                   }else{
-                    setcurrentSavings(result?.data?.savingsAmount)
+                    setcurrentSavings(result?.data?.ppfAmount)
                     setAddSvaings("")
-                    setRemoveSavings("")
+                    // setRemoveSavings("")
                   }
             })
             .catch(error => console.log('error', error));
@@ -89,7 +90,7 @@ const PPF = (props) => {
           myHeaders.append("Content-Type", "application/json");
     
           var raw = JSON.stringify({
-            savingsAmount: value
+            ppfAmount: value
           });
     
           var requestOptions = {
@@ -99,7 +100,7 @@ const PPF = (props) => {
             redirect: 'follow'
           };
     
-          fetch("https://findemybackedcode.onrender.com/saving/addSavings", requestOptions)
+          fetch("https://findemybackedcode.onrender.com/ppf/addPPF", requestOptions)
             .then(response => response.json())
             .then(result => {console.log(result)
                 totalSavings()
@@ -114,8 +115,7 @@ const PPF = (props) => {
           myHeaders.append("Content-Type", "application/json");
     
           var raw = JSON.stringify({
-            removeSavings: value,
-            savingsAmount:addSaving
+            ppfAmount:removesavings
           });
     
           var requestOptions = {
@@ -125,7 +125,7 @@ const PPF = (props) => {
             redirect: 'follow'
           };
     
-          fetch("https://findemybackedcode.onrender.com/saving/removeSavings", requestOptions)
+          fetch("https://findemybackedcode.onrender.com/ppf/removePPF", requestOptions)
             .then(response => response.json())
             .then(result => {console.log(result)
                 totalSavings()
@@ -136,66 +136,60 @@ const PPF = (props) => {
     
 
     return (
-        <div className="text-center pl-40 pr-40 pt-5 md: p-0">
-            <div className="w-96">
-                <div class="text-gray-500 font-manrope text-sm float-left" style={{color: "#969696"}}>{props.subHEading}</div>
-                <div class="text-gray-500  float-left text-4xl pt-2.5 pb-7" style={{color: "#FEC008"}}>{props.heading}</div>
+
+      <><div className="w-96 flex flex-col">
+        <div class="text-gray-500 font-manrope text-sm float-left" style={{ color: "#969696" }}>{props.subHEading}</div>
+        <div class="text-gray-500  float-left text-4xl pt-2.5 pb-7" style={{ color: "#FEC008" }}>{props.heading}</div>
+      </div><div className="text-center  pt-5 md: p-0">
+          <div className='w-full flex flex-col gap-5'>
+            <div className="flex   rounded-3xl   border-white rounded-10 h-auto items-baseline  bg-black mb-12" style={{ background: "#2B2B2B" }}>
+              <input
+                className=" focus:outline-none w-3/4 rounded-3xl border-none p-6 border-2 border-solid border-white rounded-10 h-15 text-white bg-black"
+                style={{ color: "#ffff", background: "#2B2B2B" }}
+                value={"PPF  Value"}
+                disabled={true}
+                // onChange={handleInputChange} 
+                />
+              <div
+                className="  pl-2.5 text-green-500"
+              >{`₹ ${currentSavings}`}</div>
             </div>
-            <div className='w-full flex flex-col gap-5'>
-            <div className="flex justify-between  rounded-3xl   border-white rounded-10 h-auto items-baseline  bg-black mb-12" style={{background:"#2B2B2B"}}>
-                    <input
-                        className=" focus:outline-none w-3/4 rounded-3xl border-none p-6 border-2 border-solid border-white rounded-10 h-15 text-white bg-black"
-                        style={{color:"#ffff",background:"#2B2B2B"}}
-                        value={"PPF  Value"}
-                        disabled={true}
-                        onChange={handleInputChange}
-                    />
-                      <div
-                        className="mr-8  pl-2.5 text-green-500"
-                     >{`₹ ${currentSavings}`}</div>
-                </div>
-                <hr className="sm:felx-none" />
-                <div className="flex justify-between  rounded-3xl  border-2 border-solid border-white rounded-10 h-16  bg-black " >
-                    <input
-                        className=" focus:outline-none w-3/4 rounded-3xl border-none p-6 border-2 border-solid border-white rounded-10 h-15  bg-black"
-                        style={{color:"#ffff"}}
-                        type="text"
-                        id="addStockInput"
-                        placeholder="Invested Amount"
-                        value={addSaving}
-                        onChange={handleInputChange}
-                    />
-                      <img
-                        className="mr-8 cursor-pointer pl-2.5"
-                        src={rightarrow}
-                        alt="Right Arrow"
-                        onClick ={()=>{addSavings(addSaving)}}
-                     />
-                </div>
-                   {!isAddStockValid &&
-                        <span style={{ color: 'red' }}>{validationMessage}</span>
-                    }
-               <div className="flex justify-between  rounded-3xl  border-2 border-solid border-white rounded-10 h-16  bg-black" >
-                   <input
-                        className=" focus:outline-none w-3/4 rounded-3xl border-none p-6 border-2 border-solid border-white rounded-10 h-15  bg-black"
-                        style={{color:"#ffff"}}
-                        type="text"
-                        placeholder="Remove Funds"
-                        value={removesavings}
-                        onChange={handleInputChangevalues}
-                    />
-                    <img
-                        className="mr-8 cursor-pointer pl-2.5"
-                        src={rightarrow}
-                        alt="Right Arrow"
-                        onClick = {()=>{remove(removesavings)}}
-                     />
-                   </div>
-                    {!isRemoveStockValid &&
-                        <span style={{ color: 'red' }}>{validationMessage}</span>
-                    }
+            <hr className="sm:felx-none" />
+            <div className="flex justify-between  rounded-3xl  border-2 border-solid border-white rounded-10 h-16  bg-black ">
+              <input
+                className=" focus:outline-none w-3/4 rounded-3xl border-none p-6 border-2 border-solid border-white rounded-10 h-15  bg-black"
+                style={{ color: "#ffff" }}
+                type="text"
+                id="addStockInput"
+                placeholder="Invested Amount"
+                value={addSaving}
+                onChange={handleInputChange} />
+              <img
+                className="mr-8 cursor-pointer pl-2.5"
+                src={rightarrow}
+                alt="Right Arrow"
+                onClick={() => { addSavings(addSaving); } } />
             </div>
-        </div>
+            {!isAddStockValid &&
+              <span style={{ color: 'red' }}>{validationMessage}</span>}
+            <div className="flex justify-between  rounded-3xl  border-2 border-solid border-white rounded-10 h-16  bg-black">
+              <input
+                className=" focus:outline-none w-3/4 rounded-3xl border-none p-6 border-2 border-solid border-white rounded-10 h-15  bg-black"
+                style={{ color: "#ffff" }}
+                type="text"
+                placeholder="Remove Funds"
+                // value={removesavings}
+                onChange={handleInputChangevalues} />
+              <img
+                className="mr-8 cursor-pointer pl-2.5"
+                src={rightarrow}
+                alt="Right Arrow"
+                onClick={() => { remove(removesavings); } } />
+            </div>
+            {!isRemoveStockValid &&
+              <span style={{ color: 'red' }}>{validationMessage}</span>}
+          </div>
+        </div></>
     )
 }
 
