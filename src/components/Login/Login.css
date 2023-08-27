@@ -91,9 +91,9 @@
 .text-cred {
   margin-top: 50px;
 }
-.pass-cred {
+/* .pass-cred {
   margin-bottom: 50px;
-}
+} */
 .login__option__logo {
   display: flex;
   gap: 20px;

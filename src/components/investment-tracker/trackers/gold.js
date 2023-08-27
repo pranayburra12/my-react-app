@@ -2,19 +2,23 @@ import React, { useEffect, useState } from "react"
 import rightarrow from "../../../assets/Group 1260.svg"
 import { GenerateNewToken } from "../../utils/api";
 import { useNavigate } from "react-router-dom";
+import { Button } from "@mui/material";
 
 const Gold = (props) => {
 
   const navigate = useNavigate();
 
-  const [addSaving, setAddSvaings] = useState('');
-  const [removesavings, setRemoveSavings] = useState('');
-  const [currentSavings, setcurrentSavings] = useState("");
+  const [addGold, setAddGold] = useState('');
+  const [valueofIntrest,setValueOfintgrest] = useState('')
+
+  const [removeGold, setRemoveGold] = useState('');
+  const [currentGold, setcurrentGold] = useState("");
 
 
   const [validationMessage, setValidationMessage] = useState('');
   const [isAddStockValid, setIsAddStockValid] = useState(true);
   const [isRemoveStockValid, setIsRemoveStockValid] = useState(true);
+
 
   const validateInput = (value) => {
     if (/^\d+$/.test(value)) {
@@ -31,13 +35,13 @@ const Gold = (props) => {
 
   const handleInputChange = (event) => {
     const newValue = event.target.value;
-    setAddSvaings(newValue);
+    setAddGold(newValue);
     setIsAddStockValid(validateInput(newValue));
   };
 
   const handleInputChangevalues = (event) => {
     const newValue = event.target.value;
-    setRemoveSavings(newValue);
+    setRemoveGold(newValue);
     setIsRemoveStockValid(validateInput(newValue));
   };
 
@@ -60,7 +64,7 @@ const Gold = (props) => {
       redirect: 'follow'
     };
 
-    fetch("https://findemybackedcode.onrender.com/saving/getTotalSavings", requestOptions)
+    fetch("https://findemybackedcode.onrender.com/gold/getTotalGoldInvestmentPrice", requestOptions)
       .then(response => response.json())
       .then(result => {
         console.log(result)
@@ -75,22 +79,25 @@ const Gold = (props) => {
           }
           GenerateNewToken(route, payload, navigate)
         } else {
-          setcurrentSavings(result?.data?.savingsAmount)
-          setAddSvaings("")
-          setRemoveSavings("")
+          setcurrentGold(result?.data?.totalAmount)
+          setAddGold("")
+          setRemoveGold("")
+          setValueOfintgrest("")
         }
       })
       .catch(error => console.log('error', error));
   }
 
 
-  const addSavings = (value) => {
+  const AddGold = () => {
     var myHeaders = new Headers();
     myHeaders.append("Authorization", `Bearer ${JSON.parse(localStorage.getItem('access_token'))}`);
     myHeaders.append("Content-Type", "application/json");
 
     var raw = JSON.stringify({
-      savingsAmount: value
+      totalAmount: addGold,
+      perGramPrice: valueofIntrest,
+      numberOfGrams: addGold/valueofIntrest
     });
 
     var requestOptions = {
@@ -100,7 +107,7 @@ const Gold = (props) => {
       redirect: 'follow'
     };
 
-    fetch("https://findemybackedcode.onrender.com/saving/addSavings", requestOptions)
+    fetch("https://findemybackedcode.onrender.com/gold/addGold", requestOptions)
       .then(response => response.json())
       .then(result => {
         console.log(result)
@@ -116,8 +123,7 @@ const Gold = (props) => {
     myHeaders.append("Content-Type", "application/json");
 
     var raw = JSON.stringify({
-      removeSavings: value,
-      savingsAmount: addSaving
+      numberOfGrams: value
     });
 
     var requestOptions = {
@@ -127,7 +133,7 @@ const Gold = (props) => {
       redirect: 'follow'
     };
 
-    fetch("https://findemybackedcode.onrender.com/saving/removeSavings", requestOptions)
+    fetch("https://findemybackedcode.onrender.com/gold/removeGold", requestOptions)
       .then(response => response.json())
       .then(result => {
         console.log(result)
@@ -153,54 +159,62 @@ const Gold = (props) => {
               onChange={handleInputChange} />
             <div
               className="  pl-2.5 text-green-500"
-            >{`₹ ${currentSavings}`}</div>
+            >{`₹ ${currentGold}`}</div>
           </div>
           <hr className="sm:felx-none" />
           <div className="flex justify-between  rounded-3xl  border-2 border-solid border-white rounded-10 h-16  bg-black ">
             <input
               className=" focus:outline-none w-3/4 rounded-3xl border-none p-6 border-2 border-solid border-white rounded-10 h-15  bg-black"
               style={{ color: "#ffff" }}
-              type="text"
+              type="number"
               id="addStockInput"
               placeholder="Invested Amount"
-              value={addSaving}
-              onChange={handleInputChange} />
-            <img
+              value={addGold}
+              onChange={(e)=>{setAddGold(e.target.value)}} />
+            {/* <img
               className="mr-8 cursor-pointer pl-2.5"
               src={rightarrow}
               alt="Right Arrow"
-              onClick={() => { addSavings(addSaving); } } />
+              onClick={() => { addSavings(addSaving); } } /> */}
           </div>
           <div className="flex justify-between  rounded-3xl  border-2 border-solid border-white rounded-10 h-16  bg-black ">
             <input
               className=" focus:outline-none w-3/4 rounded-3xl border-none p-6 border-2 border-solid border-white rounded-10 h-15  bg-black"
               style={{ color: "#ffff" }}
-              type="text"
+              type="number"
               id="addStockInput"
               placeholder="Value at the time of investment"
-              value={addSaving}
-              onChange={handleInputChange} />
-            <img
+              value={valueofIntrest}
+              onChange={(e)=>{setValueOfintgrest(e.target.value)}} />
+            {/* <img
               className="mr-8 cursor-pointer pl-2.5"
               src={rightarrow}
               alt="Right Arrow"
-              onClick={() => { addSavings(addSaving); } } />
+              onClick={() => { addSavings(addSaving); } } /> */}
           </div>
+
+          {/* <button className="text-xs mt-5 p-3 ml-20 rounded-xl" style={{ borderColor: "#00838f", color: "#00838f", border: "2px solid" }} onClick={()=>{}} >Add</button> */}
+
+          <Button 
+          variant='outlined' color='success'
+          onClick={AddGold}
+        > Add</Button>
+
           {!isAddStockValid &&
             <span style={{ color: 'red' }}>{validationMessage}</span>}
           <div className="flex justify-between  rounded-3xl  border-2 border-solid border-white rounded-10 h-16  bg-black mt-10">
             <input
               className=" focus:outline-none w-3/4 rounded-3xl border-none p-6 border-2 border-solid border-white rounded-10 h-15  bg-black"
               style={{ color: "#ffff" }}
-              type="text"
+              type="number"
               placeholder="Remove Gold"
-              value={removesavings}
+              value={removeGold}
               onChange={handleInputChangevalues} />
             <img
               className="mr-8 cursor-pointer pl-2.5"
               src={rightarrow}
               alt="Right Arrow"
-              onClick={() => { remove(removesavings); } } />
+              onClick={() => { remove(removeGold) } } />
           </div>
           {!isRemoveStockValid &&
             <span style={{ color: 'red' }}>{validationMessage}</span>}

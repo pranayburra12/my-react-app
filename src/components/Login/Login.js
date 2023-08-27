@@ -51,19 +51,20 @@ const Login = (props) => {
   };
 
   const handleLogin = () => {
-    if (!validateEmail(email) && !validatePassword(password) )  {
-      setEmailValid(false);
-      setPasswordValid(false);
-    } 
-     else {
+    // const  validemail= validateEmail(email)
+    // if (!validemail && !validatePassword(password) )  {
+    //   setEmailValid(false);
+    //   setPasswordValid(false);
+    // } 
+    //  else {
         let payload = {
           email: email,
           password: password,
         };
     
-      setIsSubmitting(true)
+      // setIsSubmitting(true)
       onsubmit(payload);
-    }
+    // }
   };
 
   const onsubmit = async (values) => {
@@ -115,18 +116,26 @@ const Login = (props) => {
       toast.error("Login failed. Please check your credentials.");
     }
   };
-  
-  
 
-  const validateEmail = (email) => {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regex.test(email);
-  };
 
   const validatePassword = (password) => {
-    const letterRegex = /[a-zA-Z]/;
+    const letterRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8}$/;
     return letterRegex.test(password);
   };
+
+
+  const validateEmail =(value) =>{
+    // setEmail(e.target.value);
+    if(!value) {
+     return  ("email is required")
+    }
+    else  if(!new RegExp(/^[^\s@]+@[^\s@]+(\.[^ !."`'#%&,:;<>=@{}~\$\(\)\*\+_\/\\\?\[\]\^\|]{2,4})$/).test(value)) {
+     return  ("enter a valid email")
+    }
+    else {
+     return  (undefined)
+    };
+  }
   
 
   return (
@@ -165,22 +174,48 @@ const Login = (props) => {
           className={`input-cred text-cred ${!emailValid ? "invalid" : ""}`}
           value={email}
           onChange={(e) => {
-            setEmail(e.target.value);
-            setEmailValid(true); // Reset validation when input changes
+            const value = e.target.value;
+            setEmail(value);
+            if(!value) {
+              setEmailValid("email is required")
+             }
+             else  if(!new RegExp(/^[^\s@]+@[^\s@]+(\.[^ !."`'#%&,:;<>=@{}~\$\(\)\*\+_\/\\\?\[\]\^\|]{2,4})$/).test(value)) {
+              setEmailValid("enter a valid email")
+             }
+             else {
+              setEmailValid(true)
+             };
           }}
         />
-        {!emailValid && <p className="error-message">Please enter a valid email address.</p>}
+          { emailValid && (
+              <p className={"error-message"}>{emailValid}</p>
+            )}
         <input
           type="password"
           placeholder="Password"
           className={`input-cred pass-cred ${!passwordValid ? "invalid" : ""}`}
           value={password}
+          // onChange={(e) => {
+          //   setPassword(e.target.value);
+          //   setPasswordValid(true); 
+          // }}
           onChange={(e) => {
-            setPassword(e.target.value);
-            setPasswordValid(true); // Reset validation when input changes
+            const value = e.target.value;
+            setPassword(value);
+            if(!value) {
+              setPasswordValid("pasword is required")
+             }
+            //  else  if(!new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8}$/).test(value)) {
+            //   setPasswordValid("enter a valid password")
+            //  }
+             else {
+              setPasswordValid(true)
+             };
           }}
         />
-        {!passwordValid && <p className="error-message">Password must contain at least one letter.</p>}
+         { passwordValid && (
+              <p className={"error-message"}>{passwordValid}</p>
+            )}
 
         <div className="input__checkand__forgetpass">
           <input type="checkbox" name="Remember Me" id="Remember-Me" />
@@ -193,7 +228,7 @@ const Login = (props) => {
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             onClick={handleLogin}
-            disabled={emailValid && passwordValid ? false : true}
+            disabled={email!== "" && password!=="" && emailValid===true && passwordValid===true ? false : true}
           >
             <div style={{ width: 315, height: 45 }}>
               <Lottie

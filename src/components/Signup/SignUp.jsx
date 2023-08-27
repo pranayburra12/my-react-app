@@ -10,11 +10,18 @@ const SignUp = () => {
   const navigate = useNavigate();
 
   const [formSubmit, setFormSubmit] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(true);
+
+  const [email, setEmail] = React.useState("");
+  const [emailValid, setEmailValid] = React.useState(true);
+  const [password, setPassword] = React.useState("");
+  const [passwordValid, setPasswordValid] = React.useState(true);
+  const [conformpasswordValid, setConformPasswordValid] = React.useState(true);
   const [confirmPassword, setConfirmPassword] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [numbervalidate,setNumberValidate] = useState("")
+
+
   const [formErrors, setFormErrors] = useState({
     email: "",
     password: "",
@@ -93,9 +100,6 @@ const SignUp = () => {
     setFormErrors(errors);
 
     // If there are no errors, proceed to OTP section
-    if (Object.keys(errors).length === 0) {
-      setFormSubmit(true);
-    }
 
     const payload ={
       email:email,
@@ -104,8 +108,7 @@ const SignUp = () => {
       confirmPassword:confirmPassword,
       phoneNumber:phoneNumber
   }
-
-  setIsSubmitting(true)
+  setIsSubmitting(false)
   onSubmit(payload)
 
   };
@@ -133,13 +136,16 @@ const SignUp = () => {
       .then((res)=>{
         console.log(res)
         if(res?.data?.id){
+          setFormSubmit(true);
           let payload={
             email:res.data.email,
             id:res.data.id
           }
           sendOtp(payload)
+          setIsSubmitting(true)
         }else{
           console.log("aaaaaaaa")
+          setIsSubmitting(true)
         }
         setData(res)
       })
@@ -152,6 +158,7 @@ const SignUp = () => {
       // console.log("Response data:", data);
     } catch (error) {
       console.log("Error:", error);
+      setIsSubmitting(true)
     }
 
   }
@@ -218,35 +225,71 @@ const SignUp = () => {
               placeholder="Email"
               className="signup-input-cred signup-text-cred"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              onBlur={() => handleInputBlur("email")}
+              // onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => {
+                const value = e.target.value;
+                setEmail(value);
+                if(!value) {
+                  setEmailValid("email is required")
+                 }
+                 else  if(!new RegExp(/^[^\s@]+@[^\s@]+(\.[^ !."`'#%&,:;<>=@{}~\$\(\)\*\+_\/\\\?\[\]\^\|]{2,4})$/).test(value)) {
+                  setEmailValid("enter a valid email")
+                 }
+                 else {
+                  setEmailValid(true)
+                 };
+              }}
+              // onBlur={() => handleInputBlur("email")}
             />
-            {touched.email && formErrors.email && (
-              <p className="error-message">{formErrors.email}</p>
-            )}
+             { emailValid && (
+              <p className={"error-message"} style={{marginBottom:"-36px"}}>{emailValid}</p>
+              )}
 
             <input
               type="password"
               placeholder="Password"
               className="signup-input-cred"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              onBlur={() => handleInputBlur("password")}
+              // onChange={(e) => setPassword(e.target.value)}
+              // onBlur={() => handleInputBlur("password")}
+              onChange={(e) => {
+                const value = e.target.value;
+                setPassword(value);
+                if(!value) {
+                  setPasswordValid("pasword is required")
+                 }
+                 else  if(!new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8}$/).test(value)) {
+                  setPasswordValid("enter a valid password")
+                 }
+                 else {
+                  setPasswordValid(true)
+                 };
+              }}
             />
-            {touched.password && formErrors.password && (
-              <p className="error-message">{formErrors.password}</p>
+             { passwordValid && (
+              <p className={"error-message"} style={{marginBottom:"-36px"}}>{passwordValid}</p>
             )}
-
             <input
               type="password"
               placeholder="Confirm Password"
               className="signup-input-cred"
               value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              onBlur={() => handleInputBlur("confirmPassword")}
+              disabled={passwordValid ===true ? false : true}
+              // onChange={(e) => setConfirmPassword(e.target.value)}
+              // onBlur={() => handleInputBlur("confirmPassword")}
+              onChange={(e) => {
+                const value = e.target.value;
+                setConfirmPassword(value);
+                if(value !== password) {
+                  setConformPasswordValid("Passwords do not match.")
+                 }
+                 else {
+                  setConformPasswordValid(true)
+                 };
+              }}
             />
-            {touched.confirmPassword && formErrors.confirmPassword && (
-              <p className="error-message">{formErrors.confirmPassword}</p>
+             { conformpasswordValid && (
+              <p className={"error-message"} style={{marginBottom:"-36px"}}>{conformpasswordValid}</p>
             )}
 
             <input
@@ -254,19 +297,34 @@ const SignUp = () => {
               placeholder="Phone Number"
               className="signup-input-cred signup-pass-cred"
               value={phoneNumber}
-              onChange={(e) => setPhoneNumber(e.target.value)}
-              onBlur={() => handleInputBlur("phoneNumber")}
+              // onChange={(e) => setPhoneNumber(e.target.value)}
+              // onBlur={() => handleInputBlur("phoneNumber")}
+              onChange={(e) => {
+                const value = e.target.value;
+                setPhoneNumber(value);
+                if(!new RegExp(/^[+]?\d{10,15}$/).test(value)) {
+                  setNumberValidate("invalid number")
+                 }
+                 else {
+                  setNumberValidate(true)
+                 };
+              }}
             />
-            {touched.phoneNumber && formErrors.phoneNumber && (
-              <p className="error-message">{formErrors.phoneNumber}</p>
+            { numbervalidate && (
+              <p className={"error-message"} style={{marginBottom:"-36px"}}>{numbervalidate}</p>
             )}
 
+            <button 
+            style={{paddingTop:"40px"}}
+            disabled={email!== "" && password!=="" && emailValid===true && passwordValid===true  && conformpasswordValid===true && numbervalidate===true && isSubmitting? false : true}
+            onClick={handleFormSubmit}
+            >
             <img
-              className={isSubmitting ? "enabled" : "desabled"}
+              // className={isSubmitting ? "enabled" : "desabled"}
               src={SignUpArrow}
               alt="Signup-arrow"
-              onClick={handleFormSubmit}
             />
+            </button>
           </>
         )}
         

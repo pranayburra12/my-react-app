@@ -35,36 +35,36 @@ const SideBar = () => {
 
 
   const navigateDemart=()=>{
-    navigate("./dmart")
+    navigate("/dmart")
   }
   const sidebarmenu=[{
     label:'Demat',
     logo:Dmat,
-    navigate:'./demat'
+    navigate:'/demat'
   },
 {
   label:'Cibil score',
   logo:Invest,
-  navigate:'./cibilscore'
+  navigate:'/cibilscore'
 },
 {label:'SIP calculator',
 logo:Sip,
-navigate:'./sip-calculator'
+navigate:'/sip-calculator'
 },
 {
   label:'Investment Tracker',
   logo:SideRound,
-  navigate:'./inverstment-tracker'
+  navigate:'/inverstment-tracker'
 },
 {
   label:'Expense Management',
   logo:Wallet,
-  navigate:'./expence-management'
+  navigate:'/expence-management'
 }
 ,{
   label:'Tax Calculator',
   logo:Tax,
-  navigate:'./tax-calculator'
+  navigate:'/tax-calculator'
 },
 {
   label:'Exit',
@@ -199,7 +199,11 @@ navigate:'./sip-calculator'
         <div className="flex  w-20"><img src={Logo} width='50px' /></div>
 
          {sidebarmenu?.map((each)=>{
-          return <div className={`flex items-center gap-2 p-2 mt-2 cursor-pointer opacity-50 hover:opacity-100  ${each.label}`} onClick={()=>{onSubmit(each)}}><img src={each.logo} width='40px'/><div className={`text-center w-full text-slate-100 ${isOpen ? "" : "hidden"} md:text-left`}>{each.label}</div></div>
+          return <div className={`flex items-center gap-2 p-2 mt-2 cursor-pointer opacity-50 hover:opacity-100  ${each.label}`} onClick={()=>{onSubmit(each)}} style={{
+            border: `2px solid ${each.navigate === window.location.pathname ? "#2B2B2B" : "transparent"}`,
+            background:`${each.navigate === window.location.pathname ? "#2B2B2B" : "transparent"}`,
+            borderRadius:`${each.navigate === window.location.pathname ? "15px" : "transparent"}`
+          }}><img src={each.logo} width='40px'/><div className={`text-center w-full text-slate-100 ${isOpen ? "" : "hidden"} md:text-left`}>{each.label}</div></div>
         })}
       </div>
     {/* <div

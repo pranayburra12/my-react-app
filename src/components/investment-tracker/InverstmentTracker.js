@@ -18,8 +18,13 @@ import PPF from "./trackers/ppf";
 import Gold from "./trackers/gold";
 import Bonds from "./trackers/bonds";
 import MutualFunds from "./trackers/MutualFunds";
+import { useNavigate } from "react-router-dom";
+import { GenerateNewToken } from "../utils/api";
+
 
 const InverstmentTracker = () => {
+
+    const navigate = useNavigate();
 
     const [changeTracker,setChangeTracket] = useState();
     const [addTracker,setAddTracker] = useState(false)
@@ -86,6 +91,47 @@ const InverstmentTracker = () => {
     ]
 
     const [listOfTrackersData,setListOfTrackers]=useState(listOfTrackers)
+
+    useEffect(()=>{
+        getAllTrackers();
+    },[])
+
+    const getAllTrackers = () =>{
+        var myHeaders = new Headers();
+        myHeaders.append("Authorization", `Bearer ${JSON.parse(localStorage.getItem('access_token'))}`);
+        myHeaders.append("Content-Type", "application/json");
+    
+        // var raw = JSON.stringify({ });
+    
+        var requestOptions = {
+          method: 'GET',
+          headers: myHeaders,
+        //   body: raw,
+          redirect: 'follow'
+        };
+    
+        fetch("https://findemybackedcode.onrender.com/dashboard/getDetails", requestOptions)
+          .then(response => response.json())
+          .then(result => {
+            console.log(result)
+            if( result?.message === "Token Invalid/Expired"){
+                let payload = {
+                  refreshToken  : localStorage.getItem('refresh_token')
+                }
+                let route = {
+                  payload :{ refreshToken  : localStorage.getItem('refresh_token')},
+                  route:window.location.pathname,
+                  navigate : navigate
+                }
+                GenerateNewToken(route,payload,navigate)
+              }else{
+                // setListOfTrackers(result.data)
+              }
+          })
+          .catch(error => console.log('error', error));
+    }
+
+
    
     const renderTrackerDetail=(tracker)=>{
         // setAddTracker(false)
@@ -169,12 +215,9 @@ const InverstmentTracker = () => {
         console.log(changeTracker)
       };   
       
-      const changeTooldView=(values)=>{
+      const changeTooldView=()=>{
         setAddTracker(false)
-        setListOfTrackers((prev)=> [...prev,values.data] )
       }
-
-      console.log("aaaaaaaaaaaaaaaaaaaaaaa",listOfTrackersData)
       
     
     return (

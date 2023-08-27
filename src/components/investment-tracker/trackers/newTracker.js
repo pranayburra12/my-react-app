@@ -34,7 +34,7 @@ const NewTracker = (props) => {
       .then(response => response.json())
       .then(result => {
         console.log(result)
-        props.navugateToOldView(result);
+        props.navugateToOldView();
       })
       .catch(error => console.log('error', error));
   }
@@ -196,7 +196,9 @@ const NewTracker = (props) => {
           onChange={(e) => setcurrentValue(e.target.value)}
         />
       </div>
-      <div><button className="text-xs mt-5 p-3 ml-20 rounded-xl" style={{ borderColor: "#00838f", color: "#00838f", border: "2px solid" }} onClick={submitValues} >Add new Tracker</button></div>
+      <div>
+        <button style={{color: "#00838f"}} onClick={props.navugateToOldView}>Back</button>
+        <button className="text-xs mt-5 p-3 ml-20 rounded-xl" style={{ borderColor: "#00838f", color: "#00838f", border: "2px solid" }} onClick={submitValues} >Add new Tracker</button></div>
     </div>
   )
 
