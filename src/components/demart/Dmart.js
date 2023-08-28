@@ -2,6 +2,7 @@ import React from "react";
 import "./Dmart.css";
 import dmat from '../../assets/dmat.svg'
 import dematInstant from '../../assets/demat-instant.svg'
+import AddS from "../../adds/adds";
 const Dmart = () => {
     const partners=[{
         name:'upstocks',
@@ -33,6 +34,9 @@ const Dmart = () => {
                 <img src={dmat} className="w-40 mt-3 "/>
                 {/* <span>Account</span> */}
                 <img src={dematInstant} className="w-40 mt-5"/>
+            </div>
+            <div>
+                <AddS />
             </div>
            </div>
            <div className="m-5 md:w-1/3">

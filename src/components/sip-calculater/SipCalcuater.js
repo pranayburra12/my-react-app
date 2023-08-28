@@ -4,6 +4,7 @@ import "./SipCalcuater.css"
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
 import DoughnutChart from "../charts/DoughnutChart";
+import AddS from "../../adds/adds";
 
 
 const Sipcalculater = () =>{
@@ -300,7 +301,7 @@ setDoughnutData(
                     talk to expert ad
                 </div>
                 <div className="sip-section5">
-                    learn to trade ad
+                    <AddS />
                 </div>
 
             </div>
