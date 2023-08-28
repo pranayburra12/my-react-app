@@ -174,6 +174,7 @@ myHeaders.append("Authorization", `Bearer ${JSON.parse(localStorage.getItem('acc
     setBuyAveragePrice('');
     setInvestedValue('');
     setStockName('')
+    setIsEdit(false)
   }
   const editStockHandle=()=>{
     if(stockDetail){
@@ -210,13 +211,14 @@ myHeaders.append("Authorization", `Bearer ${JSON.parse(localStorage.getItem('acc
   }
   const deleteStock=()=>{
     if(stockDetail){
+      // console.log(stockDetail['1. symbol'])
       setLoader(true)
       var myHeaders = new Headers();
       myHeaders.append("Authorization",`Bearer ${JSON.parse(localStorage.getItem('access_token'))}` );
       myHeaders.append("Content-Type", "application/json");
 
       var raw = JSON.stringify({
-          "stockSymbol":stockDetail.stockSymbol
+          "stockSymbol":stockDetail['1. symbol']
       });
 
       var requestOptions = {
