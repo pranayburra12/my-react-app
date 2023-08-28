@@ -125,7 +125,7 @@ const InverstmentTracker = () => {
                 }
                 GenerateNewToken(route,payload,navigate)
               }else{
-                // setListOfTrackers(result.data)
+                setListOfTrackers(result.data)
               }
           })
           .catch(error => console.log('error', error));
@@ -164,13 +164,15 @@ const InverstmentTracker = () => {
                                 />
 
             case 'Mutual Funds':return <MutualFunds/>
-            case 'Custom':return <CustomTracker 
-                                    subHEading = {"Edit/Manage"}
-                                    heading = {"Custom Tracker Name"}
-                                    currentValue = {"Current Saving"}
-                                    addSaving = {"Value at the time of investment"}
-                                    removeSaving = {"Current Value"}
-                                    />
+            case `${tracker?.label}`:return <CustomTracker 
+                                                subHEading = {"Edit/Manage"}
+                                                heading = {"Custom Tracker Name"}
+                                                currentValue = {"Current Saving"}
+                                                addSaving = {"Value at the time of investment"}
+                                                removeSaving = {"Current Value"}
+                                                changeTracker={tracker}
+                                                navugateToOldView={changeTooldView}
+                                            />
             case "newTracker" : 
             default:return <div className="flex flex-col items-center text-white gap-5">
             <div className="border border-[#F1CA00] p-5 rounded-2xl w-[50%] flex flex-col items-center	cursor-pointer" onClick={()=>{setAddTracker(true)}}>
