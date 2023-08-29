@@ -18,6 +18,8 @@ import Box from "@mui/material/Box";
 // import Typography from "@mui/material/Typography";
 import Drawer from "@mui/material/Drawer";
 import { GenerateNewToken } from '../../utils/api';
+const baseUrl='http://3.237.3.113:3000'
+
 const SideBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const logoutChannel = new BroadcastChannel("logout-channel");
@@ -100,7 +102,7 @@ navigate:'/sip-calculator'
         headers: myHeaders
       };
       
-      fetch(`https://findemybackedcode.onrender.com/auth/logout`,requestOptions)
+      fetch(`${baseUrl}/auth/logout`,requestOptions)
       .then((res)=>{
         return res.json();
       })
@@ -199,11 +201,13 @@ navigate:'/sip-calculator'
         <div className="flex  w-20"><img src={Logo} width='50px' /></div>
 
          {sidebarmenu?.map((each)=>{
-          return <div className={`flex items-center gap-2 p-2 mt-2 cursor-pointer opacity-50 hover:opacity-100  ${each.label}`} onClick={()=>{onSubmit(each)}} style={{
-            border: `2px solid ${each.navigate === window.location.pathname ? "#2B2B2B" : "transparent"}`,
-            background:`${each.navigate === window.location.pathname ? "#2B2B2B" : "transparent"}`,
-            borderRadius:`${each.navigate === window.location.pathname ? "15px" : "transparent"}`
-          }}><img src={each.logo} width='40px'/><div className={`text-center w-full text-slate-100 ${isOpen ? "" : "hidden"} md:text-left`}>{each.label}</div></div>
+          return <div className={`flex items-center gap-2 p-2 mt-2 cursor-pointer ${each.navigate !== window.location.pathname ? "opacity-50" : "opacity-100"} hover:opacity-100  ${each.label}`} onClick={()=>{onSubmit(each)}} 
+          // style={{
+          //   border: `2px solid ${each.navigate === window.location.pathname ? "#2B2B2B" : "transparent"}`,
+          //   background:`${each.navigate === window.location.pathname ? "#2B2B2B" : "transparent"}`,
+          //   borderRadius:`${each.navigate === window.location.pathname ? "15px" : "transparent"}`
+          // }}
+          ><img src={each.logo} width='40px'/><div className={`text-center w-full text-slate-100 ${isOpen ? "" : "hidden"} md:text-left`}>{each.label}</div></div>
         })}
       </div>
     {/* <div

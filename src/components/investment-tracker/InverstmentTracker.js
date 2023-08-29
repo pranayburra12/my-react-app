@@ -20,7 +20,7 @@ import Bonds from "./trackers/bonds";
 import MutualFunds from "./trackers/MutualFunds";
 import { useNavigate } from "react-router-dom";
 import { GenerateNewToken } from "../utils/api";
-
+const baseUrl='http://3.237.3.113:3000'
 
 const InverstmentTracker = () => {
 
@@ -110,7 +110,7 @@ const InverstmentTracker = () => {
           redirect: 'follow'
         };
     
-        fetch("https://findemybackedcode.onrender.com/dashboard/getDetails", requestOptions)
+        fetch(`${baseUrl}/dashboard/getDetails`, requestOptions)
           .then(response => response.json())
           .then(result => {
             console.log(result)
@@ -136,7 +136,7 @@ const InverstmentTracker = () => {
     const renderTrackerDetail=(tracker)=>{
         // setAddTracker(false)
         switch(tracker?.label){
-            case 'Stocks':return <Stocks/>
+            case 'Stocks':return <Stocks tracker={changeTracker}/>
             case 'Bonds':return   <Bonds 
                                     subHEading = {"Edit/Manage"}
                                     heading = {"Bonds"}
@@ -163,7 +163,7 @@ const InverstmentTracker = () => {
                                     removeSaving = {"Remove Founds"}
                                 />
 
-            case 'Mutual Funds':return <MutualFunds/>
+            case 'Mutual Funds':return <MutualFunds tracker={changeTracker}/>
             case `${tracker?.label}`:return <CustomTracker 
                                                 subHEading = {"Edit/Manage"}
                                                 heading = {"Custom Tracker Name"}
@@ -338,15 +338,15 @@ const InverstmentTracker = () => {
                     {
                         listOfTrackersData?.map((item)=>{
                             return(
-                                <div className={item.trackerName !== changeTracker?.trackerName ? "flex m-2 min-w-[80%] bg-[#2B2B2B] rounded-2xl	md:w-44 hover:cursor-pointer Content" : "flex m-2 min-w-[80%] bg-[#2B2B2B] rounded-2xl	md:w-44 border border-[#F1CA00] Content"} onClick={() => {onChangeTracker(item)}}>
+                                <div className={item.name !== changeTracker?.name ? "flex m-2 min-w-[80%] bg-[#2B2B2B] rounded-2xl	md:w-44 hover:cursor-pointer Content" : "flex m-2 min-w-[80%] bg-[#2B2B2B] rounded-2xl	md:w-44 border border-[#F1CA00] Content"} onClick={() => {onChangeTracker(item)}}>
                                 
-                                       <img src={item.img} alt={item.name} className="w-2/5"/>
+                                       <img src={gold} alt={item.name} className="w-2/5"/>
                                         <div className="text-white pt-2 pb-2 flex flex-col items-end justify-around">
                                            <div>
-                                                <div className="text-[#707070]">{item.trackerName}</div>
-                                                <div className="text-2xl">{item.investedAmount}</div>
+                                                <div className="text-[#707070]">{item.label}</div>
+                                                <div className="text-2xl">{Number(item?.currentValues)?.toFixed(1)}</div>
                                             </div>
-                                            <div className="flex bg-green-700 rounded p-0.25"><span className="text-green-200">{item.persentage}</span><img src={group} /></div>
+                                            <div className="flex bg-green-700 rounded p-0.25"><span className="text-green-200">{Math.abs(item?.percentage)?.toFixed(1)}</span><img src={group} /></div>
                                             {/* <button className=""><img src={arrow} /></button> */}
 
                                         </div>

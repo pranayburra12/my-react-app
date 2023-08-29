@@ -4,7 +4,7 @@ import SignUpArrow from "../../assets/SignUpArrow.svg";
 import "./SignUp.css";
 import OTPSection from "./OtpSection";
 import { useNavigate } from "react-router-dom";
-
+const baseUrl='http://3.237.3.113:3000'
 const SignUp = () => {
 
   const navigate = useNavigate();
@@ -129,7 +129,7 @@ const SignUp = () => {
         redirect: 'follow'
       };
   
-      fetch(`https://findemybackedcode.onrender.com/auth/register`, requestOptions)
+      fetch(`${baseUrl}/auth/register`, requestOptions)
       .then((res)=>{
         return res.json();
       })
@@ -179,7 +179,7 @@ const SignUp = () => {
         redirect: 'follow'
       };
 
-      let api=`https://findemybackedcode.onrender.com/auth/sendOtp`
+      let api=`${baseUrl}/auth/sendOtp`
   
       fetch(api, requestOptions)
       .then((res)=>{

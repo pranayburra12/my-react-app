@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import TextField from '@mui/material/TextField';
 import { useNavigate  } from "react-router-dom";
 import { GenerateNewToken } from "../../utils/api";
-
+const baseUrl='http://3.237.3.113:3000'
 const CustomTracker = (props) => {
 
   const navigate = useNavigate();
@@ -34,7 +34,7 @@ const totalSavings = () =>{
         redirect: 'follow'
       };
 
-      fetch(`https://findemybackedcode.onrender.com/customTracker/getTrackerData/${props?.changeTracker?.id}`, requestOptions)
+      fetch(`http://3.237.3.113:3000/customTracker/getTrackerData/${props?.changeTracker?.id}`, requestOptions)
         .then(response => response.json())
         .then(result => {console.log(result)
             if( result?.message === "Token Invalid/Expired"){
@@ -81,7 +81,7 @@ const totalSavings = () =>{
       redirect: 'follow'
     };
 
-    fetch("https://findemybackedcode.onrender.com/customTracker/editTrackerData", requestOptions)
+    fetch("http://3.237.3.113:3000/customTracker/editTrackerData", requestOptions)
       .then(response => response.json())
       .then(result => {
         console.log(result)
@@ -108,7 +108,7 @@ const totalSavings = () =>{
       redirect: 'follow'
     };
 
-    fetch("https://findemybackedcode.onrender.com/customTracker/editTrackerName", requestOptions)
+    fetch("http://3.237.3.113:3000/customTracker/editTrackerName", requestOptions)
       .then(response => response.json())
       .then(result => {
         console.log(result)
@@ -134,7 +134,7 @@ const totalSavings = () =>{
       redirect: 'follow'
     };
 
-    fetch("https://findemybackedcode.onrender.com/customTracker/deleteTracker", requestOptions)
+    fetch("http://3.237.3.113:3000/customTracker/deleteTracker", requestOptions)
       .then(response => response.json())
       .then(result => {
         console.log(result)

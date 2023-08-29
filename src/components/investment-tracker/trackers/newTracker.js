@@ -30,7 +30,7 @@ const NewTracker = (props) => {
       redirect: 'follow'
     };
 
-    fetch("https://findemybackedcode.onrender.com/customTracker/addTracker", requestOptions)
+    fetch("http://3.237.3.113:3000/customTracker/addTracker", requestOptions)
       .then(response => response.json())
       .then(result => {
         console.log(result)

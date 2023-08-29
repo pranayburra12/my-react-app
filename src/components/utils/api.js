@@ -12,7 +12,7 @@ export const GenerateNewToken = (props) => {
             body: raw,
             redirect: 'follow'
         };
-        fetch(`https://findemybackedcode.onrender.com/auth/generateNewToken`, requestOptions)
+        fetch(`http://3.237.3.113:3000/auth/generateNewToken`, requestOptions)
             .then((res) => {
                 return res.json();
             })

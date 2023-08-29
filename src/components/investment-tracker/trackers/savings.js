@@ -59,7 +59,7 @@ const Savings = (props) => {
             redirect: 'follow'
           };
     
-          fetch("https://findemybackedcode.onrender.com/saving/getTotalSavings", requestOptions)
+          fetch("http://3.237.3.113:3000/saving/getTotalSavings", requestOptions)
             .then(response => response.json())
             .then(result => {console.log(result)
                 if( result?.message === "Token Invalid/Expired"){
@@ -98,7 +98,7 @@ const Savings = (props) => {
             redirect: 'follow'
           };
     
-          fetch("https://findemybackedcode.onrender.com/saving/addSavings", requestOptions)
+          fetch("http://3.237.3.113:3000/saving/addSavings", requestOptions)
             .then(response => response.json())
             .then(result => {console.log(result)
                 totalSavings()
@@ -123,7 +123,7 @@ const Savings = (props) => {
             redirect: 'follow'
           };
     
-          fetch("https://findemybackedcode.onrender.com/saving/removeSavings", requestOptions)
+          fetch("http://3.237.3.113:3000/saving/removeSavings", requestOptions)
             .then(response => response.json())
             .then(result => {console.log(result)
                 totalSavings()

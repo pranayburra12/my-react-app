@@ -13,10 +13,13 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles({
   paper: {
     backgroundColor: "#2B2B2B",
-    color:'white'
+    color:'white',
+      
   }
 });
-export default function Stocks() {
+const baseUrl='http://3.237.3.113:3000';
+
+export default function Stocks({tracker}) {
   const classes = useStyles();
   const navigate = useNavigate();
   const viewRef=useRef();
@@ -85,7 +88,7 @@ export default function Stocks() {
         redirect: 'follow'
       };
 
-      fetch("https://findemybackedcode.onrender.com/stock/saveStock", requestOptions)
+      fetch(`${baseUrl}/stock/saveStock`, requestOptions)
         .then(response => response.json())
         .then(result => {console.log(result)
           setViewStocks(true)
@@ -117,7 +120,7 @@ myHeaders.append("Authorization", `Bearer ${JSON.parse(localStorage.getItem('acc
       redirect: 'follow'
     };
 
-    fetch("https://findemybackedcode.onrender.com/stock/viewStocks", requestOptions)
+    fetch(`${baseUrl}/stock/viewStocks`, requestOptions)
       .then(response => response.json())
       .then(result => {
         if( result?.message === "Token Invalid/Expired"){
@@ -198,7 +201,7 @@ myHeaders.append("Authorization", `Bearer ${JSON.parse(localStorage.getItem('acc
         redirect: 'follow'
       };
 
-      fetch("https://findemybackedcode.onrender.com/stock/editStock", requestOptions)
+      fetch(`${baseUrl}/stock/editStock`, requestOptions)
         .then(response => response.json())
         .then(result => {console.log(result)
           setViewStocks(true)
@@ -228,7 +231,7 @@ myHeaders.append("Authorization", `Bearer ${JSON.parse(localStorage.getItem('acc
         redirect: 'follow'
       };
 
-      fetch("https://findemybackedcode.onrender.com/stock/deleteStock", requestOptions)
+      fetch(`${baseUrl}/stock/deleteStock`, requestOptions)
         .then(response => response.json())
         .then(result => {console.log(result)
           setViewStocks(true)
@@ -250,7 +253,7 @@ myHeaders.append("Authorization", `Bearer ${JSON.parse(localStorage.getItem('acc
     {!viewStocks?<div className="flex flex-col justify-between gap-10">
       <div className='flex flex-col gap-3'>
         <div className='text-[#FEC008] font-bold text-2xl'>Stocks</div>
-        <div className='text-slate-300 flex justify-between w-full rounded-lg p-3 bg-[#2B2B2B]'><span className=''>Stocks Value</span><span className='text-[#0BD19D] font-bold text-xl'>₹ 21K</span> </div>
+        <div className='text-slate-300 flex justify-between w-full rounded-lg p-3 bg-[#2B2B2B]'><span className=''>Stocks Value</span><span className='text-[#0BD19D] font-bold text-xl'>₹ {tracker?.currentValues?.toFixed(1)}</span> </div>
           <div className='text-slate-200 flex justify-between w-full rounded-lg p-3 bg-[#2B2B2B] hover:cursor-pointer' onClick={()=>setViewStocks(true)}><span>View Your Stocks</span><img src={arrow} /></div>
       </div>
       <div className='max-w-full flex flex-col gap-5'>
@@ -265,35 +268,43 @@ myHeaders.append("Authorization", `Bearer ${JSON.parse(localStorage.getItem('acc
           defaultValue={StockName}
         value={StockName?StockName:null}
      classes={{paper:classes.paper}}
-          // loadingText='Loading'
+     disabled={isEdit}
+              sx={{
+                "& .MuiInputBase-input.Mui-disabled": {
+                WebkitTextFillColor: "grey",
+                },
+                }}
+         
           renderInput={(params) => (
             <TextField {...params}
            InputProps={{...params.InputProps, disableUnderline: true}} 
               placeholder='Stock Name'
               variant="outlined"
-            sx={{ color:'white',  
-                "& input": {
-                  color: 'white',
+              sx={{ color:'white',  
+              "& input": {
+                color: 'white',
+              },
+              "& fieldset": {
+                border: "1px solid white",
+              },
+             
+              '& .MuiOutlinedInput-root': {
+                '& fieldset': {
+                  borderColor: 'white',
                 },
-                "& fieldset": {
-                  border: "1px solid white",
+                '&:hover fieldset': {
+                  borderColor: 'white',
                 },
-                '& .MuiOutlinedInput-root': {
-                  '& fieldset': {
-                    borderColor: 'white',
-                  },
-                  '&:hover fieldset': {
-                    borderColor: 'white',
-                  },
-                  '&.Mui-focused fieldset': {
-                    borderColor: '#0BD19D',
-                  },
+                '&.Mui-focused fieldset': {
+                  borderColor: '#0BD19D',
                 },
-
-              }}
-
+              },
+    
+            }}
             />
           )}
+          
+    
 
         />
 

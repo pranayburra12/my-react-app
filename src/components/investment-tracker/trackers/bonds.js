@@ -4,7 +4,7 @@ import arrow from "../../../assets/arrow.svg"
 import { GenerateNewToken } from "../../utils/api";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
-
+const baseUrl='http://3.237.3.113:3000'
 const Bonds = (props) => {
 
     const navigate = useNavigate();
@@ -69,7 +69,7 @@ const Bonds = (props) => {
             redirect: 'follow'
           };
     
-          fetch("https://findemybackedcode.onrender.com/bond/viewBonds", requestOptions)
+          fetch(`${baseUrl}/bond/viewBonds`, requestOptions)
             .then(response => response.json())
             .then(result => {console.log(result)
                 if( result?.message === "Token Invalid/Expired"){
@@ -112,7 +112,7 @@ const Bonds = (props) => {
             redirect: 'follow'
           };
     
-          fetch("https://findemybackedcode.onrender.com/bond/saveBond", requestOptions)
+          fetch(`${baseUrl}/bond/saveBond`, requestOptions)
             .then(response => response.json())
             .then(result => {console.log(result)
 
@@ -139,7 +139,7 @@ const Bonds = (props) => {
             redirect: 'follow'
           };
     
-          fetch("https://findemybackedcode.onrender.com/saving/removeBond", requestOptions)
+          fetch(`${baseUrl}/saving/removeBond`, requestOptions)
             .then(response => response.json())
             .then(result => {console.log(result)
                 totalBonds()
@@ -159,13 +159,13 @@ const Bonds = (props) => {
           ? 
           <><div className=" flex flex-col">
               <div class="text-gray-500 font-manrope text-sm float-left " style={{ color: "#969696" }}>{props.subHEading}</div>
-              <div class="text-gray-500  float-left text-4xl pt-1 pb-7 pt-7" style={{ color: "#FEC008" }}>{props.heading}</div>
+              <div class="text-gray-500  float-left text-4xl  pb-7 pt-7" style={{ color: "#FEC008" }}>{props.heading}</div>
             </div><div className="text-center pt-5 md: p-0">
 
                 <div className='w-full flex flex-col gap-5'>
                   <div className="flex rounded-3xl   border-white rounded-10 h-auto items-baseline  bg-black" style={{ background: "#2B2B2B" }}>
                     <input
-                      className=" focus:outline-none w-3/4 rounded-3xl border-none p-6 border-2 border-solid border-white rounded-10 h-15 text-white bg-black"
+                      className=" focus:outline-none w-3/4 rounded-3xl p-6 border-2 border-solid border-white rounded-10 h-15 text-white bg-black"
                       style={{ color: "#ffff", background: "#2B2B2B" }}
                       value={"Bond Value"}
                       disabled={true}
@@ -181,7 +181,7 @@ const Bonds = (props) => {
 
                   <div className="flex justify-between  rounded-3xl  border-2 border-solid border-white rounded-10 h-16  bg-black ">
                     <input
-                      className=" focus:outline-none w-3/4 rounded-3xl border-none p-6 border-2 border-solid border-white rounded-10 h-15  bg-black"
+                      className=" focus:outline-none w-3/4 rounded-3xl p-6 border-2 border-solid border-white rounded-10 h-15  bg-black"
                       style={{ color: "#ffff" }}
                       type="text"
                       id="addStockInput"
@@ -191,7 +191,7 @@ const Bonds = (props) => {
                   </div>
                   <div className="flex justify-between  rounded-3xl  border-2 border-solid border-white rounded-10 h-16  bg-black ">
                     <input
-                      className=" focus:outline-none w-3/4 rounded-3xl border-none p-6 border-2 border-solid border-white rounded-10 h-15  bg-black"
+                      className=" focus:outline-none w-3/4 rounded-3xl p-6 border-2 border-solid border-white rounded-10 h-15  bg-black"
                       style={{ color: "#ffff" }}
                       type="text"
                       id="addStockInput"
@@ -203,7 +203,7 @@ const Bonds = (props) => {
                     <span style={{ color: 'red' }}>{validationMessage}</span>}
                   <div className="flex justify-between  rounded-3xl  border-2 border-solid border-white rounded-10 h-16  bg-black">
                     <input
-                      className=" focus:outline-none w-3/4 rounded-3xl border-none p-6 border-2 border-solid border-white rounded-10 h-15  bg-black"
+                      className=" focus:outline-none w-3/4 rounded-3xl p-6 border-2 border-solid border-white rounded-10 h-15  bg-black"
                       style={{ color: "#ffff" }}
                       type="text"
                       placeholder="Bond Type"

@@ -3,7 +3,7 @@ import rightarrow from "../../../assets/Group 1260.svg"
 import { GenerateNewToken } from "../../utils/api";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
-
+const baseUrl='http://3.237.3.113:3000'
 const Gold = (props) => {
 
   const navigate = useNavigate();
@@ -64,7 +64,7 @@ const Gold = (props) => {
       redirect: 'follow'
     };
 
-    fetch("https://findemybackedcode.onrender.com/gold/getTotalGoldInvestmentPrice", requestOptions)
+    fetch("http://3.237.3.113:3000/gold/getTotalGoldInvestmentPrice", requestOptions)
       .then(response => response.json())
       .then(result => {
         console.log(result)
@@ -107,7 +107,7 @@ const Gold = (props) => {
       redirect: 'follow'
     };
 
-    fetch("https://findemybackedcode.onrender.com/gold/addGold", requestOptions)
+    fetch("http://3.237.3.113:3000/gold/addGold", requestOptions)
       .then(response => response.json())
       .then(result => {
         console.log(result)
@@ -133,7 +133,7 @@ const Gold = (props) => {
       redirect: 'follow'
     };
 
-    fetch("https://findemybackedcode.onrender.com/gold/removeGold", requestOptions)
+    fetch(`${baseUrl}/gold/removeGold`, requestOptions)
       .then(response => response.json())
       .then(result => {
         console.log(result)

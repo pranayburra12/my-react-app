@@ -61,7 +61,7 @@ const PPF = (props) => {
             redirect: 'follow'
           };
     
-          fetch("https://findemybackedcode.onrender.com/ppf/getTotalPPF", requestOptions)
+          fetch("http://3.237.3.113:3000/ppf/getTotalPPF", requestOptions)
             .then(response => response.json())
             .then(result => {console.log(result)
                 if( result?.message === "Token Invalid/Expired"){
@@ -100,7 +100,7 @@ const PPF = (props) => {
             redirect: 'follow'
           };
     
-          fetch("https://findemybackedcode.onrender.com/ppf/addPPF", requestOptions)
+          fetch("http://3.237.3.113:3000/ppf/addPPF", requestOptions)
             .then(response => response.json())
             .then(result => {console.log(result)
                 totalSavings()
@@ -125,7 +125,7 @@ const PPF = (props) => {
             redirect: 'follow'
           };
     
-          fetch("https://findemybackedcode.onrender.com/ppf/removePPF", requestOptions)
+          fetch("http://3.237.3.113:3000/ppf/removePPF", requestOptions)
             .then(response => response.json())
             .then(result => {console.log(result)
                 totalSavings()

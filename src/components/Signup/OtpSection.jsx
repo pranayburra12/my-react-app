@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import SignUpArrow from "../../assets/SignUpArrow.svg";
 import "./OtpSection.css";
 import { useNavigate } from "react-router-dom";
-
+const baseUrl='http://3.237.3.113:3000'
 const OTPSection = (props) => {
 
   const navigate = useNavigate();
@@ -69,7 +69,7 @@ const OTPSection = (props) => {
         redirect: 'follow'
       };
 
-      let api=`https://findemybackedcode.onrender.com/auth/${string}`
+      let api=`${baseUrl}/auth/${string}`
   
       fetch(api, requestOptions)
       .then((res)=>{

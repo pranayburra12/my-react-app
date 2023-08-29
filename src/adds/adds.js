@@ -19,30 +19,33 @@ const AddS = () => {
 
 
     return (
-        <div className="pb-9 pt-8 block">
-            <div className="flex justify-around items-center ">
-                <div className="grid gap-4">
-                    <div>hbkb</div>
+        <div className="flex flex-col border border-slate-300 p-5 rounded-lg">
+            <div className="flex justify-around items-center gap-10">
+               
+                    
                     <div className="flex flex-col">
                         <span >Learn</span>
                         <span>How To Trade</span>
                     </div>
-                </div>
-                <div className="flex  items-center">
-                    <img src={adds} />
-                    <img src={star} />
-                </div>
+               
+              
+                    <img src={adds}
+                    className="w-[50%]"
+                    />
+                    {/* <img src={star} /> */}
+              
             </div>
-            <div className="relative mt-8">
+            <div className="mt-8">
 
-                <div style={{ height: 45 }}>
+                <div className="relative h-10" >
                     <Lottie
                         options={lottieOptions}
                         label="Learn Now"
                     />
-                    <div className="absolute top-2 left-44 text-black font-bold cursor-pointer">Learn Now</div>
+                    <div className="absolute text-black font-bold text-xs cursor-pointer top-2 left-[35%]">Learn Now</div>
+         
                 </div>
-            </div>
+                  </div>
         </div>
     )
 }
