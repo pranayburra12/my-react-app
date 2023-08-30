@@ -633,8 +633,10 @@ ctx.fillText(`hello`,width/2,180)
               textCenter={textCenter}
               options={
                 {cutout:'50%',backgroundColor: [
-                  '#0BD19D',
-                  '#FEC008'   
+                  '#FF426F',
+                  '#FEC008',
+                    '#3F6FD9',
+                    '#9772FF'
                 ],
                 borderColor:'transparent'
               }
