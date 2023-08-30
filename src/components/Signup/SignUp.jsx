@@ -232,8 +232,7 @@ const SignUp = () => {
                 if(!value) {
                   setEmailValid("email is required")
                  }
-                //  else  if(!new RegExp(/^[^\s@]+@[^\s@]+(\.[^ !."`'#%&,:;<>=@{}~\$\(\)\*\+_\/\\\?\[\]\^\|]{2,4})$/).test(value)) {
-                  else if (!new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8}$/).test(value)){
+                 else  if(!new RegExp(/^[^\s@]+@[^\s@]+(\.[^ !."`'#%&,:;<>=@{}~\$\(\)\*\+_\/\\\?\[\]\^\|]{2,4})$/).test(value)) {
                   setEmailValid("enter a valid email")
                  }
                  else {
@@ -259,9 +258,9 @@ const SignUp = () => {
                 if(!value) {
                   setPasswordValid("pasword is required")
                  }
-                 else  if(!new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8}$/).test(value)) {
-                  setPasswordValid("enter a valid password")
-                 }
+                //  else  if(!new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8}$/).test(value)) {
+                //   setPasswordValid("enter a valid password")
+                //  }
                  else {
                   setPasswordValid(true)
                  };
