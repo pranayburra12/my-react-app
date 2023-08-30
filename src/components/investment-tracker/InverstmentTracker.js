@@ -35,66 +35,6 @@ const InverstmentTracker = () => {
     const [classnameValue,setclassnameValue] = useState(false)
     const [total,setTotal]=useState(0);
 
-
-    const listOfTrackers = [
-        {
-            img: savings,
-            trackerName: "stocks",
-            label: 'Stocks',
-            investedAmount: "₹ 21.9K",
-            persentage: "11.5%",
-        },
-        {
-            img: savings,
-            trackerName: "savings",
-            label: 'Savings',
-            investedAmount: "₹ 21.9K",
-            persentage: "11.5%",
-        },
-        {
-            img: stocks,
-            trackerName: "bonds",
-            label: 'Bonds',
-            investedAmount: "₹ 21.9K",
-            persentage: "11.5%",
-        },
-        {
-            img: stocks,
-            trackerName: "gold",
-            label: 'Gold',
-            investedAmount: "₹ 21.9K",
-            persentage: "11.5%",
-        },
-        {
-            img: stocks,
-            trackerName: "ppf",
-            label: 'PPF',
-            investedAmount: "₹ 21.9K",
-            persentage: "11.5%",
-        },
-        {
-            img: stocks,
-            trackerName: "mutual-funds",
-            label: 'Mutual Funds',
-            investedAmount: "₹ 21.9K",
-            persentage: "11.5%",
-        },
-        {
-            img: stocks,
-            trackerName: "lands",
-            label: 'Custom',
-            investedAmount: "₹ 21.9K",
-            persentage: "11.5%",
-        },
-        {
-            img: stocks,
-            trackerName: "fix deposit",
-            label: 'Custom',
-            investedAmount: "₹ 21.9K",
-            persentage: "11.5%",
-        },
-    ]
-
     const [listOfTrackersData, setListOfTrackers] = useState()
 
     useEffect(() => {
@@ -154,6 +94,7 @@ const InverstmentTracker = () => {
             case 'Bonds': return <Bonds
                 subHEading={"Edit/Manage"}
                 heading={"Bonds"}
+                getDashboard = {()=>{getAllTrackers()}}
             />
             case 'Gold': return <Gold
                 subHEading={"Edit/Manage"}
@@ -161,6 +102,7 @@ const InverstmentTracker = () => {
                 currentValue={"Current Saving"}
                 addSaving={"Add Saving"}
                 removeSaving={"Remove Saving"}
+                getDashboard = {()=>{getAllTrackers()}}
             />
             case 'Savings': return <Savings
                 subHEading={"Edit/Manage"}
@@ -168,6 +110,7 @@ const InverstmentTracker = () => {
                 currentValue={"Current Saving"}
                 addSaving={"Add Saving"}
                 removeSaving={"Remove Saving"}
+                getDashboard = {()=>{getAllTrackers()}}
             />
             case 'PPF': return <PPF
                 subHEading={"Edit/Manage"}
@@ -175,6 +118,7 @@ const InverstmentTracker = () => {
                 currentValue={"PPF Value"}
                 addSaving={"Invested Amount"}
                 removeSaving={"Remove Founds"}
+                getDashboard = {()=>{getAllTrackers()}}
             />
 
             case 'Mutual Funds': return <MutualFunds  tracker={changeTracker}/>
@@ -185,7 +129,8 @@ const InverstmentTracker = () => {
                 addSaving={"Value at the time of investment"}
                 removeSaving={"Current Value"}
                 changeTracker={tracker}
-                navugateToOldView={changeTooldView}
+                navugateToOldView={()=>{changeTooldView()}}
+                getDashboard = {()=>{getAllTrackers()}}
             />
             case "newTracker":
             default:
@@ -272,7 +217,7 @@ const InverstmentTracker = () => {
             </div>
             <div className="md:col-span-2">
                 {
-                    addTracker ? <NewTracker navugateToOldView={changeTooldView} /> : renderTrackerDetail(changeTracker)
+                    addTracker ? <NewTracker navugateToOldView={()=>{changeTooldView()}} /> : renderTrackerDetail(changeTracker)
                 }
             </div>
         </div>

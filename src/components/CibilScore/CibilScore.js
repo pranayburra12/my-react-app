@@ -39,7 +39,7 @@ const CibilScore = () => {
             </div>
            </div>
            <div className="m-5 md:w-1/3">
-           <div className="flex items-center justify-between p-0 md:pb-28 ">
+           <div className="flex items-center justify-between p-0 md:pb-14 ">
                     <span className=" border-b-[1px] pb-2 text-xl" style={{borderColor: "#A5A5A5"}}>Our Partners</span>
                     <span className="text-sm" style={{color: "#A5A5A5"}}>select below</span>
                 </div>
@@ -47,7 +47,7 @@ const CibilScore = () => {
             {
                 partners.map((each)=>{
                     return (
-                            <div className="text-lg p-4 md:pt-6 md:pb-11  border-b-[1px]  flex items-center  justify-between cursor-pointer md:pb-14" style={{borderColor: "#A5A5A5"}}>
+                            <div className="text-lg p-4 md:pt-2 md:pb-5 border-b-[1px]  flex items-center  justify-between cursor-pointer" style={{borderColor: "#A5A5A5"}}>
                                 <span className="w-16 md:w-auto" ><img src={each.bwLogo} /></span>
                                 <span ><img  src={rightarrow} /></span>
                             </div>

@@ -87,9 +87,10 @@ const Gold = (props) => {
           GenerateNewToken(route, payload, navigate)
         } else {
           setcurrentGold(result?.data?.totalAmount)
+          props.getDashboard()
           setLoader(true)
           setAddGold("")
-          setRemoveGold("")
+          // setRemoveGold("")
           setValueOfintgrest("")
         }
       })
@@ -134,7 +135,7 @@ const Gold = (props) => {
     myHeaders.append("Content-Type", "application/json");
 
     var raw = JSON.stringify({
-      numberOfGrams: value
+      numberOfGrams: removeGold
     });
 
     var requestOptions = {
@@ -149,6 +150,7 @@ const Gold = (props) => {
       .then(result => {
         console.log(result)
         totalSavings()
+        setRemoveGold("")
       })
       .catch(error => console.log('error', error));
   }

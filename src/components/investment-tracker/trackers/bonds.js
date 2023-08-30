@@ -93,6 +93,7 @@ const Bonds = (props) => {
                     GenerateNewToken(route,payload,navigate)
                   }else{
                     setAllBonds(result?.data)
+                    props.getDashboard()
                     setLoader(true)
                     setAddBond("")
                     setInvestedAmount("")

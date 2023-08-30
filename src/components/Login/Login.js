@@ -17,10 +17,17 @@ import {
   Autocomplete, Button,Backdrop,CircularProgress
  
 } from "@mui/material";
+import Snackbar from '@mui/material/Snackbar';
+import {  IconButton } from "@mui/material";
+import CloseIcon from '@mui/icons-material/Close';
 
-const baseUrl='http://3.237.3.113:3000'
 const Login = (props) => {
 
+
+  const baseUrl='http://3.237.3.113:3000' 
+
+  const [open, setOpen] = React.useState(false);
+  const [meassage,setMessage] = useState("")
   const navigate = useNavigate();
   const [loader,setLoader]=useState(false);
   const [isHovered, setIsHovered] = React.useState(false);
@@ -105,6 +112,8 @@ const Login = (props) => {
         window.location.reload()
         console.log(res)
        }else{
+        setOpen(true);
+        setMessage(res.message)
         setIsSubmitting(false);
        }
        setLoader(false)
@@ -136,6 +145,30 @@ const Login = (props) => {
      return  (undefined)
     };
   }
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+  const action = (
+    <React.Fragment>
+      <Button color="secondary" size="small" onClick={handleClose}>
+        UNDO
+      </Button>
+      <IconButton
+        size="small"
+        aria-label="close"
+        color="inherit"
+        onClick={handleClose}
+      >
+        <CloseIcon fontSize="small" />
+      </IconButton>
+    </React.Fragment>
+  )
   
 
   return (
@@ -248,6 +281,12 @@ const Login = (props) => {
           ©2023 Stock Pitch. All Rights Reserved
         </footer>
       </div>
+      <Snackbar
+        open={open}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        message={meassage}
+        action={action} />
     </div>
   );
 };

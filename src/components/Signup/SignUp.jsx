@@ -4,10 +4,17 @@ import SignUpArrow from "../../assets/SignUpArrow.svg";
 import "./SignUp.css";
 import OTPSection from "./OtpSection";
 import { useNavigate } from "react-router-dom";
+import Snackbar from '@mui/material/Snackbar';
+import { Button, IconButton } from "@mui/material";
+import CloseIcon from '@mui/icons-material/Close';
 const baseUrl='http://3.237.3.113:3000'
+
 const SignUp = () => {
 
   const navigate = useNavigate();
+
+  const [open, setOpen] = React.useState(false);
+  const [meassage,setMessage] = useState("")
 
   const [formSubmit, setFormSubmit] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(true);
@@ -146,6 +153,8 @@ const SignUp = () => {
         }else{
           console.log("aaaaaaaa")
           setIsSubmitting(true)
+          setOpen(true);
+          setMessage(res.message)
         }
         setData(res)
       })
@@ -203,6 +212,30 @@ const SignUp = () => {
   const handleInputBlur = (field) => {
     setTouched((prevTouched) => ({ ...prevTouched, [field]: true }));
   };
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+  const action = (
+    <React.Fragment>
+      <Button color="secondary" size="small" onClick={handleClose}>
+        UNDO
+      </Button>
+      <IconButton
+        size="small"
+        aria-label="close"
+        color="inherit"
+        onClick={handleClose}
+      >
+        <CloseIcon fontSize="small" />
+      </IconButton>
+    </React.Fragment>
+  );
 
   return (
     <div className="SignUp__container">
@@ -336,6 +369,13 @@ const SignUp = () => {
           ©2023 Stock Pitch. All Rights Reserved
         </footer>
       </div>
+      <Snackbar
+        open={open}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        message={meassage}
+        action={action}
+      />
     </div>
   );
 };

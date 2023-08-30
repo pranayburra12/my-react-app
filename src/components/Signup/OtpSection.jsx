@@ -2,14 +2,21 @@ import React, { useState, useRef } from "react";
 import SignUpArrow from "../../assets/SignUpArrow.svg";
 import "./OtpSection.css";
 import { useNavigate } from "react-router-dom";
-const baseUrl='http://3.237.3.113:3000'
+import Snackbar from '@mui/material/Snackbar';
+import { Button, IconButton } from "@mui/material";
+import CloseIcon from '@mui/icons-material/Close';
+
 const OTPSection = (props) => {
+  const baseUrl='http://3.237.3.113:3000'
 
   const navigate = useNavigate();
 
+  const [open, setOpen] = React.useState(false);
+  const [meassage,setMessage] = useState("")
 
-  const [otp, setOTP] = useState(["", "", "", "", "" , ""]); // Array to store OTP digits
-  const otpInputRefs = [useRef(null), useRef(null), useRef(null), useRef(null), useRef(null) ,useRef(null)]; // Refs for input fields
+
+  const [otp, setOTP] = useState(["", "", "", ""]); // Array to store OTP digits
+  const otpInputRefs = [useRef(null), useRef(null), useRef(null), useRef(null)]; // Refs for input fields
 
   const handleOTPChange = (index, value) => {
     if (isNaN(value)) return; // Allow only numeric input
@@ -77,8 +84,11 @@ const OTPSection = (props) => {
       })
       .then((res)=>{
         console.log(res)
-        if(res){
+        if(res.message === "Otp Verified Successfully"){
           navigate("/")
+        }else{
+          setOpen(true);
+          setMessage(res.message)
         }
       })
   
@@ -93,9 +103,32 @@ const OTPSection = (props) => {
     }
 
   }
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+  const action = (
+    <React.Fragment>
+      <Button color="secondary" size="small" onClick={handleClose}>
+        UNDO
+      </Button>
+      <IconButton
+        size="small"
+        aria-label="close"
+        color="inherit"
+        onClick={handleClose}
+      >
+        <CloseIcon fontSize="small" />
+      </IconButton>
+    </React.Fragment>
+  );
 
   return (
-    <div className="otp-main">
+    <><div className="otp-main">
       <h2> OTP</h2>
       <div className="otp-container">
         {otp.map((digit, index) => (
@@ -106,8 +139,7 @@ const OTPSection = (props) => {
               maxLength="1"
               value={digit}
               onChange={(e) => handleOTPChange(index, e.target.value)}
-              onKeyDown={(e) => handleBackspace(index, e)}
-            />
+              onKeyDown={(e) => handleBackspace(index, e)} />
             {/* {index < otp.length - 1 && <div className="horizontal-line"></div>} */}
           </React.Fragment>
         ))}
@@ -116,14 +148,18 @@ const OTPSection = (props) => {
       <img
         src={SignUpArrow}
         alt="Signup-arrow"
-        onClick={handleFormSubmit}
-      />
-      <button style={{top:"541px",position:"absolute",fontSize:"15px",color:"#bfbfbf",fontFamily:"Manrope",marginLeft:"64px"}} 
-      onClick={ResendOtp}
+        onClick={handleFormSubmit} />
+      <button style={{ top: "541px", position: "absolute", fontSize: "15px", color: "#bfbfbf", fontFamily: "Manrope", marginLeft: "64px" }}
+        onClick={ResendOtp}
       >
         Resend Otp
       </button>
-    </div>
+    </div><Snackbar
+        open={open}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        message={meassage}
+        action={action} /></>
   );
 };
 

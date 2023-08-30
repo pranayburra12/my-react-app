@@ -56,6 +56,7 @@ const totalSavings = () =>{
                 GenerateNewToken(route,payload,navigate)
               }else{
                 setLoader(true)
+                props.getDashboard()
                 setTrackerName(result?.data?.trackerName)
                 setInvestedAmount(result?.data?.investedAmount)
                 setvalueTimeofInvestment(result?.data?.valueTimeofInvestment)
@@ -296,7 +297,7 @@ const totalSavings = () =>{
           onChange={(e) => setcurrentValue(e.target.value)} />
       </div>
       <div>
-        <button style={{ color: "#00838f" }} onClick={props.navugateToOldView}>Back</button>
+        <button style={{ color: "#00838f" }} onClick={() =>{props.navugateToOldView()}}>Back</button>
         <button className="text-xs mt-5 p-3 ml-20 rounded-xl" style={{ borderColor: "#00838f", color: "#00838f", border: "2px solid" }} onClick={()=>{setShow(true)}}>Update Tracker</button></div>
         <button className="text-xs mt-10 p-3  " style={{ borderColor: "#00838f", color: "#00838f"}} onClick={()=>{setDelete(true)}}>Delete Tracker</button>
     </div>

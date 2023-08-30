@@ -62,6 +62,7 @@ const Savings = (props) => {
                     GenerateNewToken(route,payload,navigate)
                   }else{
                     setcurrentSavings(result?.data?.savingsAmount)
+                    props.getDashboard()
                     setLoader(true)
                     setAddSvaings("")
                     setRemoveSavings("")

@@ -365,6 +365,7 @@ setDoughnutData(
                 </div>
                 <div className="sip-section2 row-span-2">
                   <div className="p-0 md:pb-20">SIP Calculator - FAQs</div>
+                <div className="">
                 <AccordionGroup
                   sx={{
                     maxWidth: 400,
@@ -405,6 +406,7 @@ setDoughnutData(
                   
                 </AccordionGroup>
                 </div>
+                </div>
                 <div className="sip-section3 hidden md:block p-3 row-span-3">
                   <div className="flex gap-4">
                     <div>
@@ -435,7 +437,7 @@ setDoughnutData(
                     
                   </div>
                 </div>
-                <div className="hidden md:sip-section4">
+                <div className="hidden md:block sip-section4">
                 <div className="block p-5">
                         <div className="flex items-center justify-between ">
                            
@@ -454,7 +456,7 @@ setDoughnutData(
                         
                     </div>
                 </div>
-                <div className="sip-section5 hidden md:contents">
+                <div className="sip-section5 hidden md:block">
                     <AddS />
                 </div>
 

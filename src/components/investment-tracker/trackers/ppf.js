@@ -82,6 +82,7 @@ const PPF = (props) => {
           GenerateNewToken(route, payload, navigate)
         } else {
           setcurrentSavings(result?.data?.ppfAmount)
+          props.getDashboard()
           setLoader(true)
           setAddSvaings("")
           // setRemoveSavings("")
@@ -99,7 +100,7 @@ const PPF = (props) => {
     myHeaders.append("Content-Type", "application/json");
 
     var raw = JSON.stringify({
-      ppfAmount: value
+      ppfAmount: addSaving
     });
 
     var requestOptions = {
