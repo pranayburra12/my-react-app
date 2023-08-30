@@ -443,7 +443,7 @@ setDoughnutData(
                            
                               <span className="text-xl">Talk to Experts</span>
                               <img  src={expert}/>
-                        </div>
+                        </div> 
                       
                         <div className="relative h-6 " >
                               <Lottie
