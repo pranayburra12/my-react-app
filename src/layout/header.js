@@ -72,7 +72,7 @@ const Header = () => {
             )}
             <img src={Search} alt="" onClick={toggleInput} />
             <img src={NotificationBell} alt="" />
-            <span>Harvey Spectre</span>
+            {/* <span>Harvey Spectre</span> */}
             <img src={UserProfile} alt="" />
           </div>
         </div>

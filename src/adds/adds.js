@@ -30,7 +30,7 @@ const AddS = () => {
                
               
                     <img src={adds}
-                    className="w-[50%]"
+                    className="w-[30%]"
                     />
                     {/* <img src={star} /> */}
               

@@ -20,6 +20,7 @@ import {
   Autocomplete, Button,Backdrop,CircularProgress
  
 } from "@mui/material";
+import calender from '../../assets/calender.svg'
 const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
   "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
 ];
@@ -43,13 +44,13 @@ const ExpenceMangement =()=>{
        { 
         label:['Expence'],
         data:[2000,4000,2500,3000],
-         cutout:'60%'
+         cutout:'70%'
         }
         ,
       ]
     }
   )
-  const [bargraph,setBarGraph]=useState('monthy_income');
+  const [bargraph,setBarGraph]=useState('monthly_income');
   const [ExpenceBarData,setExpenceBarData]=useState({
     labels:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
     datasets:[
@@ -161,20 +162,21 @@ const ExpenceMangement =()=>{
           }
           GenerateNewToken(route,payload,navigate)
         }else{
-          console.log(result.data[0]?.monthlyPercentageSumArray)
+          console.log(result.data[0])
           setExpenceData(result.data[0])
           setMonthlyExpencePercentage(result.data[0]?.monthlyPercentageSumArray)
           setDoughutData(
             {
-              labels:['Food','Shopping','Payments','Others'],
+              labels:['Shopping','Payments','Food','Others'],
               datasets:[
                { 
                 label:['Expence'],
-                data:[ Number(result?.data[0]?.monthlyPercentageSumArray?.food_monthly_percentage),
-                Number(result?.data[0]?.monthlyPercentageSumArray?.shopping_monthly_percentage),
-               Number(result?.data[0]?.monthlyPercentageSumArray?.payment_monthly_percentage),
-                Number(result?.data[0]?.monthlyPercentageSumArray?.others_monthly_percentage)],
-                 cutout:'70%'
+                data:[ 
+                Number(result?.data[0]?.totalPercentageSumArray?.shopping_total_percentage),
+               Number(result?.data[0]?.totalPercentageSumArray?.payment_total_percentage),
+               Number(result?.data[0]?.totalPercentageSumArray?.food_total_percentage),
+                Number(result?.data[0]?.totalPercentageSumArray?.others_total_percentage)],
+                 cutout:'80%'
                 }
                 ,
               ]
@@ -414,17 +416,22 @@ const setValues= (e)=>{
 const textCenter={
   id:'textCenter',
 beforeDatasetsDraw(chart,args,pluginOptions){
-const {ctx,data,width}=chart;
+const {ctx,data,width,height}=chart;
 
 ctx.save();
+ctx.font='24px sans-sarif';
+  ctx.textBaseline='middle'
+  ctx.textAlign='center'
+  ctx.fillStyle='#FEC008'
 
-
-ctx.fillText(`hello`,width/2,180)  
+ 
+  ctx.fillText(`Total Expences`,width/2,height/2)
+  ctx.restore()
 }
 }
 
     return(
-        <div className="grid grid-cols-1 md:grid-cols-6 gap-10 p-4 md:p-1 md:pl-40 justify-center">
+        <div className="grid grid-cols-1 md:grid-cols-6 gap-5 p-2 md:p-1 md:pl-40 justify-center">
           {loader&& <Backdrop
         sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={loader}
@@ -432,9 +439,9 @@ ctx.fillText(`hello`,width/2,180)
       >
         <CircularProgress color="inherit" />
       </Backdrop>}
-           <div className=" text-white md:flex md:justify-around md:overflow-hidden gap-2 overflow-scroll w-full md:col-span-3 md:row-span-1 flex p-6 md:h-48">
+           <div className=" text-white md:flex md:justify-around md:overflow-hidden gap-2 overflow-scroll w-full md:col-span-3 md:row-span-1 flex p-4 md:h-32">
                 <div className="bg-[#2B2B2B] md:row-span-1 rounded-lg min-w-[98%] md:min-w-[30%]">
-                  <div className="text-white flex flex-col-reverse items-center justify-center h-full cursor-pointer" onClick={()=>setBarGraph('monthly_income')}>                                          
+                  <div className={bargraph=='monthly_income'?"text-white flex flex-col-reverse items-center justify-center h-full cursor-pointer border border-yellow-300 rounded-lg":"text-white flex flex-col-reverse items-center justify-center h-full cursor-pointer "} onClick={()=>setBarGraph('monthly_income')}>                                          
                         <div className="text-[#707070] ">Total Income</div>
                             {/* <div className="text-xs flex justify-around"><span className='bg-[#707070] pl-1.5 pr-1.5 rounded-sm'>3 Mon</span></div> */}
                           <div className="text-xl font-bold">₹ {IncomeData}</div>
@@ -463,8 +470,8 @@ ctx.fillText(`hello`,width/2,180)
                                         </div>
                 </div>
             </div>
-            <div className=" text-white bg-red-600 md:row-span-1 rounded-lg p-6 mt-3 mb-3">
-            <div className="text-white flex flex-col-reverse items-center justify-around h-full cursor-pointer" onClick={()=>setBarGraph('monthly_expence')}>                                          
+            <div className={bargraph=='monthly_expence'?" text-white bg-red-600 md:row-span-1 rounded-lg p-6 mt-4 mb-4 border border-yellow-300  cursor-pointer":" cursor-pointer text-white bg-red-600 md:row-span-1 rounded-lg p-6 mt-3 mb-3"} onClick={()=>setBarGraph('monthly_expence')}>
+            <div className="text-white flex flex-col-reverse items-center justify-around h-full" >                                          
                                                 <div className=" m-auto" >Monthly Expence </div>
                                                 {/* <div className="text-xs flex justify-around"><span className='pl-1.5 pr-1.5 rounded-sm'>3 Mon</span></div> */}
                                                 <div className="text-xl font-bold m-auto">₹{ExpenceData?.monthlyExpenseArray[0]?.monthly_expense}</div>
@@ -473,8 +480,12 @@ ctx.fillText(`hello`,width/2,180)
                                            
                                         </div>
             </div>
-            <div className="md:col-span-2 md:row-span-3 text-white p-2 flex flex-col justify-around gap-5">
-                <div>
+            <div className="md:col-span-2 md:row-span-3 text-white p-2 flex flex-col justify-start gap-5">
+                <div className="flex flex-col gap-5 justify-center">
+                  <div className="flex justify-between p-3">
+                    <span>Edit / Manage</span>
+                    <img src={calender} alt='calender' width='20px'/>
+                  </div>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
       <Stack spacing={2}>
         <Stack direction="row" spacing={2} className="justify-around">
@@ -623,22 +634,22 @@ ctx.fillText(`hello`,width/2,180)
             </div>
           
            </div>
-           <div className="text-white md:col-span-2 md:row-span-1">
+           <div className="text-white md:col-span-2 md:row-span-1 ">
             <AddS/>
            </div>
-           <div className="text-white md:col-span-2 md:row-span-1">
+           <div className="text-white md:col-span-2 md:row-span-1" >
            {/* <AddS/> */}
            <DoughnutChart 
               chartData={doughnutData}
               textCenter={textCenter}
               options={
-                {cutout:'50%',backgroundColor: [
+                {backgroundColor: [
                   '#FF426F',
                   '#FEC008',
                     '#3F6FD9',
                     '#9772FF'
                 ],
-                // borderColor:'transparent'
+                borderColor:'transparent'
               }
               }
            />

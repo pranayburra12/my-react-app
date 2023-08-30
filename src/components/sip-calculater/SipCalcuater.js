@@ -245,12 +245,12 @@ setDoughnutData(
 
     return(
         <>
-            <div className="sipCalculator md:pl-32 ">
-                <div className="sip-section1">
+            <div className="sipCalculator md:pl-32 grid-rows-3">
+                <div className="sip-section1 row-span-2">
                    <div className="sip-section1-1">
                  
-          <h4>SIP Amount</h4> 
-  <Box sx={{ padding:'20px' }}>
+          <span>SIP Amount</span> 
+  <Box sx={{ padding:'20px' ,minWidth:'200px' }}>
       <Slider
         defaultValue={20000}
         // getAriaValueText={valuetext}
@@ -286,7 +286,7 @@ setDoughnutData(
                     </div>
                     <div className="sip-section1-2"> 
                     <h4>Expected Return Rate(p.a)</h4>
-    <Box sx={{padding:'20px'}}>
+    <Box sx={{padding:'20px',minWidth:'200px'}}>
       <Slider
         defaultValue={10}
         // getAriaValueText={valuetext}
@@ -353,7 +353,7 @@ setDoughnutData(
                     <div className="sip-section1-4">
                     <div style={{width:'16rem'}}>
       <DoughnutChart chartData={doughnutData} textCenter={textCenter} options={
-        {cutout:'50%',backgroundColor: [
+        {backgroundColor: [
           '#0BD19D',
           '#FEC008'   
         ],
@@ -363,7 +363,7 @@ setDoughnutData(
         </div>
                     </div>
                 </div>
-                <div className="sip-section2">
+                <div className="sip-section2 row-span-2">
                   <div className="p-0 md:pb-20">SIP Calculator - FAQs</div>
                 <AccordionGroup
                   sx={{
@@ -405,55 +405,53 @@ setDoughnutData(
                   
                 </AccordionGroup>
                 </div>
-                <div className="sip-section3 hidden md:block">
-                  <div className="flex justify-around pt-12">
+                <div className="sip-section3 hidden md:block p-3 row-span-3">
+                  <div className="flex gap-4">
                     <div>
                         <div className="flex flex-col gap-2">
                           <span className="text-2xl">Zero Commisons</span>
-                          <span className="text-xs leading-normal " style={{color:"#fff",fontFamily:"Manrope"}}>Invest in direct Mutual Funds</span>
+                          <span className="text-sm leading-normal " style={{color:"#fff",fontFamily:"Manrope"}}>Invest in direct Mutual Funds</span>
                         </div>
-                        <div className="flex items-center pt-12 gap-12">
+                        <div className="flex items-center pt-2 gap-5">
                             <div className="flex flex-col">
-                              <span className="text-xl leading-normal font-bold" style={{fontFamily:"Manrope"}}>No middlemen,</span>
-                              <span className="text-xl leading-normal font-bold"style={{fontFamily:"Manrope"}}>No extra charge.</span>
+                              <span className="text-sm" style={{fontFamily:"Manrope"}}>No middlemen,</span>
+                              <span className="text-sm"style={{fontFamily:"Manrope"}}>No extra charge.</span>
                             </div>
-                          <div className="rounded-xl p-3" style={{background: "#FFCE00"}}>
-                            <button className="text-xs" style={{color:"black",background: "#FFCE00"}}>View all AMC’s</button>
+                          <div className="rounded-lg p-3" style={{background: "#FFCE00"}}>
+                            <button className="text-xs" style={{color:"black",background: "#FFCE00"}}>View all</button>
                           </div>
                         </div>
                     </div>
-                    <div>
-                        <div className="flex  w-full md:grid md:grid-rows-3 md:grid-flow-col md:gap-4 ">{
-                          images.map((item)=>{
+                   
+                        <div className="flex w-full md:grid md:grid-cols-4 md:gap-4 ">{
+                          images?.map((item)=>{
                             return(
-                              <div className="bg-[#2B2B2B] p-2">
-                                <img src={item.a}></img>
+                              <div className="bg-[#2B2B2B] p-2 rounded-sm flex justify-center">
+                                <img src={item.a} width='25x'></img>
                               </div>
                             )
                           })
                           }</div>
-                    </div>
+                    
                   </div>
                 </div>
-                <div className="sip-section4 ">
-                <div className="hidden md:contents">
-                        <div className="flex  items-center justify-around pt-12">
-                            <div className="flex flex-col">
-                              <span className="text-3xl">Talk to </span>
-                              <span className="text-3xl">Experts</span>
-                            </div>
-                            <div><img  src={expert}/></div>
+                <div className="hidden md:sip-section4">
+                <div className="block p-5">
+                        <div className="flex items-center justify-between ">
+                           
+                              <span className="text-xl">Talk to Experts</span>
+                              <img  src={expert}/>
                         </div>
-                        <div className="pt-7">
-                        <div className="relative h-10" >
+                      
+                        <div className="relative h-6 " >
                               <Lottie
                                   options={lottieOptions}
                                   label="View"
                               />
-                              <div className="absolute text-black font-bold text-xs cursor-pointer top-2 left-[35%]">View</div>
+                              <div className="absolute text-black font-bold text-xs cursor-pointer top-[20%] left-[45%]">View</div>
                     
                           </div>
-                        </div>
+                        
                     </div>
                 </div>
                 <div className="sip-section5 hidden md:contents">

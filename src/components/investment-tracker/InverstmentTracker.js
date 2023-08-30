@@ -33,7 +33,7 @@ const InverstmentTracker = () => {
 
     const [loader,setLoader]=useState(false);
     const [classnameValue,setclassnameValue] = useState(false)
-
+    const [total,setTotal]=useState(0);
 
 
     const listOfTrackers = [
@@ -131,6 +131,14 @@ const InverstmentTracker = () => {
                 GenerateNewToken(route,payload,navigate)
               }else{
                 setListOfTrackers(result.data)
+                console.log(result.data)
+                let t=0;
+                result.data?.forEach(element => {
+                    t=t+Number(element.currentValues)
+
+                });
+                console.log(t)
+                setTotal(t)
                 setLoader(true)
               }
           })
@@ -182,12 +190,12 @@ const InverstmentTracker = () => {
             case "newTracker":
             default:
                 return (
-                    <div className="flex flex-col items-center text-white gap-5">
+                    <div className="flex flex-col items-center row-span-2 text-white gap-14">
                         <div className="border border-[#F1CA00] p-5 rounded-2xl w-[50%] flex flex-col items-center	cursor-pointer" onClick={() => { setAddTracker(true) }}>
                             <div className="heading"  >Add a tracker</div>
                             <img src={add} />
                         </div>
-                        <div className="flex flex-col items-center border border-white rounded-3xl">
+                        <div className="flex flex-col items-center border border-white rounded-xl">
                             <AddS />
                         </div>
                     </div>)
@@ -220,23 +228,23 @@ const InverstmentTracker = () => {
         {
             loader 
             ? 
-            <div className="grid grid-cols-1 md:grid-cols-5 gap-10 p-4 md:p-1 md:pl-40 items-start justify-center">
-            <div className="flex flex-col md:col-span-3 gap-0 md:gap-14">
-            <div className="text-2xl md:text-6xl leading-normal font-bold" style={{color: "#FFF",fontFamily:"Manrope"}}>Investment Tracker</div>
+            <div className="grid grid-cols-1 md:grid-cols-5 gap-5 p-4 md:p-1 md:pl-40 items-start justify-center">
+            <div className="flex flex-col md:col-span-3 gap-5 md:gap-10">
+            <div className="text-2xl md:text-3xl leading-normal font-bold" style={{color: "#FFF",fontFamily:'Manrope'}}>Investment Tracker</div>
                 <div className=" text-white border border-slate-200 items-center justify-between p-8 rounded-xl md:h-50">
                     <div className=""> 
                     <div className="float-right">Net Worth</div>
                         <div className="flex gap-3 items-center ">
-                            <div className="text-sm md:text-3xl md:text-6xl font-semibold p-0 md:pt-8">₹ 41.9K</div>
+                            <div className="text-2xl md:text-4xl font-semibold p-0 md:pt-8">₹ {total?.toFixed(2)}</div>
                             <div className="bg-green-700 rounded-sm p-0.25 flex m-0 md:mt-6">
                                 <div className="inline text-green-200 text-xs md:text-sm">11.5%</div>
                                 <img className="inline" src={group} />
                             </div>
                         </div>
                     </div>
-                    <div className={!classnameValue ?`block md:flex justify-between pt-4 md:pt-8 pr-8 md:pr-0`:`block md:flex justify-between hidden md:blockpt-4 md:pt-8`}>
-                        <div className="leading-normal font-normal text-sm" style={{fontFamily: "Inter"}}>Your net worth increase by ₹12,000than last month</div>
-                        <div className="leading-normal font-normal text-xs" style={{color: "#A5A5A5",fontFamily:"Manrope"}}>Last Updated Mar 29,2023</div>
+                    <div className={!classnameValue ?`block md:flex justify-between pt-4 md:pt-8 pr-8 md:pr-0`:` md:flex justify-between hidden pt-4 md:pt-8`}>
+                        {/* <div className="leading-normal font-normal text-sm" style={{fontFamily: "Inter"}}>Your net worth increase by ₹12,000than last month</div> */}
+                        <div className="leading-normal font-normal text-xs" style={{color: "#A5A5A5",fontFamily:"Manrope"}}>Last Updated </div>
                     </div>
                 </div>
                 <div className="pb-0 md:pb-12 flex overflow-scroll w-full md:grid md:grid-rows-2 md:grid-flow-col md:gap-4 md:p-4 Flipped mt-4 pt-4 p-4 ">
@@ -253,7 +261,7 @@ const InverstmentTracker = () => {
                                         </div>
                                         <div className="flex bg-green-700 rounded p-0.25 break-all mr-8">
                                             <span className="text-green-200 text-xs">{Math.abs(item?.percentage)?.toFixed(1)}</span>
-                                            {item?.percentage && <img src={group} />}
+                                            <img src={group} />
                                         </div>
                                      </div>
                                      </div>
@@ -262,7 +270,7 @@ const InverstmentTracker = () => {
 
                 </div>
             </div>
-            <div className="col-span-2">
+            <div className="md:col-span-2">
                 {
                     addTracker ? <NewTracker navugateToOldView={changeTooldView} /> : renderTrackerDetail(changeTracker)
                 }

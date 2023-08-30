@@ -3,7 +3,7 @@
     display: grid;
     grid-template-columns: auto auto auto auto auto;
    gap:1.5rem;
-    /* height: 70%; */
+    height: 100vh;
     /* margin-top: 100px; */
     /* overflow-y: scroll; */
 }
@@ -28,6 +28,7 @@
 }
 
 .sip-section3{
+    height: 250px;
     color: aliceblue;
     grid-column: 1 / span 3;
     border:1px solid #999;
@@ -38,6 +39,7 @@
 }
 
 .sip-section4{
+    height: 250px;
     color: aliceblue;
     border:1px solid #999;
     margin-left: 20px;
@@ -51,7 +53,7 @@
     margin-left: 20px;
     margin-right: 20px;
     border-radius: 5px;
-
+    height: 250px;
 }
 .sip-section1-1{
     /* border: 2px solid red; */
