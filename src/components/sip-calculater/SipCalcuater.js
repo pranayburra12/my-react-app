@@ -287,7 +287,14 @@ setDoughnutData(
     </Box></div>
                     <div className="sip-section1-4">
                     <div style={{width:'16rem'}}>
-      <DoughnutChart chartData={doughnutData} textCenter={textCenter}/>
+      <DoughnutChart chartData={doughnutData} textCenter={textCenter} options={
+        {cutout:'50%',backgroundColor: [
+          '#0BD19D',
+          '#FEC008'   
+        ],
+        borderColor:'transparent'
+      }
+      }/>
         </div>
                     </div>
                 </div>
