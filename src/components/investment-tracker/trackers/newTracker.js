@@ -1,6 +1,7 @@
 
 import React, { useState } from "react";
 import TextField from '@mui/material/TextField';
+import { Backdrop, CircularProgress } from "@mui/material";
 const NewTracker = (props) => {
 
   const [trackerName, setTrackerName] = useState("")
@@ -9,9 +10,11 @@ const NewTracker = (props) => {
   const [currentValue, setcurrentValue] = useState("")
 
   const [isvalid, setisValid] = useState(Boolean)
+  const [loader, setLoader] = useState(true);
 
 
   const submitValues = () => {
+    setLoader(false)
     var myHeaders = new Headers();
     myHeaders.append("Authorization", `Bearer ${JSON.parse(localStorage.getItem('access_token'))}`);
     myHeaders.append("Content-Type", "application/json");
@@ -34,6 +37,7 @@ const NewTracker = (props) => {
       .then(response => response.json())
       .then(result => {
         console.log(result)
+        setLoader(true)
         props.navugateToOldView();
       })
       .catch(error => console.log('error', error));
@@ -56,150 +60,165 @@ const NewTracker = (props) => {
 
 
   return (
-    <div className="flex flex-col items-center pt-5 md:p-0">
-      <div className="flex flex-col pb-4">
-        <span className="text-slate-300 pb-2 text-xs">Tracker Name</span>
+    <>
+      {loader
+        ?
+        <div className="flex flex-col items-center pt-5 md:p-0">
+          <div className="flex flex-col pb-4">
+            <span className="text-slate-300 pb-2 text-xs">Tracker Name</span>
 
-        <TextField
-          value={trackerName}
-          placeholder="Tracker Name"
-          disabled={false}
+            <TextField
+              value={trackerName}
+              placeholder="Tracker Name"
+              disabled={false}
 
-          variant='outlined'
+              variant='outlined'
 
-          sx={{
-            color: 'white',
-            "& input": {
-              color: 'white',
-            },
-            "& fieldset": {
-              border: "1px solid white",
-            }, '& .MuiOutlinedInput-root': {
-              '& fieldset': {
-                borderColor: 'white',
-              },
-              '&:hover fieldset': {
-                borderColor: 'white',
-              },
-              '&.Mui-focused fieldset': {
-                borderColor: '#0BD19D',
-              },
-            },
+              sx={{
+                color: 'white',
+                "& input": {
+                  color: 'white',
+                },
+                "& fieldset": {
+                  border: "1px solid white",
+                }, '& .MuiOutlinedInput-root': {
+                  '& fieldset': {
+                    borderColor: 'white',
+                  },
+                  '&:hover fieldset': {
+                    borderColor: 'white',
+                  },
+                  '&.Mui-focused fieldset': {
+                    borderColor: '#0BD19D',
+                  },
+                },
 
-          }}
+              }}
 
-          onChange={(e) => setTrackerName(e.target.value)}
-        />
-      </div>
-
-
-      <div className="flex flex-col pb-4">
-        <span className="text-slate-300 pb-2 text-xs">Invested Amount</span>
-        <TextField
-          value={investedAmount}
-          placeholder="Invested Amount"
-          disabled={false}
-
-          variant='outlined'
-
-          sx={{
-            color: 'white',
-            "& input": {
-              color: 'white',
-            },
-            "& fieldset": {
-              border: "1px solid white",
-            }, '& .MuiOutlinedInput-root': {
-              '& fieldset': {
-                borderColor: 'white',
-              },
-              '&:hover fieldset': {
-                borderColor: 'white',
-              },
-              '&.Mui-focused fieldset': {
-                borderColor: '#0BD19D',
-              },
-            },
-
-          }}
-
-          onChange={(e) => setInvestedAmount(e.target.value)}
-        />
-      </div>
+              onChange={(e) => setTrackerName(e.target.value)}
+            />
+          </div>
 
 
-      <div className="flex flex-col pb-4">
-        <span className="text-slate-300 pb-2 text-xs">Value Time of Investment</span>
-        <TextField
-          value={valueTimeofInvestment}
-          placeholder="Value Time of Investment"
-          disabled={false}
+          <div className="flex flex-col pb-4">
+            <span className="text-slate-300 pb-2 text-xs">Invested Amount</span>
+            <TextField
+              value={investedAmount}
+              placeholder="Invested Amount"
+              disabled={false}
 
-          variant='outlined'
+              variant='outlined'
 
-          sx={{
-            color: 'white',
-            "& input": {
-              color: 'white',
-            },
-            "& fieldset": {
-              border: "1px solid white",
-            }, '& .MuiOutlinedInput-root': {
-              '& fieldset': {
-                borderColor: 'white',
-              },
-              '&:hover fieldset': {
-                borderColor: 'white',
-              },
-              '&.Mui-focused fieldset': {
-                borderColor: '#0BD19D',
-              },
-            },
+              sx={{
+                color: 'white',
+                "& input": {
+                  color: 'white',
+                },
+                "& fieldset": {
+                  border: "1px solid white",
+                }, '& .MuiOutlinedInput-root': {
+                  '& fieldset': {
+                    borderColor: 'white',
+                  },
+                  '&:hover fieldset': {
+                    borderColor: 'white',
+                  },
+                  '&.Mui-focused fieldset': {
+                    borderColor: '#0BD19D',
+                  },
+                },
 
-          }}
+              }}
 
-          onChange={(e) => setvalueTimeofInvestment(e.target.value)}
-        />
-      </div>
+              onChange={(e) => setInvestedAmount(e.target.value)}
+            />
+          </div>
 
 
-      <div className="flex flex-col pb-4">
-        <span className="text-slate-300 pb-2 text-xs">Current Value</span>
-        <TextField
-          value={currentValue}
-          placeholder="Current Value"
-          disabled={false}
+          <div className="flex flex-col pb-4">
+            <span className="text-slate-300 pb-2 text-xs">Value Time of Investment</span>
+            <TextField
+              value={valueTimeofInvestment}
+              placeholder="Value Time of Investment"
+              disabled={false}
 
-          variant='outlined'
+              variant='outlined'
 
-          sx={{
-            color: 'white',
-            "& input": {
-              color: 'white',
-            },
-            "& fieldset": {
-              border: "1px solid white",
-            }, '& .MuiOutlinedInput-root': {
-              '& fieldset': {
-                borderColor: 'white',
-              },
-              '&:hover fieldset': {
-                borderColor: 'white',
-              },
-              '&.Mui-focused fieldset': {
-                borderColor: '#0BD19D',
-              },
-            },
+              sx={{
+                color: 'white',
+                "& input": {
+                  color: 'white',
+                },
+                "& fieldset": {
+                  border: "1px solid white",
+                }, '& .MuiOutlinedInput-root': {
+                  '& fieldset': {
+                    borderColor: 'white',
+                  },
+                  '&:hover fieldset': {
+                    borderColor: 'white',
+                  },
+                  '&.Mui-focused fieldset': {
+                    borderColor: '#0BD19D',
+                  },
+                },
 
-          }}
+              }}
 
-          onChange={(e) => setcurrentValue(e.target.value)}
-        />
-      </div>
-      <div>
-        <button style={{color: "#00838f"}} onClick={props.navugateToOldView}>Back</button>
-        <button className="text-xs mt-5 p-3 ml-20 rounded-xl" style={{ borderColor: "#00838f", color: "#00838f", border: "2px solid" }} onClick={submitValues} >Add new Tracker</button></div>
-    </div>
+              onChange={(e) => setvalueTimeofInvestment(e.target.value)}
+            />
+          </div>
+
+
+          <div className="flex flex-col pb-4">
+            <span className="text-slate-300 pb-2 text-xs">Current Value</span>
+            <TextField
+              value={currentValue}
+              placeholder="Current Value"
+              disabled={false}
+
+              variant='outlined'
+
+              sx={{
+                color: 'white',
+                "& input": {
+                  color: 'white',
+                },
+                "& fieldset": {
+                  border: "1px solid white",
+                }, '& .MuiOutlinedInput-root': {
+                  '& fieldset': {
+                    borderColor: 'white',
+                  },
+                  '&:hover fieldset': {
+                    borderColor: 'white',
+                  },
+                  '&.Mui-focused fieldset': {
+                    borderColor: '#0BD19D',
+                  },
+                },
+
+              }}
+
+              onChange={(e) => setcurrentValue(e.target.value)}
+            />
+          </div>
+          <div>
+            <button style={{ color: "#00838f" }} onClick={props.navugateToOldView}>Back</button>
+            <button className="text-xs mt-5 p-3 ml-20 rounded-xl" style={{ borderColor: "#00838f", color: "#00838f", border: "2px solid" }} onClick={submitValues} >Add new Tracker</button></div>
+        </div>
+        :
+        <div >
+          <Backdrop
+            sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+            open={loader}
+            className="loader"
+          >
+            <CircularProgress color="inherit" />
+          </Backdrop>
+        </div>
+      }
+    </>
   )
 
 }

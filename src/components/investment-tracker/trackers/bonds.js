@@ -4,10 +4,19 @@ import arrow from "../../../assets/arrow.svg"
 import { GenerateNewToken } from "../../utils/api";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
-const baseUrl='http://3.237.3.113:3000'
+import ModalComponent from "../../../modal/modal";
+import { Backdrop, CircularProgress } from "@mui/material";
+
+
 const Bonds = (props) => {
+  
+  const baseUrl='http://3.237.3.113:3000';
 
     const navigate = useNavigate();
+    const [show,setShow] = useState(false)
+    const [loader,setLoader]=useState(false);
+    
+
 
     const viewRef=useRef();
 
@@ -84,6 +93,7 @@ const Bonds = (props) => {
                     GenerateNewToken(route,payload,navigate)
                   }else{
                     setAllBonds(result?.data)
+                    setLoader(true)
                     setAddBond("")
                     setInvestedAmount("")
                     setBondtype("")
@@ -95,6 +105,8 @@ const Bonds = (props) => {
 
 
     const addBonds=(value)=>{
+        setShow(false)
+        setLoader(false)
           var myHeaders = new Headers();
           myHeaders.append("Authorization",`Bearer ${JSON.parse(localStorage.getItem('access_token'))}` );
           myHeaders.append("Content-Type", "application/json");
@@ -155,78 +167,102 @@ const Bonds = (props) => {
 
     return (
       <>
-       {  !viewBonds
-          ? 
-          <><div className=" flex flex-col">
-              <div class="text-gray-500 font-manrope text-sm float-left " style={{ color: "#969696" }}>{props.subHEading}</div>
-              <div class="text-gray-500  float-left text-4xl  pb-7 pt-7" style={{ color: "#FEC008" }}>{props.heading}</div>
-            </div><div className="text-center pt-5 md: p-0">
-
-                <div className='w-full flex flex-col gap-5'>
-                  <div className="flex rounded-3xl   border-white rounded-10 h-auto items-baseline  bg-black" style={{ background: "#2B2B2B" }}>
-                    <input
-                      className=" focus:outline-none w-3/4 rounded-3xl p-6 border-2 border-solid border-white rounded-10 h-15 text-white bg-black"
-                      style={{ color: "#ffff", background: "#2B2B2B" }}
-                      value={"Bond Value"}
-                      disabled={true}
-                      onChange={handleInputChange} />
-                    <div
-                      className="  pl-2.5 text-green-500"
-                    >{`₹ ${currentBond}`}</div>
-                  </div>
-
-                  <div>
-                    <div className='text-slate-200 flex justify-between w-full rounded-lg p-3 bg-[#2B2B2B] hover:cursor-pointer rounded-s-xl' onClick={() => { setViewBonds(true); } }><span>View Your Bonds</span><img src={arrow} /></div>
-                  </div>
-
-                  <div className="flex justify-between  rounded-3xl  border-2 border-solid border-white rounded-10 h-16  bg-black ">
-                    <input
-                      className=" focus:outline-none w-3/4 rounded-3xl p-6 border-2 border-solid border-white rounded-10 h-15  bg-black"
-                      style={{ color: "#ffff" }}
-                      type="text"
-                      id="addStockInput"
-                      placeholder="Bond Name"
-                      value={addBond}
-                      onChange={(e) => { setAddBond(e.target.value); } } />
-                  </div>
-                  <div className="flex justify-between  rounded-3xl  border-2 border-solid border-white rounded-10 h-16  bg-black ">
-                    <input
-                      className=" focus:outline-none w-3/4 rounded-3xl p-6 border-2 border-solid border-white rounded-10 h-15  bg-black"
-                      style={{ color: "#ffff" }}
-                      type="text"
-                      id="addStockInput"
-                      placeholder="Amount Invested"
-                      value={investedAmount}
-                      onChange={(e) => { setInvestedAmount(e.target.value); } } />
-                  </div>
-                  {!isAddStockValid &&
-                    <span style={{ color: 'red' }}>{validationMessage}</span>}
-                  <div className="flex justify-between  rounded-3xl  border-2 border-solid border-white rounded-10 h-16  bg-black">
-                    <input
-                      className=" focus:outline-none w-3/4 rounded-3xl p-6 border-2 border-solid border-white rounded-10 h-15  bg-black"
-                      style={{ color: "#ffff" }}
-                      type="text"
-                      placeholder="Bond Type"
-                      value={bondType}
-                      onChange={(e) => { setBondtype(e.target.value); } } />
-                  </div>
-                  {!isRemoveStockValid &&
-                    <span style={{ color: 'red' }}>{validationMessage}</span>}
-                  <div><button className="text-xs mt-5 p-3 ml-20 rounded-xl" style={{ backgroundColor: "#00838f", color: "#fff", border: "solid 1px #00838" }} onClick={addBonds}>Add new bond</button></div>
-                </div>
-              </div></>
-          :
-          <div className="text-white min-h-screen" ref={viewRef}>
-              <Button onClick={goBack} > Go Back</Button>
-            <div className='flex flex-col gap-2' >
-            {allBonds?.map(each=>{
-              return <div className='text-slate-200 flex justify-between w-full rounded-sm h-16 items-center p-3 bg-[#2B2B2B] gap-2 hover:cursor-pointer' onClick={()=>{}}><span>{each.bondName}</span><span className='text-[#0BD19D]'>₹{each.currentTotalValue.toFixed(1)    }</span></div>
-            })}
-            </div>
-            </div>
-       }
-        </>
-    )
+      {
+        loader ?
+        <>
+        {  !viewBonds
+           ? 
+           <><div className=" flex flex-col">
+               <div class="text-gray-500 font-manrope text-sm float-left " style={{ color: "#969696" }}>{props.subHEading}</div>
+               <div class="text-gray-500  float-left text-4xl pt-1 pb-7 pt-7" style={{ color: "#FEC008" }}>{props.heading}</div>
+             </div><div className="text-center pt-5 md: p-0">
+ 
+                 <div className='w-full flex flex-col gap-5'>
+                   <div className="flex rounded-3xl   border-white rounded-10 h-auto items-baseline  bg-black" style={{ background: "#2B2B2B" }}>
+                     <input
+                       className=" focus:outline-none w-3/4 rounded-3xl border-none p-6 border-2 border-solid border-white rounded-10 h-15 text-white bg-black"
+                       style={{ color: "#ffff", background: "#2B2B2B" }}
+                       value={"Bond Value"}
+                       disabled={true}
+                       onChange={handleInputChange} />
+                     <div
+                       className="  pl-2.5 text-green-500"
+                     >{`₹ ${currentBond}`}</div>
+                   </div>
+ 
+                   <div>
+                     <div className='text-slate-200 flex justify-between w-full rounded-lg p-3 bg-[#2B2B2B] hover:cursor-pointer rounded-s-xl' onClick={() => { setViewBonds(true); } }><span>View Your Bonds</span><img src={arrow} /></div>
+                   </div>
+ 
+                   <div className="flex justify-between  rounded-3xl  border-2 border-solid border-white rounded-10 h-16  bg-black ">
+                     <input
+                       className=" focus:outline-none w-3/4 rounded-3xl border-none p-6 border-2 border-solid border-white rounded-10 h-15  bg-black"
+                       style={{ color: "#ffff" }}
+                       type="text"
+                       id="addStockInput"
+                       placeholder="Bond Name"
+                       value={addBond}
+                       onChange={(e) => { setAddBond(e.target.value); } } />
+                   </div>
+                   <div className="flex justify-between  rounded-3xl  border-2 border-solid border-white rounded-10 h-16  bg-black ">
+                     <input
+                       className=" focus:outline-none w-3/4 rounded-3xl border-none p-6 border-2 border-solid border-white rounded-10 h-15  bg-black"
+                       style={{ color: "#ffff" }}
+                       type="text"
+                       id="addStockInput"
+                       placeholder="Amount Invested"
+                       value={investedAmount}
+                       onChange={(e) => { setInvestedAmount(e.target.value); } } />
+                   </div>
+                   {!isAddStockValid &&
+                     <span style={{ color: 'red' }}>{validationMessage}</span>}
+                   <div className="flex justify-between  rounded-3xl  border-2 border-solid border-white rounded-10 h-16  bg-black">
+                     <input
+                       className=" focus:outline-none w-3/4 rounded-3xl border-none p-6 border-2 border-solid border-white rounded-10 h-15  bg-black"
+                       style={{ color: "#ffff" }}
+                       type="text"
+                       placeholder="Bond Type"
+                       value={bondType}
+                       onChange={(e) => { setBondtype(e.target.value); } } />
+                   </div>
+                   {!isRemoveStockValid &&
+                     <span style={{ color: 'red' }}>{validationMessage}</span>}
+                   <div><button className="text-xs mt-5 p-3 ml-20 rounded-xl" style={{ backgroundColor: "#00838f", color: "#fff", border: "solid 1px #00838" }} onClick={()=>{setShow(true)}}>Add new bond</button></div>
+                 </div>
+               </div></>
+           :
+           <div className="text-white min-h-screen" ref={viewRef}>
+               <Button onClick={goBack} > Go Back</Button>
+             <div className='flex flex-col gap-2' >
+             {allBonds?.map(each=>{
+               return <div className='text-slate-200 flex justify-between w-full rounded-sm h-16 items-center p-3 bg-[#2B2B2B] gap-2 hover:cursor-pointer' onClick={()=>{}}><span>{each.bondName}</span><span className='text-[#0BD19D]'>₹{each.currentTotalValue.toFixed(1)    }</span></div>
+             })}
+             </div>
+             </div>
+        }
+        {
+         <ModalComponent
+         show={show}
+         cancel={"cancel"}
+         save={"save"}
+         onHide={() => setShow(false)}
+         onSubmit={()=>{addBonds()}}
+         />
+        }
+         </>
+        :
+        <div >
+          <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={loader}
+        className="loader"
+        >
+          <CircularProgress color="inherit" />
+        </Backdrop>
+        </div>
+      }
+      </>
+    ) 
 }
 
 export default Bonds;

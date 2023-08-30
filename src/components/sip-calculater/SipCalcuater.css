@@ -1,7 +1,7 @@
 .sipCalculator{
     /* width: 100%; */
     display: grid;
-    grid-template-columns: auto auto auto auto;
+    grid-template-columns: auto auto auto auto auto;
    gap:1.5rem;
     /* height: 70%; */
     /* margin-top: 100px; */
@@ -9,7 +9,7 @@
 }
 .sip-section1{
     color: aliceblue;
-    grid-column: 1 / span 3;
+    grid-column: 1 / span 4;
     border:1px solid #999;
     display: grid;
     grid-template-columns: auto auto auto;
@@ -20,7 +20,7 @@
 }
 .sip-section2{
     color: aliceblue;
-    border:1px solid #999;
+    /* border:1px solid #999; */
     margin-left: 20px;
     margin-right: 20px;
     border-radius: 5px;
@@ -29,7 +29,7 @@
 
 .sip-section3{
     color: aliceblue;
-    grid-column: 1 / span 2;
+    grid-column: 1 / span 3;
     border:1px solid #999;
     margin-left: 20px;
     margin-right: 20px;

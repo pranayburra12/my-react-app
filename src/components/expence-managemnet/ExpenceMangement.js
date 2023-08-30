@@ -638,7 +638,7 @@ ctx.fillText(`hello`,width/2,180)
                     '#3F6FD9',
                     '#9772FF'
                 ],
-                borderColor:'transparent'
+                // borderColor:'transparent'
               }
               }
            />

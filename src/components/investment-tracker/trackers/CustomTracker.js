@@ -3,15 +3,22 @@ import React, { useEffect, useState } from "react";
 import TextField from '@mui/material/TextField';
 import { useNavigate  } from "react-router-dom";
 import { GenerateNewToken } from "../../utils/api";
-const baseUrl='http://3.237.3.113:3000'
+import ModalComponent from "../../../modal/modal";
+import { Backdrop, CircularProgress } from "@mui/material";
+
 const CustomTracker = (props) => {
+  const baseUrl='http://3.237.3.113:3000'
 
   const navigate = useNavigate();
+  const [show,setShow] = useState(false)
+  const [develete,setDelete] = useState(false)
 
   const [trackerName, setTrackerName] = useState("")
   const [investedAmount, setInvestedAmount] = useState("")
   const [valueTimeofInvestment, setvalueTimeofInvestment] = useState("")
   const [currentValue, setcurrentValue] = useState("")
+  const [loader,setLoader]=useState(false);
+  
 
   const [isvalid, setisValid] = useState(Boolean)
 
@@ -48,9 +55,7 @@ const totalSavings = () =>{
                 }
                 GenerateNewToken(route,payload,navigate)
               }else{
-                // setcurrentSavings(result?.data?.savingsAmount)
-                // setAddSvaings("")
-                // setRemoveSavings("")
+                setLoader(true)
                 setTrackerName(result?.data?.trackerName)
                 setInvestedAmount(result?.data?.investedAmount)
                 setvalueTimeofInvestment(result?.data?.valueTimeofInvestment)
@@ -62,6 +67,8 @@ const totalSavings = () =>{
 
 
   const submitValues = () => {
+    setShow(false)
+    setLoader(false)
     var myHeaders = new Headers();
     myHeaders.append("Authorization", `Bearer ${JSON.parse(localStorage.getItem('access_token'))}`);
     myHeaders.append("Content-Type", "application/json");
@@ -92,6 +99,7 @@ const totalSavings = () =>{
   }
 
   const updateName =() =>{
+    setLoader(false)
     var myHeaders = new Headers();
     myHeaders.append("Authorization", `Bearer ${JSON.parse(localStorage.getItem('access_token'))}`);
     myHeaders.append("Content-Type", "application/json");
@@ -119,6 +127,8 @@ const totalSavings = () =>{
   }
 
   const deleteTracker =()=>{
+    setDelete(false)
+    setLoader(false)
     var myHeaders = new Headers();
     myHeaders.append("Authorization", `Bearer ${JSON.parse(localStorage.getItem('access_token'))}`);
     myHeaders.append("Content-Type", "application/json");
@@ -146,7 +156,11 @@ const totalSavings = () =>{
   }
 
   return (
-    <><div className="flex flex-col items-center pt-5 md:p-0">
+    <>
+      {
+          loader ? 
+          <>
+          <div className="flex flex-col items-center pt-5 md:p-0">
       <div className="flex flex-col">
         <span className="text-slate-300 pb-2 text-xs">Tracker Name</span>
 
@@ -283,9 +297,41 @@ const totalSavings = () =>{
       </div>
       <div>
         <button style={{ color: "#00838f" }} onClick={props.navugateToOldView}>Back</button>
-        <button className="text-xs mt-5 p-3 ml-20 rounded-xl" style={{ borderColor: "#00838f", color: "#00838f", border: "2px solid" }} onClick={submitValues}>Update Tracker</button></div>
-        <button className="text-xs mt-10 p-3  " style={{ borderColor: "#00838f", color: "#00838f"}} onClick={deleteTracker}>Delete Tracker</button>
-    </div></>
+        <button className="text-xs mt-5 p-3 ml-20 rounded-xl" style={{ borderColor: "#00838f", color: "#00838f", border: "2px solid" }} onClick={()=>{setShow(true)}}>Update Tracker</button></div>
+        <button className="text-xs mt-10 p-3  " style={{ borderColor: "#00838f", color: "#00838f"}} onClick={()=>{setDelete(true)}}>Delete Tracker</button>
+    </div>
+    
+    {
+        <ModalComponent
+        show={show}
+        cancel={"cancel"}
+        save={"Submit"}
+        onHide={() => setShow(false)}
+        onSubmit={()=>{submitValues()}}
+        />
+    }
+    {
+        <ModalComponent
+        show={develete}
+        cancel={"cancel"}
+        save={"Delete"}
+        onHide={() => setShow(false)}
+        onSubmit={()=>{deleteTracker()}}
+        />
+    }
+          </>
+          :
+          <div >
+          <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={loader}
+        className="loader"
+        >
+          <CircularProgress color="inherit" />
+        </Backdrop>
+        </div>
+      }
+    </>
   )
 
 }

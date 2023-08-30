@@ -4,7 +4,29 @@ import "./SipCalcuater.css"
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
 import DoughnutChart from "../charts/DoughnutChart";
+
 import AddS from "../../adds/adds";
+import expert from "../../assets/Group 1453.svg"
+import sbi from "../../assets/sbi.svg"
+import axis from "../../assets/axis.svg"
+import bank from "../../assets/bacnk1234.svg"
+import bajaj from "../../assets/bajaj.svg"
+import bank1 from "../../assets/bank1.svg"
+import bank2 from "../../assets/bank23.svg"
+import hdfc from "../../assets/hdfc.svg"
+import icici from "../../assets/icici.svg"
+import invesco from "../../assets/invesco.svg"
+import kotak from "../../assets/kotak.svg"
+import paytm from "../../assets/paytm.svg"
+import sbi1 from "../../assets/sbi1.svg"
+
+import Lottie from "react-lottie";
+import ButtonLottieAnimation from "../../utils/Button.json"
+import AccordionGroup from '@mui/joy/AccordionGroup';
+import Accordion, { accordionClasses } from '@mui/joy/Accordion';
+import AccordionDetails from '@mui/joy/AccordionDetails';
+import AccordionSummary from '@mui/joy/AccordionSummary';
+
 
 
 const Sipcalculater = () =>{
@@ -15,6 +37,25 @@ const [years,setYears]=useState(4)
 const [expectedValue,setExpectedValue]=useState(sip)
 const [percent,setPercent]=useState(10);
 
+
+const [index, setIndex] = useState(0);
+
+const images=[
+  { a:sbi},
+  { a:axis},
+  { a:bank},
+  { a:kotak},
+  { a:bank1},
+  { a:bank2},
+  { a:hdfc},
+  { a:icici},
+  { a:invesco},
+  { a:kotak},
+  { a:paytm},
+  { a:sbi1},
+  { a:sbi},
+  { a:sbi},  
+]
   
  
   const SIP = [
@@ -177,6 +218,30 @@ setDoughnutData(
         ],
         
       })
+      const lottieOptions = {
+        animationData: ButtonLottieAnimation,
+        loop: true,
+        autoplay: false,
+        rendererSettings: {
+            preserveAspectRatio: "xMidYMid slice",
+        },
+    };
+  
+  const details =[
+    {
+    heading:"How much can I invest in a SIP?",
+    subheading:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    },
+    {
+      heading:"What is the maximum tenure of a SIP?",
+      subheading:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    },
+    {
+      heading:"Are SIPs similar to mutual funds?",
+      subheading:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    },
+
+  ]
 
     return(
         <>
@@ -299,15 +364,99 @@ setDoughnutData(
                     </div>
                 </div>
                 <div className="sip-section2">
-                    Faqs will come here
+                  <div className="p-0 md:pb-20">SIP Calculator - FAQs</div>
+                <AccordionGroup
+                  sx={{
+                    maxWidth: 400,
+                    [`& .${accordionClasses.root}`]: {
+                      marginTop: '0.5rem',
+                      transition: '0.2s ease',
+                      '& button:not([aria-expanded="true"])': {
+                        transition: '0.2s ease',
+                        paddingBottom: '0.625rem',
+                      },
+                      '& button:hover': {
+                        background: 'transparent',
+                      },
+                    },
+                    [`& .${accordionClasses.root}.${accordionClasses.expanded}`]: {
+                      bgcolor: 'background.level1',
+                      borderRadius: 'md',
+                      borderBottom: '1px solid',
+                      borderColor: 'background.level2',
+                    },
+                    '& [aria-expanded="true"]': {
+                      boxShadow: (theme) => `inset 0 -1px 0 ${theme.vars.palette.divider}`,
+                    },
+                  }}
+                >
+                  {
+                    details?.map((item)=>{
+                      return(
+                        <div >
+                            <Accordion className="p-0 md:pt-2.5">
+                              <AccordionSummary>{item?.heading}</AccordionSummary>
+                              <AccordionDetails>{item.subheading}</AccordionDetails>
+                            </Accordion>
+                        </div>
+                      )
+                    })
+                  }
+                  
+                </AccordionGroup>
                 </div>
-                <div className="sip-section3">
-                    zero commision ad
+                <div className="sip-section3 hidden md:block">
+                  <div className="flex justify-around pt-12">
+                    <div>
+                        <div className="flex flex-col gap-2">
+                          <span className="text-2xl">Zero Commisons</span>
+                          <span className="text-xs leading-normal " style={{color:"#fff",fontFamily:"Manrope"}}>Invest in direct Mutual Funds</span>
+                        </div>
+                        <div className="flex items-center pt-12 gap-12">
+                            <div className="flex flex-col">
+                              <span className="text-xl leading-normal font-bold" style={{fontFamily:"Manrope"}}>No middlemen,</span>
+                              <span className="text-xl leading-normal font-bold"style={{fontFamily:"Manrope"}}>No extra charge.</span>
+                            </div>
+                          <div className="rounded-xl p-3" style={{background: "#FFCE00"}}>
+                            <button className="text-xs" style={{color:"black",background: "#FFCE00"}}>View all AMC’s</button>
+                          </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div className="flex  w-full md:grid md:grid-rows-3 md:grid-flow-col md:gap-4 ">{
+                          images.map((item)=>{
+                            return(
+                              <div className="bg-[#2B2B2B] p-2">
+                                <img src={item.a}></img>
+                              </div>
+                            )
+                          })
+                          }</div>
+                    </div>
+                  </div>
                 </div>
-                <div className="sip-section4">
-                    talk to expert ad
+                <div className="sip-section4 ">
+                <div className="hidden md:contents">
+                        <div className="flex  items-center justify-around pt-12">
+                            <div className="flex flex-col">
+                              <span className="text-3xl">Talk to </span>
+                              <span className="text-3xl">Experts</span>
+                            </div>
+                            <div><img  src={expert}/></div>
+                        </div>
+                        <div className="pt-7">
+                        <div className="relative h-10" >
+                              <Lottie
+                                  options={lottieOptions}
+                                  label="View"
+                              />
+                              <div className="absolute text-black font-bold text-xs cursor-pointer top-2 left-[35%]">View</div>
+                    
+                          </div>
+                        </div>
+                    </div>
                 </div>
-                <div className="sip-section5">
+                <div className="sip-section5 hidden md:contents">
                     <AddS />
                 </div>
 

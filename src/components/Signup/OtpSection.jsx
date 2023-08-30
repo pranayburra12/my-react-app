@@ -118,7 +118,7 @@ const OTPSection = (props) => {
         alt="Signup-arrow"
         onClick={handleFormSubmit}
       />
-      <button style={{top:"541px",position:"absolute",fontSize:"15px",color:"#bfbfbf",fontFamily:"Manrope"}} 
+      <button style={{top:"541px",position:"absolute",fontSize:"15px",color:"#bfbfbf",fontFamily:"Manrope",marginLeft:"64px"}} 
       onClick={ResendOtp}
       >
         Resend Otp

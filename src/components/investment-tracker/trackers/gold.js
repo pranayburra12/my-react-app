@@ -3,16 +3,23 @@ import rightarrow from "../../../assets/Group 1260.svg"
 import { GenerateNewToken } from "../../utils/api";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
-const baseUrl='http://3.237.3.113:3000'
+import { Backdrop, CircularProgress } from "@mui/material";
+import ModalComponent from "../../../modal/modal";
+
 const Gold = (props) => {
 
   const navigate = useNavigate();
+  const baseUrl='http://3.237.3.113:3000';
 
   const [addGold, setAddGold] = useState('');
   const [valueofIntrest,setValueOfintgrest] = useState('')
 
   const [removeGold, setRemoveGold] = useState('');
   const [currentGold, setcurrentGold] = useState("");
+
+  const [loader,setLoader]=useState(false);
+  const [removeModal,setRemoveModal] = useState(false)
+  const [show,setShow] = useState(false)
 
 
   const [validationMessage, setValidationMessage] = useState('');
@@ -80,6 +87,7 @@ const Gold = (props) => {
           GenerateNewToken(route, payload, navigate)
         } else {
           setcurrentGold(result?.data?.totalAmount)
+          setLoader(true)
           setAddGold("")
           setRemoveGold("")
           setValueOfintgrest("")
@@ -90,6 +98,8 @@ const Gold = (props) => {
 
 
   const AddGold = () => {
+    setLoader(false)
+    setShow(false)
     var myHeaders = new Headers();
     myHeaders.append("Authorization", `Bearer ${JSON.parse(localStorage.getItem('access_token'))}`);
     myHeaders.append("Content-Type", "application/json");
@@ -117,7 +127,8 @@ const Gold = (props) => {
   }
 
   const remove = (value) => {
-
+    setLoader(false)
+    setRemoveModal(false)
     var myHeaders = new Headers();
     myHeaders.append("Authorization", `Bearer ${JSON.parse(localStorage.getItem('access_token'))}`);
     myHeaders.append("Content-Type", "application/json");
@@ -145,6 +156,10 @@ const Gold = (props) => {
 
 
   return (
+    <>
+    {
+      loader 
+      ?
       <><div className="w-96 flex flex-col">
       <div class="text-gray-500 font-manrope text-sm float-left  " style={{ color: "#969696" }}>{props.subHEading}</div>
       <div class="text-gray-500  float-left text-4xl pt-1 pb-7 pt-7" style={{ color: "#FEC008" }}>{props.heading}</div>
@@ -197,7 +212,7 @@ const Gold = (props) => {
 
           <Button 
           variant='outlined' color='success'
-          onClick={AddGold}
+          onClick={()=>{setShow(true)}}
         > Add</Button>
 
           {!isAddStockValid &&
@@ -214,12 +229,37 @@ const Gold = (props) => {
               className="mr-8 cursor-pointer pl-2.5"
               src={rightarrow}
               alt="Right Arrow"
-              onClick={() => { remove(removeGold) } } />
+              onClick={() => { setRemoveModal(true) } } />
           </div>
           {!isRemoveStockValid &&
             <span style={{ color: 'red' }}>{validationMessage}</span>}
         </div>
-      </div></>
+      </div>
+      {<ModalComponent
+              show={show}
+              cancel={"cancel"}
+              save={"save"}
+              onHide={() => setShow(false)}
+              onSubmit={() => { AddGold(); }} />}
+            {<ModalComponent
+              show={removeModal}
+              cancel={"cancel"}
+              save={"delete"}
+              onHide={() => setRemoveModal(false)}
+              onSubmit={() => { remove(); }} />}
+      </> 
+      :
+      <div >
+          <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={loader}
+        className="loader"
+        >
+          <CircularProgress color="inherit" />
+        </Backdrop>
+        </div>
+    }
+    </>
   )
 }
 
