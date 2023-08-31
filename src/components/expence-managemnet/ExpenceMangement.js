@@ -425,7 +425,7 @@ ctx.font='24px sans-sarif';
   ctx.fillStyle='#FEC008'
 
  
-  ctx.fillText(`Total Expences`,width/2,height/2)
+  ctx.fillText(`Expenses`,width/2,(height*0.6))
   ctx.restore()
 }
 }
@@ -639,6 +639,7 @@ ctx.font='24px sans-sarif';
            </div>
            <div className="text-white md:col-span-2 md:row-span-1" >
            {/* <AddS/> */}
+           
            <DoughnutChart 
               chartData={doughnutData}
               textCenter={textCenter}
