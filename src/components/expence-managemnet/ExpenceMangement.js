@@ -170,12 +170,12 @@ const ExpenceMangement =()=>{
               labels:['Shopping','Payments','Food','Others'],
               datasets:[
                { 
-                label:['Expence'],
+                label:['Expense'],
                 data:[ 
-                Number(result?.data[0]?.totalPercentageSumArray?.shopping_total_percentage),
-               Number(result?.data[0]?.totalPercentageSumArray?.payment_total_percentage),
-               Number(result?.data[0]?.totalPercentageSumArray?.food_total_percentage),
-                Number(result?.data[0]?.totalPercentageSumArray?.others_total_percentage)],
+                Number(result?.data[0]?.totalPercentageSumArray?.shopping_total_percentage || 0.00),
+               Number(result?.data[0]?.totalPercentageSumArray?.payment_total_percentage || 0.00),
+               Number(result?.data[0]?.totalPercentageSumArray?.food_total_percentage || 0.00),
+                Number(result?.data[0]?.totalPercentageSumArray?.others_total_percentage || 0.00)],
                  cutout:'80%'
                 }
                 ,
@@ -186,21 +186,21 @@ const ExpenceMangement =()=>{
             labels:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
             datasets:[
              { 
-              label:['Shopping'],
+              label:'Shopping',
               data:[
-                result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==1)[0]?.shopping_monthly_expense,
-                result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==2)[0]?.shopping_monthly_expense,
-                result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==3)[0]?.shopping_monthly_expense,
-                result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==4)[0]?.shopping_monthly_expense,
-                result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==5)[0]?.shopping_monthly_expense,
-                result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==6)[0]?.shopping_monthly_expense,
-                result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==7)[0]?.shopping_monthly_expense,
-                result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==8)[0]?.shopping_monthly_expense,
-                result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==9)[0]?.shopping_monthly_expense,
-                result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==10)[0]?.shopping_monthly_expense,
-                result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==11)[0]?.shopping_monthly_expense,
-                result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==12)[0]?.shopping_monthly_expense
-              ],
+                result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==1)[0]?.shopping_monthly_expense || 0,
+                result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==2)[0]?.shopping_monthly_expense || 0,
+                result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==3)[0]?.shopping_monthly_expense || 0,
+                result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==4)[0]?.shopping_monthly_expense || 0,
+                result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==5)[0]?.shopping_monthly_expense || 0,
+                result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==6)[0]?.shopping_monthly_expense || 0,
+                result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==7)[0]?.shopping_monthly_expense || 0,
+                Number(result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==8)[0]?.shopping_monthly_expense || 0),
+                Number(result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==9)[0]?.shopping_monthly_expense || 0),
+                Number(result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==10)[0]?.shopping_monthly_expense || 0),
+                Number(result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==11)[0]?.shopping_monthly_expense || 0),
+                Number(result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==12)[0]?.shopping_monthly_expense || 0)
+              ],cutout:'80%',
               // cutout:'90%'
               // barPercentage: 0.25,
               // categoryPercentage: 0.5,
@@ -215,20 +215,20 @@ const ExpenceMangement =()=>{
               { 
                 label:['Payments'],
                 data:[
-                  result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==1)[0]?.payment_monthly_expense,
-                  result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==2)[0]?.payment_monthly_expense,
-                  result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==3)[0]?.payment_monthly_expense,
-                  result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==4)[0]?.payment_monthly_expense,
-                  result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==5)[0]?.payment_monthly_expense,
-                  result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==6)[0]?.payment_monthly_expense,
-                  result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==7)[0]?.payment_monthly_expense,
-                  result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==8)[0]?.payment_monthly_expense,
-                  result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==9)[0]?.payment_monthly_expense,
-                  result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==10)[0]?.payment_monthly_expense,
-                  result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==11)[0]?.payment_monthly_expense,
-                  result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==12)[0]?.payment_monthly_expense
+                  result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==1)[0]?.payment_monthly_expense || 0,
+                  result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==2)[0]?.payment_monthly_expense || 0,
+                  result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==3)[0]?.payment_monthly_expense || 0,
+                  result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==4)[0]?.payment_monthly_expense || 0,
+                  result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==5)[0]?.payment_monthly_expense || 0,
+                  result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==6)[0]?.payment_monthly_expense || 0,
+                  result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==7)[0]?.payment_monthly_expense || 0,
+                  result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==8)[0]?.payment_monthly_expense || 0,
+                  result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==9)[0]?.payment_monthly_expense || 0,
+                  result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==10)[0]?.payment_monthly_expense || 0,
+                  result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==11)[0]?.payment_monthly_expense || 0,
+                  result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==12)[0]?.payment_monthly_expense || 0
                 ],
-                // cutout:'90%'
+                cutout:'80%',
                 backgroundColor:'#FEC008',
                 barThickness:window?.innerWidth>600?12:5,
                 borderRadius:12,
@@ -237,20 +237,20 @@ const ExpenceMangement =()=>{
             { 
               label:['Food'],
               data:[
-                result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==1)[0]?.food_monthly_expense,
-                result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==2)[0]?.food_monthly_expense,
-                result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==3)[0]?.food_monthly_expense,
-                result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==4)[0]?.food_monthly_expense,
-                result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==5)[0]?.food_monthly_expense,
-                result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==6)[0]?.food_monthly_expense,
-                result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==7)[0]?.food_monthly_expense,
-                result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==8)[0]?.food_monthly_expense,
-                result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==9)[0]?.food_monthly_expense,
-                result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==10)[0]?.food_monthly_expense,
-                result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==11)[0]?.food_monthly_expense,
-                result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==12)[0]?.food_monthly_expense
+                result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==1)[0]?.food_monthly_expense || 0,
+                result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==2)[0]?.food_monthly_expense || 0,
+                result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==3)[0]?.food_monthly_expense || 0,
+                result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==4)[0]?.food_monthly_expense || 0,
+                result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==5)[0]?.food_monthly_expense || 0,
+                result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==6)[0]?.food_monthly_expense || 0,
+                result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==7)[0]?.food_monthly_expense || 0,
+                result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==8)[0]?.food_monthly_expense || 0,
+                result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==9)[0]?.food_monthly_expense || 0,
+                result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==10)[0]?.food_monthly_expense || 0,
+                result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==11)[0]?.food_monthly_expense || 0,
+                result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==12)[0]?.food_monthly_expense || 0
               ],
-              // cutout:'90%'
+              cutout:'80%',
               backgroundColor:'#3F6FD9',
               barThickness:window?.innerWidth>600?12:5 ,
               borderRadius:12,
@@ -259,20 +259,20 @@ const ExpenceMangement =()=>{
           { 
             label:['Others'],
             data:[
-              result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==1)[0]?.others_monthly_expense,
-              result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==2)[0]?.others_monthly_expense,
-              result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==3)[0]?.others_monthly_expense,
-              result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==4)[0]?.others_monthly_expense,
-              result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==5)[0]?.others_monthly_expense,
-              result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==6)[0]?.others_monthly_expense,
-              result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==7)[0]?.others_monthly_expense,
-              result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==8)[0]?.others_monthly_expense,
-              result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==9)[0]?.others_monthly_expense,
-              result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==10)[0]?.others_monthly_expense,
-              result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==11)[0]?.others_monthly_expense,
-              result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==12)[0]?.others_monthly_expense
+              result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==1)[0]?.others_monthly_expense || 0,
+              result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==2)[0]?.others_monthly_expense || 0,
+              result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==3)[0]?.others_monthly_expense || 0,
+              result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==4)[0]?.others_monthly_expense || 0,
+              result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==5)[0]?.others_monthly_expense || 0,
+              result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==6)[0]?.others_monthly_expense || 0,
+              result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==7)[0]?.others_monthly_expense || 0,
+              result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==8)[0]?.others_monthly_expense || 0,
+              result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==9)[0]?.others_monthly_expense || 0,
+              result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==10)[0]?.others_monthly_expense || 0,
+              result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==11)[0]?.others_monthly_expense || 0,
+              result.data[0]?.monthlyExpenseArray?.filter(each=>each.month==12)[0]?.others_monthly_expense || 0
             ],
-            // cutout:'90%'
+            cutout:'80%',
             backgroundColor:'#9772FF',
             barThickness:window?.innerWidth>600?12:5 ,
             borderRadius:12,
@@ -310,25 +310,25 @@ const ExpenceMangement =()=>{
         }else{
           console.log(result.data[0])
           setIncomeData(result.data[0].totalIncomeArray?.total_income)
-          setIncomeBarData(
+           setIncomeBarData(
            {
               labels:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
               datasets:[
                { 
                 label:['Income'],
                 data:[
-                  result.data[0]?.monthlyIncomeArray?.filter(each=>each.month==1)[0]?.monthly_income,
-                  result.data[0]?.monthlyIncomeArray?.filter(each=>each.month==2)[0]?.monthly_income,
-                  result.data[0]?.monthlyIncomeArray?.filter(each=>each.month==3)[0]?.monthly_income,
-                  result.data[0]?.monthlyIncomeArray?.filter(each=>each.month==4)[0]?.monthly_income,
-                  result.data[0]?.monthlyIncomeArray?.filter(each=>each.month==5)[0]?.monthly_income,
-                  result.data[0]?.monthlyIncomeArray?.filter(each=>each.month==6)[0]?.monthly_income,
-                  result.data[0]?.monthlyIncomeArray?.filter(each=>each.month==7)[0]?.monthly_income,
-                  result.data[0]?.monthlyIncomeArray?.filter(each=>each.month==8)[0]?.monthly_income,
-                  result.data[0]?.monthlyIncomeArray?.filter(each=>each.month==9)[0]?.monthly_income,
-                  result.data[0]?.monthlyIncomeArray?.filter(each=>each.month==10)[0]?.monthly_income,
-                  result.data[0]?.monthlyIncomeArray?.filter(each=>each.month==11)[0]?.monthly_income,
-                  result.data[0]?.monthlyIncomeArray?.filter(each=>each.month==12)[0]?.monthly_income
+                  result.data[0]?.monthlyIncomeArray?.filter(each=>each.month==1)[0]?.monthly_income || 0,
+                  result.data[0]?.monthlyIncomeArray?.filter(each=>each.month==2)[0]?.monthly_income || 0,
+                  result.data[0]?.monthlyIncomeArray?.filter(each=>each.month==3)[0]?.monthly_income || 0,
+                  result.data[0]?.monthlyIncomeArray?.filter(each=>each.month==4)[0]?.monthly_income || 0,
+                  result.data[0]?.monthlyIncomeArray?.filter(each=>each.month==5)[0]?.monthly_income || 0,
+                  result.data[0]?.monthlyIncomeArray?.filter(each=>each.month==6)[0]?.monthly_income || 0,
+                  result.data[0]?.monthlyIncomeArray?.filter(each=>each.month==7)[0]?.monthly_income || 0,
+                  result.data[0]?.monthlyIncomeArray?.filter(each=>each.month==8)[0]?.monthly_income || 0,
+                  result.data[0]?.monthlyIncomeArray?.filter(each=>each.month==9)[0]?.monthly_income || 0,
+                  result.data[0]?.monthlyIncomeArray?.filter(each=>each.month==10)[0]?.monthly_income || 0,
+                  result.data[0]?.monthlyIncomeArray?.filter(each=>each.month==11)[0]?.monthly_income || 0,
+                  result.data[0]?.monthlyIncomeArray?.filter(each=>each.month==12)[0]?.monthly_income || 0
                 ],
                 // cutout:'90%'
                 backgroundColor:'#0BD19D',

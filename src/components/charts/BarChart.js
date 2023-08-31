@@ -20,7 +20,10 @@ export default function BarChart({chartData}) {
           y:{
             beginAtZero:true
           }
-      },
+      }, plugins: {tooltip: {
+        enabled: false // Disable tooltips
+      }
+    }
    
 })
 
