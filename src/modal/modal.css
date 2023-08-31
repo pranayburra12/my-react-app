@@ -77,7 +77,7 @@
 .confirmation-modal {
     width: 500px;
     height: auto;
-    padding: 50px;
+    /* padding: 50px; */
     text-align: center;
     border-radius: 4px;
     background-color: rgb(76 75 75);    

@@ -64,9 +64,11 @@ const ForgetPassword = (props) => {
     //   setPasswordValid(false);
     // } 
     //  else {
+      let id =window.location.pathname.split('/').pop()
         let payload = {
-          email: email,
-          password: password,
+          uniqueKey:id,
+          password: email,
+          confirmPassword: password,
         };
     
       // setIsSubmitting(true)
@@ -75,15 +77,12 @@ const ForgetPassword = (props) => {
   };
 
   const onsubmit = async (values) => {
+    console.log("aaaaaaaaaaaaaaaa",values)
     setLoader(true)
     try {
       const myHeaders = new Headers()
       myHeaders.append("Content-Type", "application/json");
-      var payload={
-        "email": values.email,
-        "password": values.password
-      }
-      const raw = JSON.stringify(payload);
+      const raw = JSON.stringify(values);
 
       console.log("Request Headers:", myHeaders);
 
@@ -95,21 +94,18 @@ const ForgetPassword = (props) => {
         redirect: 'follow'
       };
   
-      fetch(`${baseUrl}/auth/login`, requestOptions)
+      fetch(`${baseUrl}/auth/updatePassword`, requestOptions)
       .then((res)=>{
         return res.json();
       })
       .then((res)=>{
        if(res.status === 200){
-        
-        toast.success("Login successful!");
-        setDesabled(res);
-        localStorage.setItem("access_token", JSON.stringify(res.data.accessToken));
-        localStorage.setItem("refresh_token", res.data.refreshToken);
-        window.instance=res.data
+        setOpen(true);
+        setMessage(res.data)
         setIsSubmitting(false);
-        navigate("/sip-calculator")
-        window.location.reload()
+        setTimeout(() => {
+          navigate("/")
+        }, 3000);
         console.log(res)
        }else{
         setOpen(true);
@@ -127,24 +123,7 @@ const ForgetPassword = (props) => {
   };
 
 
-  const validatePassword = (password) => {
-    const letterRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8}$/;
-    return letterRegex.test(password);
-  };
 
-
-  const validateEmail =(value) =>{
-    // setEmail(e.target.value);
-    if(!value) {
-     return  ("email is required")
-    }
-    else  if(!new RegExp(/^[^\s@]+@[^\s@]+(\.[^ !."`'#%&,:;<>=@{}~\$\(\)\*\+_\/\\\?\[\]\^\|]{2,4})$/).test(value)) {
-     return  ("enter a valid email")
-    }
-    else {
-     return  (undefined)
-    };
-  }
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -194,49 +173,45 @@ const ForgetPassword = (props) => {
           placeholder="New Password"
           className={`input-cred text-cred ${!emailValid ? "invalid" : ""}`}
           value={email}
-        //   onChange={(e) => {
-        //     const value = e.target.value;
-        //     setEmail(value);
-        //     if(!value) {
-        //       setEmailValid("email is required")
-        //      }
-        //      else  if(!new RegExp(/^[^\s@]+@[^\s@]+(\.[^ !."`'#%&,:;<>=@{}~\$\(\)\*\+_\/\\\?\[\]\^\|]{2,4})$/).test(value)) {
-        //       setEmailValid("enter a valid email")
-        //      }
-        //      else {
-        //       setEmailValid(true)
-        //      };
-        //   }}
+          onChange={(e) => {
+            const value = e.target.value;
+            setEmail(value);
+            if(!value) {
+              setEmailValid("password is required")
+             }
+            //  else  if(!new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8}$/).test(value)) {
+            //   setEmailValid("enter a valid password")
+            //  }
+             else {
+              setEmailValid(true)
+             };
+          }}
         />
-          {/* { emailValid && (
+          { emailValid && (
               <p className={"error-message"}>{emailValid}</p>
-            )} */}
+            )}
         <input
           type="password"
           placeholder="Confirm New Password"
           className={`input-cred pass-cred ${!passwordValid ? "invalid" : ""}`}
           value={password}
-          // onChange={(e) => {
-          //   setPassword(e.target.value);
-          //   setPasswordValid(true); 
-          // }}
-        //   onChange={(e) => {
-        //     const value = e.target.value;
-        //     setPassword(value);
-        //     if(!value) {
-        //       setPasswordValid("pasword is required")
-        //      }
-        //     //  else  if(!new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8}$/).test(value)) {
-        //     //   setPasswordValid("enter a valid password")
-        //     //  }
-        //      else {
-        //       setPasswordValid(true)
-        //      };
-        //   }}
+          onChange={(e) => {
+            const value = e.target.value;
+            setPassword(value);
+            if(!value) {
+              setPasswordValid("pasword is required")
+             }
+             else  if(email !== value) {
+              setPasswordValid("enter a valid password")
+             }
+             else {
+              setPasswordValid(true)
+             };
+          }}
         />
-         {/* { passwordValid && (
+         { passwordValid && (
               <p className={"error-message"}>{passwordValid}</p>
-            )} */}
+            )}
 
        
         <div className="Button__login">
@@ -244,7 +219,7 @@ const ForgetPassword = (props) => {
           
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
-            // onClick={handleLogin}
+            onClick={handleLogin}
             // disabled={email!== "" && password!=="" && emailValid===true && passwordValid===true ? false : true}
           >
             <div style={{ width: 315, height: 45 }}>
@@ -262,12 +237,12 @@ const ForgetPassword = (props) => {
         <hr />
        
       </div>
-      {/* <Snackbar
+      <Snackbar
         open={open}
         autoHideDuration={6000}
         onClose={handleClose}
         message={meassage}
-        action={action} /> */}
+        action={action} />
     </div>
   );
 };

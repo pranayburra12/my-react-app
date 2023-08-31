@@ -20,6 +20,7 @@ import {
 import Snackbar from '@mui/material/Snackbar';
 import {  IconButton } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
+import ModalComponent from "../../modal/modal";
 
 const Login = (props) => {
 
@@ -39,6 +40,8 @@ const Login = (props) => {
 
   const [desabled,setDesabled] = useState({})
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const [show,setShow] = useState(false)
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -169,6 +172,55 @@ const Login = (props) => {
       </IconButton>
     </React.Fragment>
   )
+
+  const forgotPassword = (value) =>{
+
+    setShow(false)
+
+    setLoader(true)
+    try {
+      const myHeaders = new Headers()
+      myHeaders.append("Content-Type", "application/json");
+      var payload={
+        "email": value,
+      }
+      const raw = JSON.stringify(payload);
+
+      console.log("Request Headers:", myHeaders);
+
+  
+      const requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+      };
+  
+      fetch(`${baseUrl}/auth/forgotPassword`, requestOptions)
+      .then((res)=>{
+        return res.json();
+      })
+      .then((res)=>{
+        setOpen(true);
+       if(res.status === 200){
+        setMessage(res.data)
+        setIsSubmitting(false);
+        console.log(res)
+       }else{
+        // setOpen(true);
+        setMessage(res.message)
+        setIsSubmitting(false);
+       }
+       setLoader(false)
+      })
+
+    } catch (error) {
+      console.log("Error:", error);
+      // setIsSubmitting(false)
+      toast.error("Login failed. Please check your credentials.");
+    }
+
+  }
   
 
   return (
@@ -254,7 +306,11 @@ const Login = (props) => {
           <input type="checkbox" name="Remember Me" id="Remember-Me" />
           <label htmlFor="Remember-Me"></label>
           <h4>Remember Me</h4>
-          <a href="/forget-password">Forget Password ?</a>
+          <a 
+          // href="/forget-password" 
+          onClick={()=>{setShow(true)}}
+          style={{cursor:"pointer"}}
+          >Forget Password ?</a>
         </div>
         <div className="Button__login">
           <button
@@ -287,6 +343,17 @@ const Login = (props) => {
         onClose={handleClose}
         message={meassage}
         action={action} />
+
+      <ModalComponent 
+        show={show}
+        // forgotPassword = {()=>{forgotPassword()}}
+        forgotFlow = {true}
+        cancel={"cancel"}
+        save={"Submit"}
+        onHide={() => setShow(false)}
+        onSubmit={forgotPassword}
+      />
+      
     </div>
   );
 };

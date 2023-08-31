@@ -13,7 +13,7 @@ function Registration() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/sign-up" element={<SignUp />} />
-        <Route path="/forget-password" element={<ForgetPassword />} />
+        <Route path="/forgotPassword/:token" element={<ForgetPassword />} />
       </Routes>
       </div>
     </div>
