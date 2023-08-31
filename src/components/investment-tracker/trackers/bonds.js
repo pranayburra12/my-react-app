@@ -29,6 +29,7 @@ const Bonds = (props) => {
     const [viewBonds,setViewBonds]=useState(false);
     const [allBonds,setAllBonds] = useState()
 
+    const [editFlow,setEditFlow] = useState()
 
     const [validationMessage, setValidationMessage] = useState('');
     const [isAddStockValid, setIsAddStockValid] = useState(true);
@@ -110,7 +111,10 @@ const Bonds = (props) => {
 
       }else{
 
-      
+        if(editFlow){
+          EditBond()
+          setLoader(false)
+        }else{      
         setShow(false)
         setLoader(false)
           var myHeaders = new Headers();
@@ -138,16 +142,20 @@ const Bonds = (props) => {
             })
             .catch(error => console.log('error', error));
       }
+      }
     }
-    const remove = (value) =>{
 
+    const EditBond = () =>{
+
+        setShow(false)
         var myHeaders = new Headers();
           myHeaders.append("Authorization",`Bearer ${JSON.parse(localStorage.getItem('access_token'))}` );
           myHeaders.append("Content-Type", "application/json");
     
           var raw = JSON.stringify({
-            removeBond: value,
-            savingsAmount:addBond
+            bondName: addBond,
+            bondType:bondType,
+            totalAmount: investedAmount
           });
     
           var requestOptions = {
@@ -157,16 +165,27 @@ const Bonds = (props) => {
             redirect: 'follow'
           };
     
-          fetch(`${baseUrl}/saving/removeBond`, requestOptions)
+          fetch(`${baseUrl}/bond/editBond`, requestOptions)
             .then(response => response.json())
             .then(result => {console.log(result)
-                totalBonds()
+              setViewBonds(false)
+              setLoader(true)
+              setViewBonds(false)
+              setAddBond("")
+              setInvestedAmount("")
+              setBondtype("")
+              setRemoveBind("")
+              totalBonds()
             })
             .catch(error => console.log('error', error));
       }
 
     const goBack=()=>{
       setViewBonds(false)
+      setAddBond("")
+      setInvestedAmount("")
+      setBondtype("")
+      setEditFlow(false)
     }
 
     
@@ -233,7 +252,7 @@ const Bonds = (props) => {
                    </div>
                    {!isRemoveStockValid &&
                      <span style={{ color: 'red' }}>{validationMessage}</span>}
-                   <div><Button color='success' variant="outlined" onClick={()=>{setShow(true)}}>Add new bond</Button></div>
+                   <div><Button color='success' variant="outlined" onClick={()=>{setShow(true)}}>{  "Add new bond" }</Button></div>
                  </div>
                </div></>
            :
@@ -241,7 +260,13 @@ const Bonds = (props) => {
                <Button onClick={goBack} > Go Back</Button>
              <div className='flex flex-col gap-2' >
              {allBonds?.map(each=>{
-               return <div className='text-slate-200 flex justify-between w-full rounded-sm h-16 items-center p-3 bg-[#2B2B2B] gap-2 hover:cursor-pointer' onClick={()=>{}}><span>{each.bondName}</span><span className='text-[#0BD19D]'>₹{each.currentTotalValue.toFixed(1)    }</span></div>
+               return <div className='text-slate-200 flex justify-between w-full rounded-sm h-16 items-center p-3 bg-[#2B2B2B] gap-2 hover:cursor-pointer' onClick={()=>{setAddBond(each?.bondName)
+                setInvestedAmount(each?.totalInvestedAmount)
+                setBondtype(each.bondType)
+                setViewBonds(false)
+                setEditFlow(true)
+              }              
+              }><span>{each.bondName}</span><span className='text-[#0BD19D]'>₹{each.currentTotalValue.toFixed(1)    }</span></div>
              })}
              </div>
              </div>
