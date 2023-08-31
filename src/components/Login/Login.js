@@ -21,6 +21,7 @@ import Snackbar from '@mui/material/Snackbar';
 import {  IconButton } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 import ModalComponent from "../../modal/modal";
+import FormDialog from "./dailog";
 
 const Login = (props) => {
 
@@ -136,19 +137,6 @@ const Login = (props) => {
   };
 
 
-  const validateEmail =(value) =>{
-    // setEmail(e.target.value);
-    if(!value) {
-     return  ("email is required")
-    }
-    else  if(!new RegExp(/^[^\s@]+@[^\s@]+(\.[^ !."`'#%&,:;<>=@{}~\$\(\)\*\+_\/\\\?\[\]\^\|]{2,4})$/).test(value)) {
-     return  ("enter a valid email")
-    }
-    else {
-     return  (undefined)
-    };
-  }
-
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
@@ -221,7 +209,10 @@ const Login = (props) => {
     }
 
   }
-  
+
+  const handleCloseDailog = () => {
+    setShow(false);
+  };
 
   return (
     <div className="Login__container h-full">
@@ -346,7 +337,7 @@ const Login = (props) => {
         
         />
 
-      <ModalComponent 
+      {/* <ModalComponent 
         show={show}
         // forgotPassword = {()=>{forgotPassword()}}
         forgotFlow = {true}
@@ -354,6 +345,11 @@ const Login = (props) => {
         save={"Submit"}
         onHide={() => setShow(false)}
         onSubmit={forgotPassword}
+      /> */}
+      <FormDialog
+          open={show}
+          handleClose={handleCloseDailog}
+          handleSave = {forgotPassword}
       />
       
     </div>
