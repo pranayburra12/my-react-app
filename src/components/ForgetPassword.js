@@ -1,10 +1,6 @@
 import React, { useState } from "react";
 import "./ForgetPassword.css";
 import Logo from "../assets/LogoFindemy.svg";
-// import GoogleLogo from "../../assets/Google.svg";
-// import FacebookLogo from "../../assets/Facebook.svg";
-// import LinkedinLogo from "../../assets/Linkedin.svg";
-// import Linehori from "../../assets/linehorizontal.svg";
 
 import Lottie from "react-lottie";
 import ButtonLottieAnimation from "../utils/Button.json";
@@ -58,22 +54,13 @@ const ForgetPassword = (props) => {
   };
 
   const handleLogin = () => {
-    // const  validemail= validateEmail(email)
-    // if (!validemail && !validatePassword(password) )  {
-    //   setEmailValid(false);
-    //   setPasswordValid(false);
-    // } 
-    //  else {
       let id =window.location.pathname.split('/').pop()
         let payload = {
           uniqueKey:id,
           password: email,
           confirmPassword: password,
         };
-    
-      // setIsSubmitting(true)
       onsubmit(payload);
-    // }
   };
 
   const onsubmit = async (values) => {
@@ -105,7 +92,7 @@ const ForgetPassword = (props) => {
         setIsSubmitting(false);
         setTimeout(() => {
           navigate("/")
-        }, 3000);
+        }, 1000);
         console.log(res)
        }else{
         setOpen(true);
@@ -169,7 +156,7 @@ const ForgetPassword = (props) => {
        
         <hr />
         <input
-          type="email"
+          type="password"
           placeholder="New Password"
           className={`input-cred text-cred ${!emailValid ? "invalid" : ""}`}
           value={email}
