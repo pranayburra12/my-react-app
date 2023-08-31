@@ -211,10 +211,10 @@ const Gold = (props) => {
           {/* <button className="text-xs mt-5 p-3 ml-20 rounded-xl" style={{ borderColor: "#00838f", color: "#00838f", border: "2px solid" }} onClick={()=>{}} >Add</button> */}
 
           <Button 
-          variant='outlined' color='success'
+           color='success'
           onClick={()=>{setShow(true)}}
           
-          variant='contained'
+          variant='outlined'
           disabled={!addGold ||!valueofIntrest}
         > Add</Button>
 
