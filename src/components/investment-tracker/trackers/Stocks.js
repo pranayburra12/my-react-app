@@ -381,11 +381,14 @@ myHeaders.append("Authorization", `Bearer ${JSON.parse(localStorage.getItem('acc
     </div>:
       <div className="text-white min-h-screen" ref={viewRef}>
     <Button onClick={goBack} > Go Back</Button>
-   <div className='flex flex-col gap-2' >
+   {allStocks.length!==0? <div className='flex flex-col gap-2' >
    {allStocks?.map(each=>{
     return <div className='text-slate-200 flex justify-between w-full rounded-sm h-16 items-center p-3 bg-[#2B2B2B] gap-2 hover:cursor-pointer' onClick={()=>editStock(each)}><span>{each.stockName}</span><span className='text-[#0BD19D]'>₹{each.currentTotalValue.toFixed(1)    }</span></div>
    })}
-   </div>
+   </div>:
+   <div className='flex flex-col gap-2' >
+     <div className='text-slate-200 flex justify-between w-full rounded-sm h-16 items-center p-3 bg-[#2B2B2B] gap-2 hover:cursor-pointer'><span>NO RECORDS FOUND</span><span className='text-[#0BD19D]'></span></div>
+   </div> }
   </div>
   }
   </>

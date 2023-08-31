@@ -258,7 +258,7 @@ const Bonds = (props) => {
            :
            <div className="text-white min-h-screen" ref={viewRef}>
                <Button onClick={goBack} > Go Back</Button>
-             <div className='flex flex-col gap-2' >
+             {allBonds.length!==0?<div className='flex flex-col gap-2' >
              {allBonds?.map(each=>{
                return <div className='text-slate-200 flex justify-between w-full rounded-sm h-16 items-center p-3 bg-[#2B2B2B] gap-2 hover:cursor-pointer' onClick={()=>{setAddBond(each?.bondName)
                 setInvestedAmount(each?.totalInvestedAmount)
@@ -268,7 +268,8 @@ const Bonds = (props) => {
               }              
               }><span>{each.bondName}</span><span className='text-[#0BD19D]'>₹{each.currentTotalValue.toFixed(1)    }</span></div>
              })}
-             </div>
+             </div>:
+             <div className='text-slate-200 flex justify-between w-full rounded-sm h-16 items-center p-3 bg-[#2B2B2B] gap-2 hover:cursor-pointer'><span>NO RECORDS FOUND</span><span className='text-[#0BD19D]'></span></div>}
              </div>
         }
         {
