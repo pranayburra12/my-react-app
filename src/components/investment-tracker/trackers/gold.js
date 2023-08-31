@@ -106,9 +106,9 @@ const Gold = (props) => {
     myHeaders.append("Content-Type", "application/json");
 
     var raw = JSON.stringify({
-      totalAmount: addGold,
-      perGramPrice: valueofIntrest,
-      numberOfGrams: addGold/valueofIntrest
+      totalAmount: Number(addGold),
+      perGramPrice: Number(valueofIntrest),
+      numberOfGrams:(addGold/valueofIntrest)
     });
 
     var requestOptions = {
