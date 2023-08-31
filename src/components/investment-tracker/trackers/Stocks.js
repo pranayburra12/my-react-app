@@ -19,7 +19,7 @@ const useStyles = makeStyles({
 });
 const baseUrl='http://3.237.3.113:3000';
 
-export default function Stocks({tracker}) {
+export default function Stocks({tracker,getDashboard}) {
   const classes = useStyles();
   const navigate = useNavigate();
   const viewRef=useRef();
@@ -93,6 +93,7 @@ export default function Stocks({tracker}) {
         .then(result => {console.log(result)
           setViewStocks(true)
           scrollToResults();
+          getDashboard();
         setLoader(false)
         })
         .catch(error => console.log('error', error));
@@ -206,6 +207,7 @@ myHeaders.append("Authorization", `Bearer ${JSON.parse(localStorage.getItem('acc
         .then(result => {console.log(result)
           setViewStocks(true)
           scrollToResults();
+          getDashboard();
         setLoader(false)
         })
         .catch(error => console.log('error', error));
@@ -346,7 +348,7 @@ myHeaders.append("Authorization", `Bearer ${JSON.parse(localStorage.getItem('acc
           name="invested-value"
           // margin="dense"
           disabled={false}
-
+          
           type='number'
           variant="outlined"
                 sx={{color:'white',  

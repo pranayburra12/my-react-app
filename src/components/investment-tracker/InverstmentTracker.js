@@ -34,6 +34,7 @@ const InverstmentTracker = () => {
     const [loader,setLoader]=useState(false);
     const [classnameValue,setclassnameValue] = useState(false)
     const [total,setTotal]=useState(0);
+    const [currentTotal,setCurrentTotal]=useState(0);
 
     const [listOfTrackersData, setListOfTrackers] = useState()
 
@@ -73,12 +74,15 @@ const InverstmentTracker = () => {
                 setListOfTrackers(result.data)
                 console.log(result.data)
                 let t=0;
+                let c=0;
                 result.data?.forEach(element => {
-                    t=t+Number(element.currentValues)
-
+                    c=c+Number(element.currentValues)
+                    t=t+Number(element.values)
                 });
                 console.log(t)
                 setTotal(t)
+                let p=((c-t)/t)*100;
+                setCurrentTotal(p)
                 setLoader(true)
               }
           })
@@ -90,7 +94,9 @@ const InverstmentTracker = () => {
     const renderTrackerDetail = (tracker) => {
         // setAddTracker(false)
         switch (tracker?.label) {
-            case 'Stocks': return <Stocks  tracker={changeTracker}/>
+            case 'Stocks': return <Stocks  tracker={changeTracker}
+            getDashboard = {()=>{getAllTrackers()}}
+            />
             case 'Bonds': return <Bonds
                 subHEading={"Edit/Manage"}
                 heading={"Bonds"}
@@ -114,14 +120,15 @@ const InverstmentTracker = () => {
             />
             case 'PPF': return <PPF
                 subHEading={"Edit/Manage"}
-                heading={"Public Provide Fund"}
+                heading={"PPF"}
                 currentValue={"PPF Value"}
                 addSaving={"Invested Amount"}
                 removeSaving={"Remove Founds"}
                 getDashboard = {()=>{getAllTrackers()}}
             />
 
-            case 'Mutual Funds': return <MutualFunds  tracker={changeTracker}/>
+            case 'Mutual Funds': return <MutualFunds  tracker={changeTracker}
+            getDashboard = {()=>{getAllTrackers()}}/>
             case `${tracker?.label}`: return <CustomTracker
                 subHEading={"Edit/Manage"}
                 heading={"Custom Tracker Name"}
@@ -131,6 +138,7 @@ const InverstmentTracker = () => {
                 changeTracker={tracker}
                 navugateToOldView={()=>{changeTooldView()}}
                 getDashboard = {()=>{getAllTrackers()}}
+                
             />
             case "newTracker":
             default:
@@ -181,8 +189,8 @@ const InverstmentTracker = () => {
                     <div className="float-right">Net Worth</div>
                         <div className="flex gap-3 items-center ">
                             <div className="text-2xl md:text-4xl font-semibold p-0 md:pt-8">₹ {total?.toFixed(2)}</div>
-                            <div className="bg-green-700 rounded-sm p-0.25 flex m-0 md:mt-6">
-                                <div className="inline text-green-200 text-xs md:text-sm">11.5%</div>
+                            <div className={currentTotal>=0?"bg-green-700 text-green-200 rounded-sm p-0.5 flex m-0 md:mt-6":"bg-red-700 text-red-200 rounded-sm p-0.5 flex m-0 md:mt-6"}>
+                                <div className="inline text-xs md:text-sm">{currentTotal?.toFixed(2)}%</div>
                                 <img className="inline" src={group} />
                             </div>
                         </div>
@@ -204,8 +212,8 @@ const InverstmentTracker = () => {
                                             <div className="text-[#707070]">{item.name}</div>
                                             <div className="text-2xl">{Number(item?.currentValues)?.toFixed(1)}</div>
                                         </div>
-                                        <div className="flex bg-green-700 rounded p-0.25 break-all mr-8">
-                                            <span className="text-green-200 text-xs">{Math.abs(item?.percentage)?.toFixed(1)}</span>
+                                        <div className={item?.percentage?.toFixed(1)>=0?"flex bg-green-700 rounded p-0.5 break-all mr-8":"flex bg-red-700 rounded p-0.5 break-all mr-8"}>
+                                            <span className={item?.percentage?.toFixed(1)>=0?"text-green-200 text-xs":"text-red-200 text-xs"}>{(item?.percentage)?.toFixed(1)}</span>
                                             <img src={group} />
                                         </div>
                                      </div>

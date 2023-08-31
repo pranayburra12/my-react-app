@@ -11,19 +11,22 @@ import rightarrow from "../../assets/Group 1260.svg"
 
 const CibilScore = () => {
     const partners=[{
-        name:'upstocks',
+        name:'Credit Mantri',
         bwLogo:credit,
-        hover:''
+        hover:'',
+        navigatedUrl:'https://www.creditmantri.com/credit-score/'
     },
     {
-        name:'Kite',
+        name:'Bajaj Finserv',
         bwLogo:bajaj,
-        hover:''
+        hover:'',
+        navigatedUrl:'https://www.bajajfinserv.in/check-free-cibil-score'
     },
     {
-        name:'AngelOne',
+        name:'bankbazaar',
         bwLogo:bb,
-        hover:''
+        hover:'',
+        navigatedUrl:'https://www.bankbazaar.com/cibil/cibil-credit-report.html'
     },
 
 ]
@@ -48,7 +51,11 @@ const CibilScore = () => {
                 partners.map((each)=>{
                     return (
                             <div className="text-lg p-4 md:pt-2 md:pb-5 border-b-[1px]  flex items-center  justify-between cursor-pointer" style={{borderColor: "#A5A5A5"}}>
-                                <span className="w-16 md:w-auto" ><img src={each.bwLogo} /></span>
+                                <span className="w-16 md:w-auto" >
+                                    <a href={each.navigatedUrl} target="_blank">
+                                        <img src={each.bwLogo} />
+                                    </a>
+                                </span>
                                 <span ><img  src={rightarrow} /></span>
                             </div>
                     )

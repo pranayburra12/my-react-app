@@ -16,7 +16,7 @@ const useStyles = makeStyles({
     color:'white'
   }
 });
-export default function MutualFunds({tracker}) {
+export default function MutualFunds({tracker, getDashboard }) {
   const classes = useStyles();
   const navigate = useNavigate();
   const viewRef=useRef();
@@ -96,7 +96,9 @@ export default function MutualFunds({tracker}) {
         .then(result => {console.log(result)
         setViewSchemes(true)
         scrollToResults();
+        getDashboard()
         setLoader(false)
+        
         })
         .catch(error => console.log('error', error));
       
@@ -203,6 +205,7 @@ const editScheme=(each)=>{
           setViewSchemes(true)
           scrollToResults();
         setLoader(false)
+        getDashboard();
         })
         .catch(error => console.log('error', error));
 

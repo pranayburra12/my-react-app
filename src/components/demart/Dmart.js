@@ -13,23 +13,28 @@ const Dmart = () => {
     const partners=[{
         name:'upstocks',
         bwLogo:upstock,
-        hover:''
+        hover:'',
+        navigatedUrl:'https://upstox.com/open-demat-account/v2/?f=5RAYEY'
     },
     {
         name:'Kite',
-        bwLogo:upstock1,
-        hover:''
+        bwLogo:upstock3,
+        hover:'',
+        navigatedUrl:'https://zerodha.com/open-account/'
     },
     {
         name:'AngelOne',
         bwLogo:upstock2,
-        hover:''
+        hover:'',
+        navigatedUrl:'https://www.angelone.in/sem/open-demat-account'
     },
     {
         name:'Motilal',
-        bwLogo:upstock3,
-        hover:''
-    }
+        bwLogo:upstock1,
+        hover:'',
+        navigatedUrl:'https://www.motilaloswal.com/'
+    },
+    
 
 ]
     return (
@@ -54,7 +59,11 @@ const Dmart = () => {
                 partners.map((each)=>{
                     return (
                         <div className="text-lg p-4 md:pt-2 md:pb-5  border-b-[1px]  flex items-center  justify-between cursor-pointer" style={{borderColor: "#A5A5A5"}}>
-                            <span className="w-16 md:w-auto"><img src={each.bwLogo} /></span>
+                            <span className="w-16 md:w-auto">
+                                <a href={each.navigatedUrl} target="_blank">
+                                <img src={each.bwLogo} />
+                                </a>
+                                </span>
                             <span><img src={rightarrow} /></span>
                         </div>
                     )

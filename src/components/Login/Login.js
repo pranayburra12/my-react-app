@@ -238,8 +238,8 @@ const Login = (props) => {
       <div className="Login__second__section">
         <h1>Login</h1>
         <h5>See your growth and get consulting support!</h5>
-        <h5>Sign Up With </h5>
-        <div className="login__option__logo">
+        {/* <h5>Sign Up With </h5> */}
+        {/* <div className="login__option__logo">
           <a href="https://www.google.com/" target="_blank">
             <img src={GoogleLogo} alt="googleLogo" />
           </a>
@@ -251,7 +251,7 @@ const Login = (props) => {
           <a href="https://linkedin.com" target="_blank">
             <img src={LinkedinLogo} alt="LinkedinLogo" />
           </a>
-        </div>
+        </div> */}
         <hr />
         <input
           type="email"
@@ -342,7 +342,9 @@ const Login = (props) => {
         autoHideDuration={6000}
         onClose={handleClose}
         message={meassage}
-        action={action} />
+        action={action}
+        
+        />
 
       <ModalComponent 
         show={show}

@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import TextField from '@mui/material/TextField';
 import { Backdrop, CircularProgress } from "@mui/material";
+import {Button} from "@mui/material";
 const NewTracker = (props) => {
 
   const [trackerName, setTrackerName] = useState("")
@@ -14,6 +15,10 @@ const NewTracker = (props) => {
 
 
   const submitValues = () => {
+    if(!trackerName||!investedAmount||!valueTimeofInvestment||!currentValue){
+
+    }
+    else{
     setLoader(false)
     var myHeaders = new Headers();
     myHeaders.append("Authorization", `Bearer ${JSON.parse(localStorage.getItem('access_token'))}`);
@@ -42,6 +47,7 @@ const NewTracker = (props) => {
       })
       .catch(error => console.log('error', error));
   }
+}
 
 
   const renderTrackerDetail = (tracker) => {
@@ -106,7 +112,7 @@ const NewTracker = (props) => {
               value={investedAmount}
               placeholder="Invested Amount"
               disabled={false}
-
+              type="number"
               variant='outlined'
 
               sx={{
@@ -141,7 +147,7 @@ const NewTracker = (props) => {
               value={valueTimeofInvestment}
               placeholder="Value Time of Investment"
               disabled={false}
-
+              type="number"
               variant='outlined'
 
               sx={{
@@ -176,7 +182,7 @@ const NewTracker = (props) => {
               value={currentValue}
               placeholder="Current Value"
               disabled={false}
-
+type="number"
               variant='outlined'
 
               sx={{
@@ -203,9 +209,11 @@ const NewTracker = (props) => {
               onChange={(e) => setcurrentValue(e.target.value)}
             />
           </div>
-          <div>
-            <button style={{ color: "#00838f" }} onClick={props.navugateToOldView}>Back</button>
-            <button className="text-xs mt-5 p-3 ml-20 rounded-xl" style={{ borderColor: "#00838f", color: "#00838f", border: "2px solid" }} onClick={submitValues} >Add new Tracker</button></div>
+          <div className="flex justify-between">
+          <Button onClick={props.navugateToOldView} >Back</Button>
+            {/* <button style={{ color: "#00838f" }} >Back</button> */}
+            <Button onClick={submitValues} color='success' variant='contained' >Add Tracker</Button>
+            {/* <button className="text-xs mt-5 p-3 ml-20 rounded-xl" style={{ borderColor: "#00838f", color: "#00838f", border: "2px solid" }} onClick={submitValues} >Add new Tracker</button>*/}</div> 
         </div>
         :
         <div >

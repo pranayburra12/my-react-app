@@ -167,38 +167,36 @@ const Gold = (props) => {
       <div class="text-gray-500  float-left text-4xl pt-1 pb-7 pt-7" style={{ color: "#FEC008" }}>{props.heading}</div>
     </div><div className="text-center  pt-5 md: p-0">
         <div className='w-full flex flex-col gap-5'>
-          <div className="flex   rounded-3xl   border-white rounded-10 h-auto items-baseline  bg-black mb-12" style={{ background: "#2B2B2B" }}>
+          <div className="text-slate-300 flex justify-between w-full rounded-lg p-3 bg-[#2B2B2B]" style={{ background: "#2B2B2B" }}>
+           <span>Invested Gold</span>
+           <span className='text-[#0BD19D] font-bold text-xl'>₹ {currentGold ? currentGold : "0"}</span> </div>
+
+
+          {/* <hr className="sm:felx-none" /> */}
+          <div className="flex justify-between  rounded-xl rounded-10 h-16  bg-[#2B2B2B]">
             <input
-              className=" focus:outline-none w-3/4 rounded-3xl border-none p-6 border-2 border-solid border-white rounded-10 h-15 text-white bg-black"
-              style={{ color: "#ffff", background: "#2B2B2B" }}
-              value={"Invested Gold"}
-              disabled={true}
-              onChange={handleInputChange} />
-            <div
-              className="  pl-2.5 text-green-500"
-            >{`₹ ${currentGold}`}</div>
-          </div>
-          <hr className="sm:felx-none" />
-          <div className="flex justify-between  rounded-3xl  border-2 border-solid border-white rounded-10 h-16  bg-black ">
-            <input
-              className=" focus:outline-none w-3/4 rounded-3xl border-none p-6 border-2 border-solid border-white rounded-10 h-15  bg-black"
+              className="focus:outline-none w-3/4 rounded-2xl border-none p-6 rounded-10 h-15  bg-[#2B2B2B]"
               style={{ color: "#ffff" }}
               type="number"
+              min="0"
               id="addStockInput"
               placeholder="Invested Amount"
               value={addGold}
-              onChange={(e)=>{setAddGold(e.target.value)}} />
+              onChange={(e)=>{setAddGold(e.target.value)}}
+              onwheel="return false;" />
+               
             {/* <img
               className="mr-8 cursor-pointer pl-2.5"
               src={rightarrow}
               alt="Right Arrow"
               onClick={() => { addSavings(addSaving); } } /> */}
           </div>
-          <div className="flex justify-between  rounded-3xl  border-2 border-solid border-white rounded-10 h-16  bg-black ">
+          <div className="flex justify-between  rounded-xl rounded-10 h-16  bg-[#2B2B2B]">
             <input
-              className=" focus:outline-none w-3/4 rounded-3xl border-none p-6 border-2 border-solid border-white rounded-10 h-15  bg-black"
+              className="focus:outline-none w-3/4 rounded-2xl border-none p-6 rounded-10 h-15  bg-[#2B2B2B]"
               style={{ color: "#ffff" }}
               type="number"
+              min="0"
               id="addStockInput"
               placeholder="Value at the time of investment"
               value={valueofIntrest}
@@ -215,13 +213,16 @@ const Gold = (props) => {
           <Button 
           variant='outlined' color='success'
           onClick={()=>{setShow(true)}}
+          
+          variant='contained'
+          disabled={!addGold ||!valueofIntrest}
         > Add</Button>
 
           {!isAddStockValid &&
             <span style={{ color: 'red' }}>{validationMessage}</span>}
-          <div className="flex justify-between  rounded-3xl  border-2 border-solid border-white rounded-10 h-16  bg-black mt-10">
+          <div className="flex justify-between  rounded-xl rounded-10 h-16  bg-[#2B2B2B]">
             <input
-              className=" focus:outline-none w-3/4 rounded-3xl border-none p-6 border-2 border-solid border-white rounded-10 h-15  bg-black"
+              className="focus:outline-none w-3/4 rounded-3xl border-none p-6 rounded-10 h-15  bg-[#2B2B2B]"
               style={{ color: "#ffff" }}
               type="number"
               placeholder="Remove Gold"
