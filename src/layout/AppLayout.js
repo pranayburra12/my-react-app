@@ -12,7 +12,7 @@ import ExpenceMangement from '../components/expence-managemnet/ExpenceMangement'
 import InverstmentTracker from '../components/investment-tracker/InverstmentTracker';
 import Sipcalculater from '../components/sip-calculater/SipCalcuater';
 import Header from './header';
-
+// import ForgetPassword from '../components/ForgetPassword'
 function AppLayout() {
   const navigate = useNavigate();
 
@@ -35,6 +35,7 @@ function AppLayout() {
         <Route path="/expence-management" element={<ExpenceMangement />} />
         <Route path="/inverstment-tracker" element={<InverstmentTracker />} />
         <Route path="/sip-calculator" element={<Sipcalculater />} />
+        {/* <Route path="/forget-password" element={<ForgetPassword />} /> */}
       </Routes>
       </div>
     </div>

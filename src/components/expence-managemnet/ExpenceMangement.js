@@ -318,17 +318,17 @@ const ExpenceMangement =()=>{
                 label:['Income'],
                 data:[
                   result.data[0]?.monthlyIncomeArray?.filter(each=>each.month==1)[0]?.monthly_income,
-                result.data[0]?.monthlyIncomeArray?.filter(each=>each.month==2)[0]?.monthly_income,
-                result.data[0]?.monthlyIncomeArray?.filter(each=>each.month==3)[0]?.monthly_income,
-                result.data[0]?.monthlyIncomeArray?.filter(each=>each.month==4)[0]?.monthly_income,
-                result.data[0]?.monthlyIncomeArray?.filter(each=>each.month==5)[0]?.monthly_income,
-                result.data[0]?.monthlyIncomeArray?.filter(each=>each.month==6)[0]?.monthly_income,
-                result.data[0]?.monthlyIncomeArray?.filter(each=>each.month==7)[0]?.monthly_income,
-                result.data[0]?.monthlyIncomeArray?.filter(each=>each.month==8)[0]?.monthly_income,
-                result.data[0]?.monthlyIncomeArray?.filter(each=>each.month==9)[0]?.monthly_income,
-                result.data[0]?.monthlyIncomeArray?.filter(each=>each.month==10)[0]?.monthly_income,
-                result.data[0]?.monthlyIncomeArray?.filter(each=>each.month==11)[0]?.monthly_income,
-                result.data[0]?.monthlyIncomeArray?.filter(each=>each.month==12)[0]?.monthly_income
+                  result.data[0]?.monthlyIncomeArray?.filter(each=>each.month==2)[0]?.monthly_income,
+                  result.data[0]?.monthlyIncomeArray?.filter(each=>each.month==3)[0]?.monthly_income,
+                  result.data[0]?.monthlyIncomeArray?.filter(each=>each.month==4)[0]?.monthly_income,
+                  result.data[0]?.monthlyIncomeArray?.filter(each=>each.month==5)[0]?.monthly_income,
+                  result.data[0]?.monthlyIncomeArray?.filter(each=>each.month==6)[0]?.monthly_income,
+                  result.data[0]?.monthlyIncomeArray?.filter(each=>each.month==7)[0]?.monthly_income,
+                  result.data[0]?.monthlyIncomeArray?.filter(each=>each.month==8)[0]?.monthly_income,
+                  result.data[0]?.monthlyIncomeArray?.filter(each=>each.month==9)[0]?.monthly_income,
+                  result.data[0]?.monthlyIncomeArray?.filter(each=>each.month==10)[0]?.monthly_income,
+                  result.data[0]?.monthlyIncomeArray?.filter(each=>each.month==11)[0]?.monthly_income,
+                  result.data[0]?.monthlyIncomeArray?.filter(each=>each.month==12)[0]?.monthly_income
                 ],
                 // cutout:'90%'
                 backgroundColor:'#0BD19D',

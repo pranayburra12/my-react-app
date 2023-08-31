@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import "./Login.css";
-import Logo from "../../assets/LogoFindemy.svg";
-import GoogleLogo from "../../assets/Google.svg";
-import FacebookLogo from "../../assets/Facebook.svg";
-import LinkedinLogo from "../../assets/Linkedin.svg";
-import Linehori from "../../assets/linehorizontal.svg";
+import "./ForgetPassword.css";
+import Logo from "../assets/LogoFindemy.svg";
+// import GoogleLogo from "../../assets/Google.svg";
+// import FacebookLogo from "../../assets/Facebook.svg";
+// import LinkedinLogo from "../../assets/Linkedin.svg";
+// import Linehori from "../../assets/linehorizontal.svg";
 
 import Lottie from "react-lottie";
-import ButtonLottieAnimation from "../../utils/Button.json";
+import ButtonLottieAnimation from "../utils/Button.json";
 import { useNavigate } from "react-router-dom";
 
 import { toast } from 'react-toastify';
@@ -21,7 +21,7 @@ import Snackbar from '@mui/material/Snackbar';
 import {  IconButton } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 
-const Login = (props) => {
+const ForgetPassword = (props) => {
 
 
   const baseUrl='http://3.237.3.113:3000' 
@@ -184,84 +184,68 @@ const Login = (props) => {
       <img className="logo-img-top" src={Logo} alt="" />
       {/* </div> */}
       <div className="Login__second__section">
-        <h1>Login</h1>
-        <h5>See your growth and get consulting support!</h5>
-        <h5>Sign Up With </h5>
-        <div className="login__option__logo">
-          <a href="https://www.google.com/" target="_blank">
-            <img src={GoogleLogo} alt="googleLogo" />
-          </a>
-          <img src={Linehori} alt="line" />
-          <a href="https://facebook.com" target="_blank">
-            <img src={FacebookLogo} alt="facebookLogo" />
-          </a>
-          <img src={Linehori} alt="line" />
-          <a href="https://linkedin.com" target="_blank">
-            <img src={LinkedinLogo} alt="LinkedinLogo" />
-          </a>
-        </div>
+        <h1>Forgot Password</h1>
+       
+        
+       
         <hr />
         <input
           type="email"
-          placeholder="Email"
+          placeholder="New Password"
           className={`input-cred text-cred ${!emailValid ? "invalid" : ""}`}
           value={email}
-          onChange={(e) => {
-            const value = e.target.value;
-            setEmail(value);
-            if(!value) {
-              setEmailValid("email is required")
-             }
-             else  if(!new RegExp(/^[^\s@]+@[^\s@]+(\.[^ !."`'#%&,:;<>=@{}~\$\(\)\*\+_\/\\\?\[\]\^\|]{2,4})$/).test(value)) {
-              setEmailValid("enter a valid email")
-             }
-             else {
-              setEmailValid(true)
-             };
-          }}
+        //   onChange={(e) => {
+        //     const value = e.target.value;
+        //     setEmail(value);
+        //     if(!value) {
+        //       setEmailValid("email is required")
+        //      }
+        //      else  if(!new RegExp(/^[^\s@]+@[^\s@]+(\.[^ !."`'#%&,:;<>=@{}~\$\(\)\*\+_\/\\\?\[\]\^\|]{2,4})$/).test(value)) {
+        //       setEmailValid("enter a valid email")
+        //      }
+        //      else {
+        //       setEmailValid(true)
+        //      };
+        //   }}
         />
-          { emailValid && (
+          {/* { emailValid && (
               <p className={"error-message"}>{emailValid}</p>
-            )}
+            )} */}
         <input
           type="password"
-          placeholder="Password"
+          placeholder="Confirm New Password"
           className={`input-cred pass-cred ${!passwordValid ? "invalid" : ""}`}
           value={password}
           // onChange={(e) => {
           //   setPassword(e.target.value);
           //   setPasswordValid(true); 
           // }}
-          onChange={(e) => {
-            const value = e.target.value;
-            setPassword(value);
-            if(!value) {
-              setPasswordValid("pasword is required")
-             }
-            //  else  if(!new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8}$/).test(value)) {
-            //   setPasswordValid("enter a valid password")
-            //  }
-             else {
-              setPasswordValid(true)
-             };
-          }}
+        //   onChange={(e) => {
+        //     const value = e.target.value;
+        //     setPassword(value);
+        //     if(!value) {
+        //       setPasswordValid("pasword is required")
+        //      }
+        //     //  else  if(!new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8}$/).test(value)) {
+        //     //   setPasswordValid("enter a valid password")
+        //     //  }
+        //      else {
+        //       setPasswordValid(true)
+        //      };
+        //   }}
         />
-         { passwordValid && (
+         {/* { passwordValid && (
               <p className={"error-message"}>{passwordValid}</p>
-            )}
+            )} */}
 
-        <div className="input__checkand__forgetpass">
-          <input type="checkbox" name="Remember Me" id="Remember-Me" />
-          <label htmlFor="Remember-Me"></label>
-          <h4>Remember Me</h4>
-          <a href="/forget-password">Forget Password ?</a>
-        </div>
+       
         <div className="Button__login">
           <button
+          
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
-            onClick={handleLogin}
-            disabled={email!== "" && password!=="" && emailValid===true && passwordValid===true ? false : true}
+            // onClick={handleLogin}
+            // disabled={email!== "" && password!=="" && emailValid===true && passwordValid===true ? false : true}
           >
             <div style={{ width: 315, height: 45 }}>
               <Lottie
@@ -269,26 +253,23 @@ const Login = (props) => {
                 isPaused={!isHovered}
                 isStopped={!isHovered}
               />
+             
             </div>
-            <h3>Login</h3>
+            <h3>Submit</h3>
+           
           </button>
         </div>
         <hr />
-        <a className="create__an_account" href="" onClick={()=>{ navigate("/sign-up") }}>
-          Create An Account
-        </a>
-        <footer className="Login__footer">
-          ©2023 Stock Pitch. All Rights Reserved
-        </footer>
+       
       </div>
-      <Snackbar
+      {/* <Snackbar
         open={open}
         autoHideDuration={6000}
         onClose={handleClose}
         message={meassage}
-        action={action} />
+        action={action} /> */}
     </div>
   );
 };
 
-export default Login;
+export default ForgetPassword;
