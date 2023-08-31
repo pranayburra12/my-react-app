@@ -230,15 +230,15 @@ setDoughnutData(
   const details =[
     {
     heading:"How much can I invest in a SIP?",
-    subheading:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    subheading:"The amount you can invest in a Systematic Investment Plan (SIP) depends on each individual."
     },
     {
       heading:"What is the maximum tenure of a SIP?",
-      subheading:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+      subheading:"SIPs are a flexible investment option, No limit for SIP Tenure."
     },
     {
       heading:"Are SIPs similar to mutual funds?",
-      subheading:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+      subheading:"Systematic Investment Plans (SIPs) and mutual funds are related concepts, but they are not exactly the same."
     },
 
   ]
