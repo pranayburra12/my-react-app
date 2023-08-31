@@ -106,9 +106,9 @@ const Gold = (props) => {
     myHeaders.append("Content-Type", "application/json");
 
     var raw = JSON.stringify({
-      totalAmount: addGold,
-      perGramPrice: valueofIntrest,
-      numberOfGrams: addGold/valueofIntrest
+      totalAmount: Number(addGold),
+      perGramPrice: Number(valueofIntrest),
+      numberOfGrams:(addGold/valueofIntrest)
     });
 
     var requestOptions = {
@@ -164,7 +164,7 @@ const Gold = (props) => {
       ?
       <><div className="w-96 flex flex-col">
       <div class="text-gray-500 font-manrope text-sm float-left  " style={{ color: "#969696" }}>{props.subHEading}</div>
-      <div class="text-gray-500  float-left text-4xl pt-1 pb-7 pt-7" style={{ color: "#FEC008" }}>{props.heading}</div>
+      <div class="text-gray-500  float-left text-4xl pt-1 pb-7 " style={{ color: "#FEC008" }}>{props.heading}</div>
     </div><div className="text-center  pt-5 md: p-0">
         <div className='w-full flex flex-col gap-5'>
           <div className="text-slate-300 flex justify-between w-full rounded-lg p-3 bg-[#2B2B2B]" style={{ background: "#2B2B2B" }}>
@@ -211,10 +211,10 @@ const Gold = (props) => {
           {/* <button className="text-xs mt-5 p-3 ml-20 rounded-xl" style={{ borderColor: "#00838f", color: "#00838f", border: "2px solid" }} onClick={()=>{}} >Add</button> */}
 
           <Button 
-          variant='outlined' color='success'
+           color='success'
           onClick={()=>{setShow(true)}}
           
-          variant='contained'
+          variant='outlined'
           disabled={!addGold ||!valueofIntrest}
         > Add</Button>
 
