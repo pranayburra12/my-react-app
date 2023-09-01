@@ -228,7 +228,7 @@ const Gold = (props) => {
     </div>
           <div className="text-slate-300 flex justify-between w-full rounded-lg p-3 bg-[#2B2B2B]" style={{ background: "#2B2B2B" }}>
            <span>Invested Gold</span>
-           <span className='text-[#0BD19D] font-bold text-xl'>₹ {currentGold?.totalAmount ? currentGold?.totalAmount : "0"} <span className="text-xs opacity-70">({currentGold?.numberOfGrams } grams)</span></span> </div>
+           <span className='text-[#0BD19D] font-bold text-xl'>₹ {currentGold?.currentGoldInvestmentPrice ? currentGold?.currentGoldInvestmentPrice.toFixed(2) : "0"} <span className="text-xs opacity-70">({currentGold?.numberOfGrams } grams)</span></span> </div>
 
 
           {/* <hr className="sm:felx-none" /> */}

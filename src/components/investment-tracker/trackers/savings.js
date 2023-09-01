@@ -207,7 +207,7 @@ const Savings = (props) => {
       
         {/* <div className=""> */}
            
-            <div className='w-full flex flex-col  justify-evenly h-full'>
+            <div className='w-full flex flex-col  justify-evenly h-full gap-5'>
             <div className="flex flex-col">
               <div class="font-manrope text-sm " style={{ color: "#969696" }}>{props.subHEading}</div>
               <div class=" font-manrope   text-4xl pt-2.5 pb-7" style={{ color: "#FEC008" }}>{props.heading}</div>
