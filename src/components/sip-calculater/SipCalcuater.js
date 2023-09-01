@@ -390,7 +390,7 @@ setDoughnutData(
                       boxShadow: (theme) => `inset 0 -1px 0 ${theme.vars.palette.divider}`,
                     },
                   }}
-                  className="overflow-scroll h-80"
+                  className="overflow-y-scroll h-48"
                 >
                   {
                     details?.map((item)=>{
