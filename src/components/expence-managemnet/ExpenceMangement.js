@@ -634,10 +634,10 @@ ctx.font='24px sans-sarif';
             </div>
           
            </div>
-           <div className="text-white md:col-span-2 md:row-span-1 ">
+           <div className="text-white md:col-span-2 ">
             <AddS/>
            </div>
-           <div className="text-white md:col-span-2 md:row-span-1" >
+           <div className="text-white md:col-span-2 flex justify-center" >
            {/* <AddS/> */}
            
            <DoughnutChart 
@@ -655,6 +655,7 @@ ctx.font='24px sans-sarif';
               }
            />
            </div>
+           
         </div>
     )
 }

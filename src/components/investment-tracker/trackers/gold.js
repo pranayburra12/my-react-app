@@ -48,8 +48,13 @@ const Gold = (props) => {
 
   const handleInputChangevalues = (event) => {
     const newValue = event.target.value;
-    setRemoveGold(newValue);
-    setIsRemoveStockValid(validateInput(newValue));
+    if(newValue>currentGold?.numberOfGrams){
+
+    }else{
+      setRemoveGold(newValue);
+      setIsRemoveStockValid(validateInput(newValue));
+    }
+   
   };
 
   useEffect(() => {
@@ -86,7 +91,7 @@ const Gold = (props) => {
           }
           GenerateNewToken(route, payload, navigate)
         } else {
-          setcurrentGold(result?.data?.totalAmount)
+          setcurrentGold(result?.data)
           props.getDashboard()
           setLoader(true)
           setAddGold("")
@@ -169,7 +174,7 @@ const Gold = (props) => {
         <div className='w-full flex flex-col gap-5'>
           <div className="text-slate-300 flex justify-between w-full rounded-lg p-3 bg-[#2B2B2B]" style={{ background: "#2B2B2B" }}>
            <span>Invested Gold</span>
-           <span className='text-[#0BD19D] font-bold text-xl'>₹ {currentGold ? currentGold : "0"}</span> </div>
+           <span className='text-[#0BD19D] font-bold text-xl'>₹ {currentGold?.totalAmount ? currentGold?.totalAmount : "0"} <span className="text-sm opacity-70">({currentGold?.numberOfGrams } gm)</span></span> </div>
 
 
           {/* <hr className="sm:felx-none" /> */}
@@ -225,7 +230,7 @@ const Gold = (props) => {
               className="focus:outline-none w-3/4 rounded-3xl border-none p-6 rounded-10 h-15  bg-[#2B2B2B]"
               style={{ color: "#ffff" }}
               type="number"
-              placeholder="Remove Gold"
+              placeholder="Remove Gold (in grams)"
               value={removeGold}
               onChange={handleInputChangevalues} />
             <img

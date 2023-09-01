@@ -6,7 +6,9 @@ import Lottie from "react-lottie";
 import ButtonLottieAnimation from "../../utils/Button.json"
 import gold from "../../assets/Gold.svg"
 import savings from "../../assets/saings.svg"
-// import mutualfunds from "../../assets/mutual-funds.svg"
+import mutualfunds from "../../assets/mutual-funds.svg"
+import bonds from '../../assets/bonds.svg'
+// import mutualfunds from '../../assets/market-icon.svg'
 import pff from "../../assets/pff.svg"
 import stocks from "../../assets/stocks.svg"
 import arrow from "../../assets/arrow.svg"
@@ -174,7 +176,17 @@ const InverstmentTracker = () => {
     const changeTooldView = () => {
         setAddTracker(false)
     }
-
+    const getImage=(each)=>{
+        switch(each.name){
+            case 'Gold':return <img src={gold} alt={each.name} className="w-2/5" />
+            case 'PPF': return <img src={pff} alt={each.name} className="w-2/5" />;
+            case 'Savings':return <img src={savings} alt={each.name} className="w-2/5" />;
+            case 'Mutual Funds': return <img src={mutualfunds} alt={each.name} className="w-2/5" />;
+            case 'Stocks':return <img src={stocks} alt={each.name} className="w-2/5" />
+            case 'Bonds' : return <img src={bonds} alt={each.name} className="w-2/5" />
+            default : return <img src={savings} alt={each.name} className="w-2/5" />;
+        }
+    }
 
     return (    
         <>
@@ -206,7 +218,7 @@ const InverstmentTracker = () => {
                             return (
                                 <div className={item.name !== changeTracker?.name ? "flex m-2 min-w-[100%] bg-[#2B2B2B] rounded-2xl	md:w-44 hover:cursor-pointer Content" : "flex m-2 min-w-[100%] bg-[#2B2B2B] rounded-2xl	md:w-44 border border-[#F1CA00] Content"} onClick={() => { onChangeTracker(item) }}>
 
-                                    <img src={savings} alt={item.name} className="w-2/5" />
+                                    {getImage(item)}
                                     <div className="text-white pt-2 pb-2 flex flex-col  justify-around">
                                         <div className="break-all">
                                             <div className="text-[#707070]">{item.name}</div>
