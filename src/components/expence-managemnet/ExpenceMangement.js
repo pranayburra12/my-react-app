@@ -431,7 +431,7 @@ ctx.font='24px sans-sarif';
 }
 
     return(
-        <div className="grid grid-cols-1 md:grid-cols-6 gap-5 p-2 md:p-1 md:pl-40 justify-center">
+        <div className="grid grid-cols-1 md:grid-cols-6 p-2 md:p-1 md:pl-40 justify-center">
           {loader&& <Backdrop
         sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={loader}
@@ -480,7 +480,7 @@ ctx.font='24px sans-sarif';
                                            
                                         </div>
             </div>
-            <div className="md:col-span-2 md:row-span-3 text-white p-2 flex flex-col justify-start gap-5">
+            <div className="md:col-span-2 md:row-span-3 text-white p-5 flex flex-col justify-start gap-10">
                 <div className="flex flex-col gap-5 justify-center">
                   <div className="flex justify-between p-3">
                     <span>Edit / Manage</span>
@@ -524,7 +524,7 @@ ctx.font='24px sans-sarif';
     </LocalizationProvider>
     </div>
     <div className="text-white">
-    <div className="flex justify-between rounded-xl h-16  bg-[#2B2B2B]" >
+    <div className="flex justify-between rounded-xl h-16  bg-[#2B2B2B] border border-[#0BD19D]" >
                    <input
                         className="focus:outline-none w-3/4 rounded-3xl border-none p-6 rounded-10 h-15  bg-[#2B2B2B]"
                         style={{color:"#ffff"}}
@@ -546,7 +546,7 @@ ctx.font='24px sans-sarif';
     </div>
     <div className="flex flex-col gap-5 text-white">
     
-                   <div className="flex justify-between  rounded-xl rounded-10 h-16  bg-[#2B2B2B]" >
+                   <div className="flex justify-between  rounded-xl rounded-10 h-16  bg-[#2B2B2B] border border-[#FF426F]" >
                    <input
                         className="focus:outline-none w-3/4 rounded-3xl border-none p-6 rounded-10 h-15  bg-[#2B2B2B]"
                         style={{color:"#ffff"}}
@@ -564,7 +564,7 @@ ctx.font='24px sans-sarif';
                         onClick = {operations}
                      />
                    </div>
-                   <div className="flex justify-between  rounded-xl rounded-10 h-16  bg-[#2B2B2B]" >
+                   <div className="flex justify-between  rounded-xl rounded-10 h-16  bg-[#2B2B2B] border border-[#FEC008]" >
                    <input
                         className="focus:outline-none w-3/4 rounded-3xl border-none p-6 rounded-10 h-15  bg-[#2B2B2B]"
                         style={{color:"#ffff"}}
@@ -584,7 +584,7 @@ ctx.font='24px sans-sarif';
                         onClick = {operations}
                      />
                    </div>
-                   <div className="flex justify-between  rounded-xl rounded-10 h-16  bg-[#2B2B2B]" >
+                   <div className="flex justify-between  rounded-xl rounded-10 h-16  bg-[#2B2B2B] border border-[#3F6FD9]" >
                    <input
                         className="focus:outline-none w-3/4 rounded-3xl border-none p-6 rounded-10 h-15  bg-[#2B2B2B]"
                         style={{color:"#ffff"}}
@@ -605,7 +605,7 @@ ctx.font='24px sans-sarif';
                         onClick = {operations}
                      />
                    </div>
-                   <div className="flex justify-between  rounded-xl rounded-10 h-16  bg-[#2B2B2B]" >
+                   <div className="flex justify-between  rounded-xl rounded-10 h-16  bg-[#2B2B2B] border border-[#9772FF]" >
                    <input
                         className="focus:outline-none w-3/4 rounded-3xl border-none p-6 rounded-10 h-15  bg-[#2B2B2B]"
                         style={{color:"#ffff"}}

@@ -345,7 +345,7 @@ const editScheme=(each)=>{
         > Add</Button>}
         </div>
     </div>:
-  <div className="text-white min-h-screen" ref={viewRef}>
+  <div className="text-white min-h-screen w-full" ref={viewRef}>
     <Button onClick={goBack} > Go Back</Button>
     {allSchemes.length!==0 ? <div className='flex flex-col gap-2' >
    {allSchemes?.map(each=>{

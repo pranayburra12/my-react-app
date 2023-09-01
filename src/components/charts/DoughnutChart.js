@@ -6,7 +6,7 @@ import {Chart as ChartJS} from 'chart.js/auto'
 export default function DoughnutChart({chartData,textCenter,options}) {
     
   return (
-    <div className="border border-slate-300 p-2 rounded-lg">
+    <div className="p-2 rounded-lg">
    <Doughnut data={chartData} plugins={[textCenter]} options={options}/>
    </div>
   )

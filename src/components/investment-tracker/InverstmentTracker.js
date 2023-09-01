@@ -45,6 +45,7 @@ const InverstmentTracker = () => {
     }, [addTracker])
 
     const getAllTrackers = () => {
+        setLoader(true)
         var myHeaders = new Headers();
         myHeaders.append("Authorization", `Bearer ${JSON.parse(localStorage.getItem('access_token'))}`);
         myHeaders.append("Content-Type", "application/json");
@@ -85,7 +86,7 @@ const InverstmentTracker = () => {
                 setTotal(t)
                 let p=((c-t)/t)*100;
                 setCurrentTotal(p)
-                setLoader(true)
+                setLoader(false)
               }
           })
           .catch(error => console.log('error', error));
@@ -145,8 +146,8 @@ const InverstmentTracker = () => {
             case "newTracker":
             default:
                 return (
-                    <div className="flex flex-col items-center row-span-2 text-white gap-14">
-                        <div className="border border-[#F1CA00] p-5 rounded-2xl w-[50%] flex flex-col items-center	cursor-pointer" onClick={() => { setAddTracker(true) }}>
+                    <div className="flex flex-col justify-around row-span-2 text-white h-full items-center">
+                        <div className="border border-[#F1CA00] p-5 rounded-2xl w-[90%] flex flex-col items-center	cursor-pointer" onClick={() => { setAddTracker(true) }}>
                             <div className="heading"  >Add a tracker</div>
                             <img src={add} />
                         </div>
@@ -190,10 +191,17 @@ const InverstmentTracker = () => {
 
     return (    
         <>
-        {
-            loader 
-            ? 
+        
             <div className="grid grid-cols-1 md:grid-cols-5 gap-5 p-4 md:p-1 md:pl-40 items-start justify-center">
+            {  loader 
+           &&
+                <Backdrop
+                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                open={loader}
+                // className="loader"
+                >
+                    <CircularProgress color="inherit" />
+                </Backdrop>}
             <div className="flex flex-col md:col-span-3 gap-5 md:gap-10">
             <div className="text-2xl md:text-3xl leading-normal font-bold" style={{color: "#FFF",fontFamily:'Manrope'}}>Investment Tracker</div>
                 <div className=" text-white border border-slate-200 items-center justify-between p-8 rounded-xl md:h-50">
@@ -212,7 +220,7 @@ const InverstmentTracker = () => {
                         <div className="leading-normal font-normal text-xs" style={{color: "#A5A5A5",fontFamily:"Manrope"}}>Last Updated </div>
                     </div>
                 </div>
-                <div className="pb-0 md:pb-12 flex overflow-scroll w-full md:grid md:grid-rows-2 md:grid-flow-col md:gap-4 md:p-4 Flipped mt-4 pt-4 p-4 ">
+                <div className="pb-10 md:pb-12 flex overflow-scroll w-full md:grid md:grid-rows-2 md:grid-flow-col md:gap-4 md:p-4 Flipped mt-4 pt-4 p-4 ">
                     {
                  listOfTrackersData?.map((item) => {
                             return (
@@ -235,23 +243,17 @@ const InverstmentTracker = () => {
 
                 </div>
             </div>
-            <div className="md:col-span-2">
+            <div className="md:col-span-2 md:p-10 h-full flex items-center">
                 {
                     addTracker ? <NewTracker navugateToOldView={()=>{changeTooldView()}} /> : renderTrackerDetail(changeTracker)
                 }
             </div>
         </div>
-            :
-            <div >
-                <Backdrop
-                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-                open={loader}
-                className="loader"
-                >
-                    <CircularProgress color="inherit" />
-                </Backdrop>
-            </div>
-        }
+          
+            
+              
+          
+        
         </>
         
     )

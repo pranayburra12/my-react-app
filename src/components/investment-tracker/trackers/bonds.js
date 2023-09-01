@@ -65,6 +65,7 @@ const Bonds = (props) => {
     },[])
 
     const totalBonds = () =>{
+      setLoader(true)
         var myHeaders = new Headers();
           myHeaders.append("Authorization",`Bearer ${JSON.parse(localStorage.getItem('access_token'))}` );
           myHeaders.append("Content-Type", "application/json");
@@ -95,11 +96,16 @@ const Bonds = (props) => {
                   }else{
                     setAllBonds(result?.data)
                     props.getDashboard()
-                    setLoader(true)
+                    setLoader(false)
                     setAddBond("")
                     setInvestedAmount("")
                     setBondtype("")
                     setRemoveBind("")
+                    let total=0;
+                    result?.data?.map(each=>{
+                      total=total+each?.currentTotalValue
+                    })
+                    setcurrentBonds(total)
                   }
             })
             .catch(error => console.log('error', error));
@@ -113,10 +119,10 @@ const Bonds = (props) => {
 
         if(editFlow){
           EditBond()
-          setLoader(false)
+          
         }else{      
         setShow(false)
-        setLoader(false)
+    
           var myHeaders = new Headers();
           myHeaders.append("Authorization",`Bearer ${JSON.parse(localStorage.getItem('access_token'))}` );
           myHeaders.append("Content-Type", "application/json");
@@ -137,7 +143,7 @@ const Bonds = (props) => {
           fetch(`${baseUrl}/bond/saveBond`, requestOptions)
             .then(response => response.json())
             .then(result => {console.log(result)
-
+              setViewBonds(true)
                 totalBonds()
             })
             .catch(error => console.log('error', error));
@@ -146,7 +152,7 @@ const Bonds = (props) => {
     }
 
     const EditBond = () =>{
-
+    
         setShow(false)
         var myHeaders = new Headers();
           myHeaders.append("Authorization",`Bearer ${JSON.parse(localStorage.getItem('access_token'))}` );
@@ -169,8 +175,8 @@ const Bonds = (props) => {
             .then(response => response.json())
             .then(result => {console.log(result)
               setViewBonds(false)
-              setLoader(true)
-              setViewBonds(false)
+            
+             
               setAddBond("")
               setInvestedAmount("")
               setBondtype("")
@@ -193,30 +199,30 @@ const Bonds = (props) => {
     return (
       <>
       {
-        loader ?
+        
         <>
         {  !viewBonds
            ? 
-           <><div className=" flex flex-col">
-               <div class="text-gray-500 font-manrope text-sm float-left " style={{ color: "#969696" }}>{props.subHEading}</div>
-               <div class="text-gray-500  float-left text-4xl pt-1 pb-7 " style={{ color: "#FEC008" }}>{props.heading}</div>
-             </div><div className="text-center pt-5 md: p-0">
- 
-                 <div className='w-full flex flex-col gap-5'>
-                   <div className="flex rounded-2xl   border-white rounded-10 h-auto items-baseline  bg-black" style={{ background: "#2B2B2B" }}>
-                     <input
-                       className=" focus:outline-none w-3/4 rounded-xl border-none p-6 border-2  border-white rounded-10 h-15 text-white bg-black"
-                       style={{ color: "#ffff", background: "#2B2B2B" }}
-                       value={"Bond Value"}
-                       disabled={true}
-                       onChange={handleInputChange} />
-                     <div
-                       className="  pl-2.5 text-green-500"
-                     >{`₹ ${currentBond}`}</div>
-                   </div>
+           <><div className="w-full pt-5 md: p-0">
+ {
+  loader &&   <Backdrop
+  sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+  open={loader}
+
+  >
+    <CircularProgress color="inherit" />
+  </Backdrop>
+ }
+                 <div className='flex flex-col gap-5'>
+                 <div className=" flex flex-col">
+               <div class="font-manrope text-sm " style={{ color: "#969696" }}>{props.subHEading}</div>
+               <div class="text-4xl pt-1 pb-7 " style={{ color: "#FEC008" }}>{props.heading}</div>
+             </div>
+             <div className='text-slate-300 flex justify-between w-full rounded-lg p-3 bg-[#2B2B2B]'><span className=''>Current Bonds</span><span className='text-[#0BD19D] font-bold text-xl'>₹{currentBond ? currentBond : "0"}</span> </div>
+
  
                    <div>
-                     <div className='text-slate-200 flex justify-between w-full rounded-lg p-3 bg-[#2B2B2B] hover:cursor-pointer rounded-s-xl' onClick={() => { setViewBonds(true); } }><span>View Your Bonds</span><img src={arrow} /></div>
+                     <div className='text-slate-200 flex justify-between rounded-lg p-3 bg-[#2B2B2B] hover:cursor-pointer rounded-s-xl' onClick={() => { setViewBonds(true); } }><span>View Your Bonds</span><img src={arrow} /></div>
                    </div>
  
                    <div className="flex justify-between  rounded-xl rounded-10 h-16  bg-[#2B2B2B]">
@@ -226,6 +232,7 @@ const Bonds = (props) => {
                        type="text"
                        id="addStockInput"
                        placeholder="Bond Name"
+                       disabled={editFlow}
                        value={addBond}
                        onChange={(e) => { setAddBond(e.target.value); } } />
                    </div>
@@ -233,8 +240,9 @@ const Bonds = (props) => {
                      <input
                        className="focus:outline-none w-3/4 rounded-2xl border-none p-6 rounded-10 h-15  bg-[#2B2B2B]"
                        style={{ color: "#ffff" }}
-                       type="text"
+                      
                        id="addStockInput"
+                       type='number'
                        placeholder="Amount Invested"
                        value={investedAmount}
                        onChange={(e) => { setInvestedAmount(e.target.value); } } />
@@ -247,16 +255,17 @@ const Bonds = (props) => {
                        style={{ color: "#ffff" }}
                        type="text"
                        placeholder="Bond Type"
+                       disabled={editFlow}
                        value={bondType}
                        onChange={(e) => { setBondtype(e.target.value); } } />
                    </div>
                    {!isRemoveStockValid &&
                      <span style={{ color: 'red' }}>{validationMessage}</span>}
-                   <div><Button color='success' variant="outlined" onClick={()=>{setShow(true)}}>{  "Add new bond" }</Button></div>
+                   <div><Button color='success' variant="outlined" onClick={()=>{setShow(true)}}>{ editFlow? "save changes" : "Add new bond" }</Button></div>
                  </div>
                </div></>
            :
-           <div className="text-white min-h-screen" ref={viewRef}>
+           <div className="text-white min-h-screen w-full" ref={viewRef}>
                <Button onClick={goBack} > Go Back</Button>
              {allBonds.length!==0?<div className='flex flex-col gap-2' >
              {allBonds?.map(each=>{
@@ -282,16 +291,7 @@ const Bonds = (props) => {
          />
         }
          </>
-        :
-        <div >
-          <Backdrop
-        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-        open={loader}
-        className="loader"
-        >
-          <CircularProgress color="inherit" />
-        </Backdrop>
-        </div>
+      
       }
       </>
     ) 

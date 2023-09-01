@@ -4,7 +4,11 @@ import { GenerateNewToken } from "../../utils/api";
 import { useNavigate } from "react-router-dom";
 import { Backdrop, CircularProgress } from "@mui/material";
 import ModalComponent from "../../../modal/modal";
-
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 const PPF = (props) => {
 
   const navigate = useNavigate();
@@ -20,7 +24,12 @@ const PPF = (props) => {
   const [validationMessage, setValidationMessage] = useState('');
   const [isAddStockValid, setIsAddStockValid] = useState(true);
   const [isRemoveStockValid, setIsRemoveStockValid] = useState(true);
-
+  const [open,setOpen]=useState(false);
+  const handleClose=()=>{
+    setOpen(false)
+  }
+  const [alertMsg,setAlert]=useState('');
+ 
   const validateInput = (value) => {
     if (/^\d+$/.test(value)) {
       setValidationMessage('Input is valid.');
@@ -83,7 +92,7 @@ const PPF = (props) => {
         } else {
           setcurrentSavings(result?.data?.ppfAmount)
           props.getDashboard()
-          setLoader(true)
+          setLoader(false)
           setAddSvaings("")
           setRemoveSavings("")
         }
@@ -93,8 +102,19 @@ const PPF = (props) => {
 
 
   const addSavings = (value) => {
+    if(!addSaving){
+      setAlert(
+        {
+          'color':'error',
+          'Message':'Enter Values'
+        }
+      
+      )
+      setOpen(true)
+    }
+    else {
     setShow(false)
-    setLoader(false)
+    setLoader(true)
     var myHeaders = new Headers();
     myHeaders.append("Authorization", `Bearer ${JSON.parse(localStorage.getItem('access_token'))}`);
     myHeaders.append("Content-Type", "application/json");
@@ -115,13 +135,34 @@ const PPF = (props) => {
       .then(result => {
         console.log(result)
         totalSavings()
+        setLoader(false)
+        setAlert(
+          {
+            'color':'success',
+            'Message':`Added ₹${addSaving} to PPF`
+          }
+        )
+        setOpen(true)
       })
       .catch(error => console.log('error', error));
   }
+}
 
   const remove = (value) => {
-    setRemoveModal(false)
-    setLoader(false)
+    if(!removesavings){
+      setAlert(
+        {
+          'color':'error',
+          'Message':'Enter Values'
+        }
+      
+      )
+      setOpen(true)
+    }
+    else{
+
+  
+    setLoader(true)
     var myHeaders = new Headers();
     myHeaders.append("Authorization", `Bearer ${JSON.parse(localStorage.getItem('access_token'))}`);
     myHeaders.append("Content-Type", "application/json");
@@ -141,25 +182,39 @@ const PPF = (props) => {
       .then(response => response.json())
       .then(result => {
         console.log(result)
-
+        setLoader(false)
         totalSavings()
+        setAlert(
+          {
+            'color':'success',
+            'Message':`Removed ₹${removesavings} from PPF`
+          }
+        )
+        setOpen(true)
       })
       .catch(error => console.log('error', error));
   }
+}
 
 
 
   return (
 
     <>   
-    {
-     loader ?
-       <div className="text-center pt-5 md: p-0">
-           <div className="w-10">
-             <div class="font-manrope text-sm float-left" style={{ color: "#969696" }}>{props.subHEading}</div>
+     {
+      <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity={alertMsg.color} sx={{ width: '100%' }}>
+          {alertMsg.Message}
+        </Alert>
+      </Snackbar>
+     }
+       <div className="pt-5 md: p-0">
+           
+           <div className='w-full flex flex-col gap-5'>
+           <div className="flex flex-col">
+             <div class="font-manrope text-sm " style={{ color: "#969696" }}>{props.subHEading}</div>
              <div class=" font-manrope  text-2xl pb-7" style={{ color: "#FEC008" }}>{props.heading}</div>
            </div>
-           <div className='w-full flex flex-col gap-5'>
              <div className='text-slate-300 flex justify-between w-full rounded-lg p-3 bg-[#2B2B2B]'><span className=''>Current Funds</span><span className='text-[#0BD19D] font-bold text-xl'>₹ {currentSavings ? currentSavings : "0"}</span> </div>
 
 
@@ -177,7 +232,7 @@ const PPF = (props) => {
                  className="mr-8 cursor-pointer pl-2.5"
                  src={rightarrow}
                  alt="Right Arrow"
-                 onClick={() => { setShow(true); } } />
+                 onClick={() => { addSavings(); } } />
              </div>
 
              <div className="flex justify-between  rounded-xl rounded-10 h-16  bg-[#2B2B2B]">
@@ -192,10 +247,10 @@ const PPF = (props) => {
                  className="mr-8 cursor-pointer pl-2.5"
                  src={rightarrow}
                  alt="Right Arrow"
-                 onClick={() => { setRemoveModal(true); } } />
+                 onClick={() => { remove() } } />
              </div>
            </div>
-           {<ModalComponent
+           {/* {<ModalComponent
              show={show}
              cancel={"cancel"}
              save={"save"}
@@ -206,19 +261,19 @@ const PPF = (props) => {
              cancel={"cancel"}
              save={"delete"}
              onHide={() => setRemoveModal(false)}
-             onSubmit={() => { remove(); } } />}
+             onSubmit={() => { remove(); } } />} */}
          </div>
-         :
-         <div >
-         <Backdrop
+         
+    {
+     loader&&    <Backdrop
        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
        open={loader}
-       className="loader"
+       
        >
          <CircularProgress color="inherit" />
-       </Backdrop>
-       </div>
-       }
+       </Backdrop>}
+     
+       
    </>
   )
 }

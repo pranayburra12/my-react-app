@@ -149,7 +149,7 @@ const images=[
 
 
 let m=Number(sip)*((Math.pow(1+i,12*Number(years))-1)/i)*(1+i)
-// let m=calculateSIPMaturityAmount(sip,percent,years,12)
+// let m=calculateSIPMaturityAunt(sip,percent,years,12)
 // let m=calculateSIP(Number(sip),Number(percent),Number(years),12)
 console.log('expected value',m)
 setExpectedValue(m)
@@ -398,7 +398,7 @@ setDoughnutData(
                         <div >
                             <Accordion className="p-0 md:pt-2.5">
                               <AccordionSummary>{item?.heading}</AccordionSummary>
-                              <AccordionDetails>{item.subheading}</AccordionDetails>
+                              <AccordionDetails>{item?.subheading}</AccordionDetails>
                             </Accordion>
                         </div>
                       )

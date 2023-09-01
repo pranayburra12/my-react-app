@@ -5,7 +5,11 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
 import { Backdrop, CircularProgress } from "@mui/material";
 import ModalComponent from "../../../modal/modal";
-
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 const Gold = (props) => {
 
   const navigate = useNavigate();
@@ -16,7 +20,12 @@ const Gold = (props) => {
 
   const [removeGold, setRemoveGold] = useState('');
   const [currentGold, setcurrentGold] = useState("");
-
+  const [open,setOpen]=useState(false);
+  const handleClose=()=>{
+    setOpen(false)
+  }
+  const [alertMsg,setAlert]=useState('');
+ 
   const [loader,setLoader]=useState(false);
   const [removeModal,setRemoveModal] = useState(false)
   const [show,setShow] = useState(false)
@@ -93,7 +102,7 @@ const Gold = (props) => {
         } else {
           setcurrentGold(result?.data)
           props.getDashboard()
-          setLoader(true)
+      
           setAddGold("")
           // setRemoveGold("")
           setValueOfintgrest("")
@@ -104,7 +113,18 @@ const Gold = (props) => {
 
 
   const AddGold = () => {
-    setLoader(false)
+    if(!addGold||!valueofIntrest){
+      setAlert(
+        {
+          'color':'error',
+          'Message':'Enter Values'
+        }
+      
+      )
+      setOpen(true)
+    }
+    else{
+    setLoader(true)
     setShow(false)
     var myHeaders = new Headers();
     myHeaders.append("Authorization", `Bearer ${JSON.parse(localStorage.getItem('access_token'))}`);
@@ -128,12 +148,32 @@ const Gold = (props) => {
       .then(result => {
         console.log(result)
         totalSavings()
+        setLoader(false)
+        setAlert(
+          {
+            'color':'success',
+            'Message':`Added ${(addGold/valueofIntrest).toFixed(2)} gram of Gold`
+          }
+        )
+        setOpen(true)
+
       })
       .catch(error => console.log('error', error));
-  }
+  }}
 
   const remove = (value) => {
-    setLoader(false)
+    if(!removeGold){
+      setAlert(
+        {
+          'color':'error',
+          'Message':'Enter Values'
+        }
+      
+      )
+      setOpen(true)
+    }
+    else{
+    setLoader(true)
     setRemoveModal(false)
     var myHeaders = new Headers();
     myHeaders.append("Authorization", `Bearer ${JSON.parse(localStorage.getItem('access_token'))}`);
@@ -155,32 +195,46 @@ const Gold = (props) => {
       .then(result => {
         console.log(result)
         totalSavings()
+        setLoader(false)
         setRemoveGold("")
+        setAlert(
+          {
+            'color':'success',
+            'Message':`Removed ${removeGold} gram of Gold`
+          }
+        )
+        setOpen(true)
       })
       .catch(error => console.log('error', error));
   }
+}
 
 
 
   return (
     <>
     {
-      loader 
-      ?
-      <><div className="w-96 flex flex-col">
-      <div class="text-gray-500 font-manrope text-sm float-left  " style={{ color: "#969696" }}>{props.subHEading}</div>
-      <div class="text-gray-500  float-left text-4xl pt-1 pb-7 " style={{ color: "#FEC008" }}>{props.heading}</div>
-    </div><div className="text-center  pt-5 md: p-0">
-        <div className='w-full flex flex-col gap-5'>
+      <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity={alertMsg.color} sx={{ width: '100%' }}>
+          {alertMsg.Message}
+        </Alert>
+      </Snackbar>
+     }
+      <><div className="pt-5 md: p-0">
+        <div className='flex flex-col gap-5'>
+        <div className="flex flex-col">
+      <div class="font-manrope text-sm" style={{ color: "#969696" }}>{props.subHEading}</div>
+      <div class="text-4xl pt-1 pb-7 " style={{ color: "#FEC008" }}>{props.heading}</div>
+    </div>
           <div className="text-slate-300 flex justify-between w-full rounded-lg p-3 bg-[#2B2B2B]" style={{ background: "#2B2B2B" }}>
            <span>Invested Gold</span>
-           <span className='text-[#0BD19D] font-bold text-xl'>₹ {currentGold?.totalAmount ? currentGold?.totalAmount : "0"} <span className="text-sm opacity-70">({currentGold?.numberOfGrams } gm)</span></span> </div>
+           <span className='text-[#0BD19D] font-bold text-xl'>₹ {currentGold?.totalAmount ? currentGold?.totalAmount : "0"} <span className="text-xs opacity-70">({currentGold?.numberOfGrams } grams)</span></span> </div>
 
 
           {/* <hr className="sm:felx-none" /> */}
-          <div className="flex justify-between  rounded-xl rounded-10 h-16  bg-[#2B2B2B]">
+          <div className="flex justify-between  rounded-xl rounded-10 h-16  bg-[#2B2B2B] border border-[#0BD19D]">
             <input
-              className="focus:outline-none w-3/4 rounded-2xl border-none p-6 rounded-10 h-15  bg-[#2B2B2B]"
+              className="focus:outline-none w-3/4 rounded-2xl border-none p-6 rounded-10 h-15  bg-[#2B2B2B] "
               style={{ color: "#ffff" }}
               type="number"
               min="0"
@@ -196,7 +250,7 @@ const Gold = (props) => {
               alt="Right Arrow"
               onClick={() => { addSavings(addSaving); } } /> */}
           </div>
-          <div className="flex justify-between  rounded-xl rounded-10 h-16  bg-[#2B2B2B]">
+          <div className="flex justify-between  rounded-xl rounded-10 h-16  bg-[#2B2B2B] border border-[#0BD19D]">
             <input
               className="focus:outline-none w-3/4 rounded-2xl border-none p-6 rounded-10 h-15  bg-[#2B2B2B]"
               style={{ color: "#ffff" }}
@@ -217,15 +271,14 @@ const Gold = (props) => {
 
           <Button 
            color='success'
-          onClick={()=>{setShow(true)}}
+          onClick={()=>{AddGold()}}
           
           variant='outlined'
-          disabled={!addGold ||!valueofIntrest}
         > Add</Button>
 
           {!isAddStockValid &&
             <span style={{ color: 'red' }}>{validationMessage}</span>}
-          <div className="flex justify-between  rounded-xl rounded-10 h-16  bg-[#2B2B2B]">
+          <div className="flex justify-between  rounded-xl rounded-10 h-16  bg-[#2B2B2B] border border-red-500">
             <input
               className="focus:outline-none w-3/4 rounded-3xl border-none p-6 rounded-10 h-15  bg-[#2B2B2B]"
               style={{ color: "#ffff" }}
@@ -237,13 +290,13 @@ const Gold = (props) => {
               className="mr-8 cursor-pointer pl-2.5"
               src={rightarrow}
               alt="Right Arrow"
-              onClick={() => { setRemoveModal(true) } } />
+              onClick={() => { remove(true) } } />
           </div>
-          {!isRemoveStockValid &&
-            <span style={{ color: 'red' }}>{validationMessage}</span>}
+          {/* {!isRemoveStockValid &&
+            <span style={{ color: 'red' }}>{validationMessage}</span>} */}
         </div>
       </div>
-      {<ModalComponent
+      {/* {<ModalComponent
               show={show}
               cancel={"cancel"}
               save={"save"}
@@ -254,19 +307,18 @@ const Gold = (props) => {
               cancel={"cancel"}
               save={"delete"}
               onHide={() => setRemoveModal(false)}
-              onSubmit={() => { remove(); }} />}
+              onSubmit={() => { remove(); }} />} */}
       </> 
-      :
-      <div >
-          <Backdrop
+      
+    
+         {loader&& <Backdrop
         sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={loader}
-        className="loader"
+      
         >
           <CircularProgress color="inherit" />
         </Backdrop>
-        </div>
-    }
+       }
     </>
   )
 }

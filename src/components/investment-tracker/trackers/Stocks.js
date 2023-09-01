@@ -379,7 +379,7 @@ myHeaders.append("Authorization", `Bearer ${JSON.parse(localStorage.getItem('acc
         > Add</Button>}
       </div>
     </div>:
-      <div className="text-white min-h-screen" ref={viewRef}>
+      <div className="text-white min-h-screen w-full" ref={viewRef}>
     <Button onClick={goBack} > Go Back</Button>
    {allStocks.length!==0? <div className='flex flex-col gap-2' >
    {allStocks?.map(each=>{
