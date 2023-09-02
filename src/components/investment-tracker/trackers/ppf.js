@@ -208,12 +208,12 @@ const PPF = (props) => {
         </Alert>
       </Snackbar>
      }
-       <div className="pt-5 md: p-0">
+       <div className="w-[360px] flex flex-col h-full gap-5">
            
-           <div className='w-full flex flex-col gap-5'>
+          
            <div className="flex flex-col">
              <div class="font-manrope text-sm " style={{ color: "#969696" }}>{props.subHEading}</div>
-             <div class=" font-manrope  text-2xl pb-7" style={{ color: "#FEC008" }}>{props.heading}</div>
+             <div className='font-manrope text-[#FEC008] font-bold text-2xl'>PPF</div>
            </div>
              <div className='text-slate-300 flex justify-between w-full rounded-lg p-3 bg-[#2B2B2B]'><span className=''>Current Funds</span><span className='text-[#0BD19D] font-bold text-xl'>₹ {currentSavings ? currentSavings : "0"}</span> </div>
 
@@ -262,7 +262,7 @@ const PPF = (props) => {
              save={"delete"}
              onHide={() => setRemoveModal(false)}
              onSubmit={() => { remove(); } } />} */}
-         </div>
+      
          
     {
      loader&&    <Backdrop

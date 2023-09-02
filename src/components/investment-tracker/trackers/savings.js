@@ -207,12 +207,12 @@ const Savings = (props) => {
       
         {/* <div className=""> */}
            
-            <div className='w-full flex flex-col  justify-evenly h-full gap-5'>
+            <div className='w-[360px] flex flex-col h-full gap-5'>
             <div className="flex flex-col">
               <div class="font-manrope text-sm " style={{ color: "#969696" }}>{props.subHEading}</div>
               <div class=" font-manrope   text-4xl pt-2.5 pb-7" style={{ color: "#FEC008" }}>{props.heading}</div>
             </div>
-              <div className='text-slate-300 flex justify-between w-full rounded-lg p-3 bg-[#2B2B2B]'><span className=''>Current Savings</span><span className='text-[#0BD19D] font-bold text-xl'>₹ {currentSavings ? currentSavings : "0"}</span> </div>
+              <div className='text-slate-300 flex justify-between w-full rounded-lg p-3 bg-[#2B2B2B] h-16 items-center'><span className=''>Current Savings</span><span className='text-[#0BD19D] font-bold text-xl'>₹ {currentSavings ? currentSavings : "0"}</span> </div>
 
 
               {/* <hr className="sm:flex-none" /> */}

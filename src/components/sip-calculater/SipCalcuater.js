@@ -19,7 +19,7 @@ import invesco from "../../assets/invesco.svg"
 import kotak from "../../assets/kotak.svg"
 import paytm from "../../assets/paytm.svg"
 import sbi1 from "../../assets/sbi1.svg"
-
+import amcs from '../../assets/amcs.svg'
 import Lottie from "react-lottie";
 import ButtonLottieAnimation from "../../utils/Button.json"
 import AccordionGroup from '@mui/joy/AccordionGroup';
@@ -27,7 +27,7 @@ import Accordion, { accordionClasses } from '@mui/joy/Accordion';
 import AccordionDetails from '@mui/joy/AccordionDetails';
 import AccordionSummary from '@mui/joy/AccordionSummary';
 
-
+import talkToExperts from '../../assets/talk to experts.png'
 
 const Sipcalculater = () =>{
     
@@ -53,8 +53,7 @@ const images=[
   { a:kotak},
   { a:paytm},
   { a:sbi1},
-  { a:sbi},
-  { a:sbi},  
+  
 ]
   
  
@@ -244,9 +243,12 @@ setDoughnutData(
   ]
 
     return(
-        <>
-            <div className="sipCalculator md:pl-32 grid-rows-3">
-                <div className="sip-section1 row-span-2">
+        <div className="flex flex-col">
+         <span className="text-white sipHeading pl-2 md:pt-20 md:pl-64">SIP Calculator</span>
+            <div className="sipCalculator md:pl-52 ">
+              
+           
+                <div className="sip-section1 ">
                    <div className="sip-section1-1">
                  
           <span>SIP Amount</span> 
@@ -363,7 +365,7 @@ setDoughnutData(
         </div>
                     </div>
                 </div>
-                <div className="sip-section2 row-span-2">
+                <div className="sip-section2">
                   <div className="p-0 md:pb-20">SIP Calculator - FAQs</div>
                 <div className="">
                 <AccordionGroup
@@ -390,7 +392,7 @@ setDoughnutData(
                       boxShadow: (theme) => `inset 0 -1px 0 ${theme.vars.palette.divider}`,
                     },
                   }}
-                  className="overflow-y-scroll h-48"
+                  className="overflow-y-scroll h-98"
                 >
                   {
                     details?.map((item)=>{
@@ -408,29 +410,30 @@ setDoughnutData(
                 </AccordionGroup>
                 </div>
                 </div>
-                <div className="sip-section3 hidden md:block p-3 row-span-3">
-                  <div className="flex gap-4">
-                    <div>
-                        <div className="flex flex-col gap-2">
-                          <span className="text-2xl">Zero Commisons</span>
-                          <span className="text-sm leading-normal " style={{color:"#fff",fontFamily:"Manrope"}}>Invest in direct Mutual Funds</span>
+                <div className="hidden md:border md:border-[#999] rounded-lg text-[#FFF] md:col-span-3 h-[260px] w-full justify-around md:flex md:items-center ">
+                  <div className="flex items-center justify-between w-full pr-8 pt-8 h-full pb-8 gap-4">
+                    <div className="flex flex-col justify-between h-full md:pl-8 font-[Manrope]">
+                        <div className="flex flex-col gap-1">
+                          <span className="text-2xl font-bold">Zero Commisons</span>
+                          <span className="text-xs" style={{color:"#fff",fontFamily:"Manrope"}}>Invest in direct Mutual Funds</span>
                         </div>
                         <div className="flex items-center pt-2 gap-5">
                             <div className="flex flex-col">
-                              <span className="text-sm" style={{fontFamily:"Manrope"}}>No middlemen,</span>
-                              <span className="text-sm"style={{fontFamily:"Manrope"}}>No extra charge.</span>
+                              <span className="text-base" style={{fontFamily:"Manrope"}}>No middlemen,</span>
+                              <span className="text-base"style={{fontFamily:"Manrope"}}>No extra charge.</span>
                             </div>
-                          <div className="rounded-lg p-3" style={{background: "#FFCE00"}}>
-                            <button className="text-xs" style={{color:"black",background: "#FFCE00"}}>View all</button>
+                          <div className="rounded-lg p-3 h-9 flex w-28 items-center justify-between" style={{background: "#FFCE00"}}>
+                            <span className="text-xs" style={{color:"black",background: "#FFCE00"}}>View all AMCs</span>
+                            <img src={amcs}/>
                           </div>
                         </div>
                     </div>
                    
-                        <div className="flex w-full md:grid md:grid-cols-4 md:gap-4 ">{
+                        <div className="flex  md:grid md:grid-cols-4 md:gap-4 h-full">{
                           images?.map((item)=>{
                             return(
-                              <div className="bg-[#2B2B2B] p-2 rounded-sm flex justify-center">
-                                <img src={item.a} width='25x'></img>
+                              <div className="bg-[#2B2B2B] rounded-lg flex justify-center w-12 h-12">
+                                <img src={item.a} width='25px'></img>
                               </div>
                             )
                           })
@@ -439,14 +442,14 @@ setDoughnutData(
                   </div>
                 </div>
                 <div className="hidden md:block sip-section4">
-                <div className="block p-5">
-                        <div className="flex items-center justify-between ">
+                <div className="flex flex-col justify-between p-5 h-full">
+                        {/* <div className="flex items-center justify-between ">
                            
                               <span className="text-xl">Talk to Experts</span>
                               <img  src={expert}/>
-                        </div> 
-                      
-                        <div className="relative h-6 " >
+                        </div>  */}
+                      <img src={talkToExperts}/>
+                        <div className="relative h-8 " >
                               <Lottie
                                   options={lottieOptions}
                                   label="View"
@@ -462,7 +465,7 @@ setDoughnutData(
                 </div>
 
             </div>
-        </>
+        </div>
     )
 }
 

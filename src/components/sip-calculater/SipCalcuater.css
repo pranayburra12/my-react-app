@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope&display=swap');
 .sipCalculator{
     /* width: 100%; */
     display: grid;
@@ -6,6 +7,12 @@
     height: 100vh;
     /* margin-top: 100px; */
     /* overflow-y: scroll; */
+    padding-top: 30px;
+}
+.sipHeading{
+    font-family: 'Manrope', sans-serif;
+    font-size: 2.8rem;
+    font-weight: 700;
 }
 .sip-section1{
     color: aliceblue;
@@ -14,46 +21,53 @@
     display: grid;
     grid-template-columns: auto auto auto;
     margin: 20px;
-    border-radius: 5px;
+    border-radius: 10px;
     gap:1.2rem;
     padding: 1.5em;
+    align-items: center;
+
 }
 .sip-section2{
     color: aliceblue;
     /* border:1px solid #999; */
     margin-left: 20px;
     margin-right: 20px;
-    border-radius: 5px;
+    border-radius: 10px;
 
 }
 
 .sip-section3{
-    height: 250px;
+    display: flex;
+    align-items: center;
+    
+    height: 260px;
     color: aliceblue;
     grid-column: 1 / span 3;
     border:1px solid #999;
     margin-left: 20px;
     margin-right: 20px;
-    border-radius: 5px;
+    border-radius: 10px;
 
 }
 
 .sip-section4{
-    height: 250px;
+    height: 260px;
     color: aliceblue;
     border:1px solid #999;
-    margin-left: 20px;
-    margin-right: 20px;
-    border-radius: 5px;
-
+    /* margin-left: 20px;
+    margin-right: 20px; */
+    border-radius: 10px;
+   
 }
 .sip-section5{
+    height: 260px;
+    
     color: aliceblue;
     /* border:1px solid #999; */
-    margin-left: 20px;
-    margin-right: 20px;
-    border-radius: 5px;
-    height: 250px;
+    /* margin-left: 20px;
+    margin-right: 20px; */
+    border-radius: 10px;
+ 
 }
 .sip-section1-1{
     /* border: 2px solid red; */

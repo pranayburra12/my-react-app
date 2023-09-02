@@ -9,7 +9,7 @@ import { GenerateNewToken } from '../../utils/api';
 import { useNavigate } from "react-router-dom";
 import arrow from "../../../assets/arrow.svg"
 import { makeStyles } from "@material-ui/core/styles";
-
+import backarrow from '../../../assets/backarrow.svg'
 const useStyles = makeStyles({
   paper: {
     backgroundColor: "#2B2B2B",
@@ -27,7 +27,7 @@ export default function Stocks({tracker,getDashboard}) {
   const [stockDetail,setStockDetail]=useState();
   const [stocksNameData,setStocksNameData]=useState([]);
   const [investedValue,setInvestedValue]=useState();
-
+  
   const [buyAveragePrice,setBuyAveragePrice]=useState();
   const [viewStocks,setViewStocks]=useState(false);
   const [isEdit,setIsEdit]=useState(false);
@@ -254,9 +254,9 @@ myHeaders.append("Authorization", `Bearer ${JSON.parse(localStorage.getItem('acc
       </Backdrop>}
     {!viewStocks?<div className="flex flex-col justify-between gap-10">
       <div className='flex flex-col gap-3'>
-        <div className='text-[#FEC008] font-bold text-2xl'>Stocks</div>
-        <div className='text-slate-300 flex justify-between w-full rounded-lg p-3 bg-[#2B2B2B]'><span className=''>Stocks Value</span><span className='text-[#0BD19D] font-bold text-xl'>₹ {tracker?.currentValues?.toFixed(1)}</span> </div>
-          <div className='text-slate-200 flex justify-between w-full rounded-lg p-3 bg-[#2B2B2B] hover:cursor-pointer' onClick={()=>setViewStocks(true)}><span>View Your Stocks</span><img src={arrow} /></div>
+        <div className='font-manrope text-[#FEC008] font-bold text-2xl'>Stocks</div>
+        <div className='text-slate-300 flex justify-between w-full rounded-lg p-3 bg-[#2B2B2B]  items-center'><span className=''>Stocks Value</span><span className='text-[#0BD19D] font-bold text-xl'>₹ {tracker?.currentValues?.toFixed(1)}</span> </div>
+          <div className='text-slate-200 flex justify-between w-full rounded-lg p-3 bg-[#2B2B2B] items-center h-16 hover:cursor-pointer' onClick={()=>setViewStocks(true)}><span>View Your Stocks</span><img src={arrow} /></div>
       </div>
       <div className='max-w-full flex flex-col gap-5'>
         <Autocomplete
@@ -301,7 +301,8 @@ myHeaders.append("Authorization", `Bearer ${JSON.parse(localStorage.getItem('acc
                   borderColor: '#0BD19D',
                 },
               },
-    
+              width:'360px',
+              height:'65px'
             }}
             />
           )}
@@ -336,6 +337,8 @@ myHeaders.append("Authorization", `Bearer ${JSON.parse(localStorage.getItem('acc
                 borderColor: '#0BD19D',
               },
             },
+            width:'360px',
+              height:'65px'
 
           }}
 
@@ -368,7 +371,8 @@ myHeaders.append("Authorization", `Bearer ${JSON.parse(localStorage.getItem('acc
               '&.Mui-focused fieldset': {
                 borderColor: '#0BD19D',
               },
-            },
+            },width:'360px',
+            height:'65px'
 
           }}
 
@@ -379,16 +383,16 @@ myHeaders.append("Authorization", `Bearer ${JSON.parse(localStorage.getItem('acc
         > Add</Button>}
       </div>
     </div>:
-      <div className="text-white min-h-screen w-full" ref={viewRef}>
-    <Button onClick={goBack} > Go Back</Button>
-   {allStocks.length!==0? <div className='flex flex-col gap-2' >
+      <div className="text-white min-h-screen w-full pt-10 flex flex-col items-center" ref={viewRef}>
+    <div onClick={goBack} className='flex gap-3 justify-start md:w-[75%] items-center' > <img src={backarrow}/> <span className='text-[#FEC008] font-bold text-2xl'>Your Stocks</span></div>
+   {allStocks.length!==0? <div className='flex flex-col gap-2 pt-5' >
    {allStocks?.map(each=>{
-    return <div className='text-slate-200 flex justify-between w-full rounded-sm h-16 items-center p-3 bg-[#2B2B2B] gap-2 hover:cursor-pointer' onClick={()=>editStock(each)}><span>{each.stockName}</span><span className='text-[#0BD19D]'>₹{each.currentTotalValue.toFixed(1)    }</span></div>
+    return <div className='text-slate-200 flex justify-between rounded-sm h-16 items-center p-3 bg-[#2B2B2B] gap-2 hover:cursor-pointer w-96' onClick={()=>editStock(each)}><span>{each.stockName}</span><span className='text-[#0BD19D]'>₹{each.currentTotalValue.toFixed(1)    }</span></div>
    })}
    </div>:
-   <div className='flex flex-col gap-2' >
-     <div className='text-slate-200 flex justify-between w-full rounded-sm h-16 items-center p-3 bg-[#2B2B2B] gap-2 hover:cursor-pointer'><span>NO RECORDS FOUND</span><span className='text-[#0BD19D]'></span></div>
-   </div> }
+   
+     <div className='mt-10 bg-[#2B2B2B] h-16 flex justify-center items-center rounded-lg w-[360px]'><span>NO RECORDS FOUND</span></div>
+   }
   </div>
   }
   </>

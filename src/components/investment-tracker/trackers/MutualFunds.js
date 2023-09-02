@@ -9,7 +9,7 @@ import { GenerateNewToken } from '../../utils/api';
 import { useNavigate } from "react-router-dom";
 import arrow from "../../../assets/arrow.svg"
 import { makeStyles } from "@material-ui/core/styles";
-
+import backarrow from '../../../assets/backarrow.svg'
 const useStyles = makeStyles({
   paper: {
     backgroundColor: "#2B2B2B",
@@ -250,11 +250,11 @@ const editScheme=(each)=>{
       >
         <CircularProgress color="inherit" />
       </Backdrop>}
-    {!viewSchemes?<div className="flex flex-col justify-between gap-10">
+    {!viewSchemes?<div className="flex flex-col justify-between gap-10 ">
       <div className='flex flex-col gap-3'>
-          <div className='text-[#FEC008] font-bold text-2xl'>Mutual Funds</div>
-          <div className='text-slate-300 flex justify-between w-full rounded-lg p-3 bg-[#2B2B2B]'><span>Value</span><span className='text-[#0BD19D] font-bold text-xl'>₹ {tracker?.currentValues?.toFixed(1)}</span> </div>
-          <div className='text-slate-200 flex justify-between w-full rounded-lg p-3 bg-[#2B2B2B] hover:cursor-pointer' onClick={()=>setViewSchemes(true)}><span>View Your Schemes</span><img src={arrow} /></div>
+          <div className='font-manrope text-[#FEC008] font-bold text-2xl'>Mutual Funds</div>
+          <div className='text-slate-300 flex justify-between w-full rounded-lg p-3 bg-[#2B2B2B] items-center'><span>Value</span><span className='text-[#0BD19D] font-bold text-xl'>₹ {tracker?.currentValues?.toFixed(1)}</span> </div>
+          <div className='text-slate-200 flex justify-between w-full rounded-lg p-3 bg-[#2B2B2B] items-center h-16 hover:cursor-pointer' onClick={()=>setViewSchemes(true)}><span>View Your Schemes</span><img src={arrow} /></div>
         </div>
         <div className='max-w-full flex flex-col gap-5'>
          <Autocomplete
@@ -288,7 +288,8 @@ const editScheme=(each)=>{
             "& fieldset": {
               border: "1px solid white",
             },
-
+            width:'360px',
+            height:'65px'
         }}
          
           />
@@ -312,7 +313,8 @@ const editScheme=(each)=>{
                   "& fieldset": {
                     border: "1px solid white",
                   },
-
+                  width:'360px',
+                  height:'65px'
               }}
               
                 onChange={(e) => setBuyAveragePrice(e.target.value)  }
@@ -334,7 +336,8 @@ const editScheme=(each)=>{
                 "& fieldset": {
                   border: "1px solid white",
                 },
-               
+                width:'360px',
+                height:'65px'
 
             }}
 
@@ -345,16 +348,16 @@ const editScheme=(each)=>{
         > Add</Button>}
         </div>
     </div>:
-  <div className="text-white min-h-screen w-full" ref={viewRef}>
-    <Button onClick={goBack} > Go Back</Button>
-    {allSchemes.length!==0 ? <div className='flex flex-col gap-2' >
+  <div className="text-white min-h-screen w-full pt-10 flex flex-col items-center" ref={viewRef}>
+    <div onClick={goBack} className='flex gap-3 justify-start md:w-[75%] items-center' > <img src={backarrow}/> <span className='text-[#FEC008] font-bold text-2xl'>Your Funds</span></div>
+    {allSchemes.length!==0 ? <div className='flex flex-col gap-2 pt-5' >
    {allSchemes?.map(each=>{
     return <div className='text-slate-200 flex justify-between w-full rounded-sm h-16 items-center p-3 bg-[#2B2B2B] gap-2 hover:cursor-pointer' 
     onClick={()=>editScheme(each)}
     ><span>{each.schemeName}</span><span className='text-[#0BD19D]'>₹{each.currentTotalValue.toFixed(1)    }</span></div>
    })}
    </div>:
-   <div className='text-slate-200 flex justify-between w-full rounded-sm h-16 items-center p-3 bg-[#2B2B2B] gap-2 hover:cursor-pointer'><span>NO RECORDS FOUND</span><span className='text-[#0BD19D]'></span></div>
+   <div className='mt-10 bg-[#2B2B2B] h-16 flex justify-center items-center rounded-lg w-[360px]'><span>NO RECORDS FOUND</span></div>
    }
   </div>
   }

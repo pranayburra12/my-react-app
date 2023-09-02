@@ -42,36 +42,43 @@ const SideBar = () => {
   const sidebarmenu=[{
     label:'Demat',
     logo:Dmat,
-    navigate:'/demat'
+    navigate:'/demat',
+    width:'34px'
   },
 {
   label:'Cibil score',
   logo:Invest,
-  navigate:'/cibilscore'
+  navigate:'/cibilscore',
+  width:'36px'
 },
 {label:'SIP calculator',
 logo:Sip,
-navigate:'/sip-calculator'
+navigate:'/sip-calculator',
+width:'35px'
 },
 {
   label:'Investment Tracker',
   logo:SideRound,
-  navigate:'/inverstment-tracker'
+  navigate:'/inverstment-tracker',
+  width:'28px'
 },
 {
   label:'Expense Management',
   logo:Wallet,
-  navigate:'/expence-management'
+  navigate:'/expence-management',
+  width:'33px'
 }
 ,{
   label:'Tax Calculator',
   logo:Tax,
-  navigate:'/tax-calculator'
+  navigate:'/tax-calculator',
+  width:'50px'
 },
 {
   label:'Exit',
   logo:Logout,
-  navigate:'/'
+  navigate:'/',
+  width:'26px'
 }
 ];
    const [state, setState] = useState(false);
@@ -194,11 +201,11 @@ navigate:'/sip-calculator'
         <img src={LogoBig} width='200px' />
       </div>
        {/* <div className=""><img src={LogoBig} width='200px' className="" onClick={toggleSidebar}/></div> */}
-      <div className={`sidebar ${isOpen ? "open" : ""} md:block md:w-100 fixed`}
+      <div className={`sidebar ${isOpen ? "open" : ""} md:block md:w-50 fixed`}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
       >
-        <div className="flex  w-20"><img src={Logo} width='50px' /></div>
+        <div className="flex w-22"><img src={Logo}  /></div>
 
          {sidebarmenu?.map((each)=>{
           return <div className={`flex items-center gap-2 p-2 mt-2 cursor-pointer ${each.navigate !== window.location.pathname ? "opacity-50" : "opacity-100"} hover:opacity-100  ${each.label}`} onClick={()=>{onSubmit(each)}} 
@@ -207,7 +214,7 @@ navigate:'/sip-calculator'
           //   background:`${each.navigate === window.location.pathname ? "#2B2B2B" : "transparent"}`,
           //   borderRadius:`${each.navigate === window.location.pathname ? "15px" : "transparent"}`
           // }}
-          ><img src={each.logo} width='40px'/><div className={`text-center w-full text-slate-100 ${isOpen ? "" : "hidden"} md:text-left`}>{each.label}</div></div>
+          ><img src={each.logo} width={each.width}/><div className={`text-center w-full text-slate-100 ${isOpen ? "" : "hidden"} md:text-left`}>{each.label}</div></div>
         })}
       </div>
     {/* <div

@@ -9,6 +9,7 @@ import upstock2 from "../../assets/upstock2.svg"
 import upstock3 from "../../assets/upstock4.svg"
 import upstock4 from "../../assets/ups6.svg"
 import rightarrow from "../../assets/Group 1260.svg"
+import openDemat from '../../assets/open-demat.png'
 const Dmart = () => {
     const partners=[{
         name:'upstocks',
@@ -38,23 +39,23 @@ const Dmart = () => {
 
 ]
     return (
-        <div className="text-white flex flex-col h-screen mb-36 md:pl-24 md:flex-row md:justify-around md:h-full md:mb-0 ">
-           <div className="m-5 ">
-            <div className="flex flex-col gap-3 pb-14">
-                <span className="">Open your</span>
-                <img src={dmat} className="w-40 mt-3 "/>
-                <img src={dematInstant} className="w-40 mt-3"/>
+        <div className="text-white flex flex-col h-screen mb-36 md:pl-24 md:flex-row md:justify-around md:h-full md:mb-0">
+           <div className="flex flex-col justify-around">
+            <div className="flex flex-col gap-3 p-0 md:pt-14">
+                {/* <span className="">Open your</span> */}
+                <img src={openDemat} className="w-[250px] mt-3 "/>
+                {/* <img src={dematInstant} className="w-40 mt-3"/> */}
             </div>
-            <div className="hidden md:contents ">
+            <div className="hidden md:flex w-[500px] h-[400px]">
                 <AddS />
             </div>
            </div>
-           <div className="m-5 md:w-1/3">
-               <div className="flex items-center justify-between  demart-navigate pb-8  md:pb-12">
+           <div className="flex flex-col justify-end md:w-1/3">
+               <div className="flex items-center justify-between  md:pb-12">
                     <span className=" border-b-[1px] pb-2 text-xl" style={{borderColor: "#A5A5A5"}}>Our Partners</span>
                     <span className="text-sm" style={{color: "#A5A5A5"}}>select below</span>
                 </div>
-            <div className="m-2 flex flex-col gap-5">
+            <div className="m-2 flex flex-col justify-around h-[70%]">
             {
                 partners.map((each)=>{
                     return (

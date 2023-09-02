@@ -226,7 +226,7 @@ const Gold = (props) => {
       <div class="font-manrope text-sm" style={{ color: "#969696" }}>{props.subHEading}</div>
       <div class="text-4xl pt-1 pb-7 " style={{ color: "#FEC008" }}>{props.heading}</div>
     </div>
-          <div className="text-slate-300 flex justify-between w-full rounded-lg p-3 bg-[#2B2B2B]" style={{ background: "#2B2B2B" }}>
+          <div className="text-slate-300 flex justify-between w-full rounded-lg p-3 bg-[#2B2B2B] h-16 items-center" style={{ background: "#2B2B2B" }}>
            <span>Invested Gold</span>
            <span className='text-[#0BD19D] font-bold text-xl'>₹ {currentGold?.currentGoldInvestmentPrice ? currentGold?.currentGoldInvestmentPrice.toFixed(2) : "0"} <span className="text-xs opacity-70">({currentGold?.numberOfGrams } grams)</span></span> </div>
 

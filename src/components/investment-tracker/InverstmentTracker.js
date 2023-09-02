@@ -143,15 +143,15 @@ const InverstmentTracker = () => {
                 getDashboard = {()=>{getAllTrackers()}}
                 
             />
-            case "newTracker":
+            // case "newTracker":
             default:
                 return (
-                    <div className="flex flex-col justify-around row-span-2 text-white h-full items-center">
-                        <div className="border border-[#F1CA00] p-5 rounded-2xl w-[90%] flex flex-col items-center	cursor-pointer" onClick={() => { setAddTracker(true) }}>
+                    <div className="flex flex-col justify-between row-span-2 text-white h-full items-center md:pt-5 gap-10">
+                        <div className="border border-[#F1CA00] p-5 rounded-2xl md:w-[450px] w-full flex flex-col items-center	cursor-pointer md:h-[250px] justify-center gap-3" onClick={() => { setAddTracker(true) }}>
                             <div className="heading"  >Add a tracker</div>
                             <img src={add} />
                         </div>
-                        <div className="flex flex-col items-center border border-white rounded-xl">
+                        <div className="flex flex-col items-center rounded-xl md:w-[450px] md:h-[350px]">
                             <AddS />
                         </div>
                     </div>)
@@ -192,7 +192,7 @@ const InverstmentTracker = () => {
     return (    
         <>
         
-            <div className="grid grid-cols-1 md:grid-cols-5 gap-5 p-4 md:p-1 md:pl-40 items-start justify-center">
+            <div className="grid grid-cols-1 md:grid-cols-5 gap-5 p-4 md:p-1 md:pl-52 md:pt-4 items-start justify-center">
             {  loader 
            &&
                 <Backdrop
@@ -204,11 +204,11 @@ const InverstmentTracker = () => {
                 </Backdrop>}
             <div className="flex flex-col md:col-span-3 gap-5 md:gap-10">
             <div className="text-2xl md:text-3xl leading-normal font-bold" style={{color: "#FFF",fontFamily:'Manrope'}}>Investment Tracker</div>
-                <div className=" text-white border border-slate-200 items-center justify-between p-8 rounded-xl md:h-50">
+                <div className=" text-white border border-[#707070] items-center justify-between p-8 rounded-xl md:h-50 bg-[#2B2B2B]">
                     <div className=""> 
                     <div className="float-right">Net Worth</div>
                         <div className="flex gap-3 items-center ">
-                            <div className="text-2xl md:text-4xl font-semibold p-0 md:pt-8">₹ {total?.toFixed(2)}</div>
+                            <div className="text-2xl md:text-7xl font-inter font-bold p-0 md:pt-8">₹ {total?.toFixed(1)}</div>
                             <div className={currentTotal>=0?"bg-green-700 text-green-200 rounded-sm p-0.5 flex m-0 md:mt-6":"bg-red-700 text-red-200 rounded-sm p-0.5 flex m-0 md:mt-6"}>
                                 <div className="inline text-xs md:text-sm">{currentTotal?.toFixed(2)}%</div>
                                 <img className="inline" src={group} />
@@ -224,7 +224,7 @@ const InverstmentTracker = () => {
                     {
                  listOfTrackersData?.map((item) => {
                             return (
-                                <div className={item.name !== changeTracker?.name ? "flex m-2 min-w-[100%] bg-[#2B2B2B] rounded-2xl	md:w-44 hover:cursor-pointer Content" : "flex m-2 min-w-[100%] bg-[#2B2B2B] rounded-2xl	md:w-44 border border-[#F1CA00] Content"} onClick={() => { onChangeTracker(item) }}>
+                                <div className={item.name !== changeTracker?.name ? "flex m-2 min-w-[300px] bg-[#2B2B2B] rounded-2xl	md:w-44 hover:cursor-pointer Content h-[150px]" : "flex m-2 min-w-[300px] bg-[#2B2B2B] rounded-2xl	md:w-44 border border-[#F1CA00] Content h-[150px]"} onClick={() => { onChangeTracker(item) }}>
 
                                     {getImage(item)}
                                     <div className="text-white pt-2 pb-2 flex flex-col  justify-around">
@@ -243,7 +243,7 @@ const InverstmentTracker = () => {
 
                 </div>
             </div>
-            <div className="md:col-span-2 md:p-10 h-full flex items-center">
+            <div className="md:col-span-2 md:p-10 h-full flex items-center md:justify-center md:border-l md:border-white">
                 {
                     addTracker ? <NewTracker navugateToOldView={()=>{changeTooldView()}} /> : renderTrackerDetail(changeTracker)
                 }

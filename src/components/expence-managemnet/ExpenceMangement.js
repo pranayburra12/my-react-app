@@ -431,7 +431,7 @@ ctx.font='24px sans-sarif';
 }
 
     return(
-        <div className="grid grid-cols-1 md:grid-cols-6 p-2 md:p-1 md:pl-40 justify-center">
+        <div className="grid grid-cols-1 md:grid-cols-6 p-2 md:p-1 md:pl-52 md:pt-20 justify-center gap-5">
           {loader&& <Backdrop
         sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={loader}
@@ -439,7 +439,7 @@ ctx.font='24px sans-sarif';
       >
         <CircularProgress color="inherit" />
       </Backdrop>}
-           <div className=" text-white md:flex md:justify-around md:overflow-hidden gap-2 overflow-scroll w-full md:col-span-3 md:row-span-1 flex p-4 md:h-32">
+           <div className=" text-white md:flex md:justify-around md:overflow-hidden gap-2 overflow-scroll w-[full] md:col-span-3 md:row-span-1 flex p-4 md:h-32">
                 <div className="bg-[#2B2B2B] md:row-span-1 rounded-lg min-w-[98%] md:min-w-[30%]">
                   <div className={bargraph=='monthly_income'?"text-white flex flex-col-reverse items-center justify-center h-full cursor-pointer border border-yellow-300 rounded-lg":"text-white flex flex-col-reverse items-center justify-center h-full cursor-pointer "} onClick={()=>setBarGraph('monthly_income')}>                                          
                         <div className="text-[#707070] ">Total Income</div>
@@ -480,14 +480,16 @@ ctx.font='24px sans-sarif';
                                            
                                         </div>
             </div>
-            <div className="md:col-span-2 md:row-span-3 text-white p-5 flex flex-col justify-start gap-10">
-                <div className="flex flex-col gap-5 justify-center">
+            <div className="md:col-span-2 md:row-span-3 text-white p-5 flex flex-col justify-start gap-10 w-[360px] items-center">
+                <div className="flex flex-col gap-5 justify-center w-full">
                   <div className="flex justify-between p-3">
                     <span>Edit / Manage</span>
                     <img src={calender} alt='calender' width='20px'/>
                   </div>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <Stack spacing={2}>
+            <LocalizationProvider dateAdapter={AdapterDayjs}  sx={{
+          width:'100%'
+        }}>
+      <Stack spacing={2} >
         <Stack direction="row" spacing={2} className="justify-around">
         <div className="flex flex-col justify-center text-lg gap-3 items-center">
             <img src={dateUp} className='w-6'onClick={() => setSelectedSectionType('day_up')}/>
@@ -544,7 +546,7 @@ ctx.font='24px sans-sarif';
                      />
                    </div>
     </div>
-    <div className="flex flex-col gap-5 text-white">
+    <div className="flex flex-col gap-5 text-white items-center">
     
                    <div className="flex justify-between  rounded-xl rounded-10 h-16  bg-[#2B2B2B] border border-[#FF426F]" >
                    <input

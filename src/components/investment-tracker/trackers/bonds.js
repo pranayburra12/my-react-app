@@ -203,7 +203,7 @@ const Bonds = (props) => {
         <>
         {  !viewBonds
            ? 
-           <><div className="w-full pt-5 md: p-0">
+           <><div className="w-[360px] flex flex-col h-full gap-5">
  {
   loader &&   <Backdrop
   sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
@@ -213,16 +213,16 @@ const Bonds = (props) => {
     <CircularProgress color="inherit" />
   </Backdrop>
  }
-                 <div className='flex flex-col gap-5'>
-                 <div className=" flex flex-col">
+                 <div className='flex flex-col'>
+                
                <div class="font-manrope text-sm " style={{ color: "#969696" }}>{props.subHEading}</div>
-               <div class="text-4xl pt-1 pb-7 " style={{ color: "#FEC008" }}>{props.heading}</div>
-             </div>
+               <div className='font-manrope text-[#FEC008] font-bold text-2xl'>Bonds</div>
+          </div>
              <div className='text-slate-300 flex justify-between w-full rounded-lg p-3 bg-[#2B2B2B]'><span className=''>Current Bonds</span><span className='text-[#0BD19D] font-bold text-xl'>₹{currentBond ? currentBond : "0"}</span> </div>
 
  
                    <div>
-                     <div className='text-slate-200 flex justify-between rounded-lg p-3 bg-[#2B2B2B] hover:cursor-pointer rounded-s-xl' onClick={() => { setViewBonds(true); } }><span>View Your Bonds</span><img src={arrow} /></div>
+                     <div className='text-slate-200 flex justify-between items-center rounded-lg p-3 bg-[#2B2B2B] hover:cursor-pointer h-16' onClick={() => { setViewBonds(true); } }><span>View Your Bonds</span><img src={arrow} width='25px'/></div>
                    </div>
  
                    <div className="flex justify-between  rounded-xl rounded-10 h-16  bg-[#2B2B2B]">
@@ -262,7 +262,7 @@ const Bonds = (props) => {
                    {!isRemoveStockValid &&
                      <span style={{ color: 'red' }}>{validationMessage}</span>}
                    <div><Button color='success' variant="outlined" onClick={()=>{setShow(true)}}>{ editFlow? "save changes" : "Add new bond" }</Button></div>
-                 </div>
+                 
                </div></>
            :
            <div className="text-white min-h-screen w-full" ref={viewRef}>

@@ -50,7 +50,7 @@ const Header = () => {
 
   return (
     <><>
-      <div className="items-center p-0 md:pl-32 fixed bottom-0 h-24 w-full flex justify-around bg-[rgb(20,20,20)] items-start border-t-2 border-white gap-4 p-4 md:top-0 z-10 md:border-none md:justify-around md:gap-10">
+      <div className="md:pl-60 fixed bottom-0 h-24 md:h-40 w-full flex justify-around bg-[rgb(20,20,20)] border-t-2 border-white gap-4 p-4 md:top-0 z-10 md:border-none md:justify-around md:gap-10 items-center">
         <div className="flex md:justify-start justify-between grow md:gap-10 ">
           {data?.map((each) => {
             return <div className="flex flex-col items-center justify-around w-10 md:w-max"><img src={each.icon} className="md:hidden" /><span className="text-[#e5e7eb] text-center text-sm	md:text-lg">{each.label}</span></div>;
