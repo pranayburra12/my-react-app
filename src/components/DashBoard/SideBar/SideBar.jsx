@@ -18,7 +18,7 @@ import Box from "@mui/material/Box";
 // import Typography from "@mui/material/Typography";
 import Drawer from "@mui/material/Drawer";
 import { GenerateNewToken } from '../../utils/api';
-import {api} from '../utils/constant'
+import {api} from '../../utils/constant'
 const baseUrl=api.baseUrl
 
 const SideBar = () => {
