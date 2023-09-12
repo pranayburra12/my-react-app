@@ -18,7 +18,8 @@ import Box from "@mui/material/Box";
 // import Typography from "@mui/material/Typography";
 import Drawer from "@mui/material/Drawer";
 import { GenerateNewToken } from '../../utils/api';
-const baseUrl='http://3.237.3.113:3000'
+import {api} from '../utils/constant'
+const baseUrl=api.baseUrl
 
 const SideBar = () => {
   const [isOpen, setIsOpen] = useState(false);
