@@ -5,9 +5,10 @@ import { useNavigate } from "react-router-dom";
 import Snackbar from '@mui/material/Snackbar';
 import { Button, IconButton } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
+import {api} from '../utils/constant'
 
 const OTPSection = (props) => {
-  const baseUrl='http://3.237.3.113:3000'
+  const baseUrl=api.baseUrl
 
   const navigate = useNavigate();
 

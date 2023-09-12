@@ -6,9 +6,12 @@ import { Backdrop, CircularProgress } from "@mui/material";
 import ModalComponent from "../../../modal/modal";
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
+import {api} from '../../utils/constant';
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
+
+const baseUrl=api.baseUrl 
 const PPF = (props) => {
 
   const navigate = useNavigate();
@@ -75,7 +78,7 @@ const PPF = (props) => {
       redirect: 'follow'
     };
 
-    fetch("http://3.237.3.113:3000/ppf/getTotalPPF", requestOptions)
+    fetch(`${baseUrl}/ppf/getTotalPPF`, requestOptions)
       .then(response => response.json())
       .then(result => {
         console.log(result)
@@ -130,7 +133,7 @@ const PPF = (props) => {
       redirect: 'follow'
     };
 
-    fetch("http://3.237.3.113:3000/ppf/addPPF", requestOptions)
+    fetch(`${baseUrl}/ppf/addPPF`, requestOptions)
       .then(response => response.json())
       .then(result => {
         console.log(result)
@@ -178,7 +181,7 @@ const PPF = (props) => {
       redirect: 'follow'
     };
 
-    fetch("http://3.237.3.113:3000/ppf/removePPF", requestOptions)
+    fetch(`${baseUrl}/ppf/removePPF`, requestOptions)
       .then(response => response.json())
       .then(result => {
         console.log(result)

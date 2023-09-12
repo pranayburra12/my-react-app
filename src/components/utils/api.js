@@ -1,4 +1,6 @@
 
+import {api} from '../utils/constant'
+
 export const GenerateNewToken = (props) => {
     try {
         const myHeaders = new Headers()
@@ -12,7 +14,7 @@ export const GenerateNewToken = (props) => {
             body: raw,
             redirect: 'follow'
         };
-        fetch(`http://3.237.3.113:3000/auth/generateNewToken`, requestOptions)
+        fetch(`${api.baseUrl}/auth/generateNewToken`, requestOptions)
             .then((res) => {
                 return res.json();
             })

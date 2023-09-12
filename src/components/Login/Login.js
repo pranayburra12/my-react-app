@@ -22,11 +22,11 @@ import {  IconButton } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 import ModalComponent from "../../modal/modal";
 import FormDialog from "./dailog";
-
+import {api} from '../utils/constant'
 const Login = (props) => {
 
 
-  const baseUrl='http://3.237.3.113:3000' 
+  // const baseUrl=api.baseUrl 
 
   const [open, setOpen] = React.useState(false);
   const [meassage,setMessage] = useState("")
@@ -99,7 +99,7 @@ const Login = (props) => {
         redirect: 'follow'
       };
   
-      fetch(`${baseUrl}/auth/login`, requestOptions)
+      fetch(`${api.baseUrl}/auth/login`, requestOptions)
       .then((res)=>{
         return res.json();
       })
@@ -126,6 +126,7 @@ const Login = (props) => {
     } catch (error) {
       console.log("Error:", error);
       setIsSubmitting(false)
+      setLoader(false)
       toast.error("Login failed. Please check your credentials.");
     }
   };
@@ -184,7 +185,7 @@ const Login = (props) => {
         redirect: 'follow'
       };
   
-      fetch(`${baseUrl}/auth/forgotPassword`, requestOptions)
+      fetch(`${api.baseUrl}/auth/forgotPassword`, requestOptions)
       .then((res)=>{
         return res.json();
       })

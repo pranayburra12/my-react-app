@@ -9,15 +9,20 @@ import { GenerateNewToken } from '../../utils/api';
 import { useNavigate } from "react-router-dom";
 import arrow from "../../../assets/arrow.svg"
 import { makeStyles } from "@material-ui/core/styles";
-import backarrow from '../../../assets/backarrow.svg'
+import backarrow from '../../../assets/backarrow.svg';
+import {api} from '../../utils/constant'
+
 const useStyles = makeStyles({
   paper: {
     backgroundColor: "#2B2B2B",
     color:'white'
   }
 });
+
+
 export default function MutualFunds({tracker, getDashboard }) {
   const classes = useStyles();
+  const baseUrl=api.baseUrl
   const navigate = useNavigate();
   const viewRef=useRef();
   const [schemeName,setSchemeName]=useState('');
@@ -91,7 +96,7 @@ export default function MutualFunds({tracker, getDashboard }) {
         redirect: 'follow'
       };
       
-      fetch("http://3.237.3.113:3000/mutualFunds/saveQuantity", requestOptions)
+      fetch(`${baseUrl}/mutualFunds/saveQuantity`, requestOptions)
         .then(response => response.json())
         .then(result => {console.log(result)
         setViewSchemes(true)
@@ -125,7 +130,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("http://3.237.3.113:3000/mutualFunds/getInvestmentHistory", requestOptions)
+fetch(`${baseUrl}/mutualFunds/getInvestmentHistory`, requestOptions)
   .then(response => response.json())
   .then(result =>{
     if( result?.message === "Token Invalid/Expired"){
@@ -140,11 +145,14 @@ fetch("http://3.237.3.113:3000/mutualFunds/getInvestmentHistory", requestOptions
       GenerateNewToken(route,payload,navigate)
     }else{
       setAllSchemes(result?.data)
+      console.log(result)
     }
     
     setLoader(false)
   })
-  .catch(error => console.log('error', error));}
+  .catch(error => {console.log('error', error)
+  setLoader(false)
+})}
       },[viewSchemes])
 
 const editScheme=(each)=>{
@@ -199,7 +207,7 @@ const editScheme=(each)=>{
         redirect: 'follow'
       };
 
-      fetch("http://3.237.3.113:3000/mutualFunds/editQuantity", requestOptions)
+      fetch(`${baseUrl}/mutualFunds/editQuantity`, requestOptions)
         .then(response => response.json())
         .then(result => {console.log(result)
           setViewSchemes(true)
@@ -230,7 +238,7 @@ const editScheme=(each)=>{
         redirect: 'follow'
       };
 
-      fetch("http://3.237.3.113:3000/mutualFunds/deleteMutualFunds", requestOptions)
+      fetch(`${baseUrl}/mutualFunds/deleteMutualFunds`, requestOptions)
         .then(response => response.json())
         .then(result => {console.log(result)
           setViewSchemes(true)

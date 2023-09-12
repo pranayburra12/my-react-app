@@ -39,7 +39,7 @@ const Dmart = () => {
 
 ]
     return (
-        <div className="text-white flex flex-col h-screen mb-36 md:pl-24 md:flex-row md:justify-around md:h-full md:mb-0">
+        <div className="text-white flex flex-col h-screen mb-36 md:pl-52 md:flex-row md:justify-around md:h-full md:mb-0">
            <div className="flex flex-col justify-around">
             <div className="flex flex-col gap-3 p-0 md:pt-14">
                 {/* <span className="">Open your</span> */}

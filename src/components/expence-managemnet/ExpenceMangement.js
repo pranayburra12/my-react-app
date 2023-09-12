@@ -15,6 +15,8 @@ import BarChart from "../charts/BarChart";
 import DoughnutChart from '../charts/DoughnutChart'
 import { useNavigate } from "react-router-dom";
 import { GenerateNewToken } from "../utils/api";
+import {api} from '../utils/constant'
+
 import {
  
   Autocomplete, Button,Backdrop,CircularProgress
@@ -24,7 +26,7 @@ import calender from '../../assets/calender.svg'
 const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
   "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
 ];
-const baseUrl='http://3.237.3.113:3000';
+const baseUrl=api.baseUrl;
 
 const today = dayjs();
 

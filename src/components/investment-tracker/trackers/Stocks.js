@@ -9,7 +9,8 @@ import { GenerateNewToken } from '../../utils/api';
 import { useNavigate } from "react-router-dom";
 import arrow from "../../../assets/arrow.svg"
 import { makeStyles } from "@material-ui/core/styles";
-import backarrow from '../../../assets/backarrow.svg'
+import backarrow from '../../../assets/backarrow.svg';
+import {api} from '../../utils/constant';
 const useStyles = makeStyles({
   paper: {
     backgroundColor: "#2B2B2B",
@@ -17,7 +18,8 @@ const useStyles = makeStyles({
       
   }
 });
-const baseUrl='http://3.237.3.113:3000';
+// const baseUrl='http://3.237.3.113:3000';
+const baseUrl=api.baseUrl 
 
 export default function Stocks({tracker,getDashboard}) {
   const classes = useStyles();

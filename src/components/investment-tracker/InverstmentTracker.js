@@ -24,12 +24,13 @@ import { useNavigate } from "react-router-dom";
 import { GenerateNewToken } from "../utils/api";
 import AddS from "../../adds/adds";
 import { Backdrop, CircularProgress } from "@mui/material";
-const baseUrl='http://3.237.3.113:3000'
+// const baseUrl='http://3.237.3.113:3000'
+import {api} from '../utils/constant'
 
 const InverstmentTracker = () => {
 
     const navigate = useNavigate();
-
+    const baseUrl=api.baseUrl 
     const [changeTracker, setChangeTracket] = useState();
     const [addTracker, setAddTracker] = useState(false)
 
@@ -86,10 +87,12 @@ const InverstmentTracker = () => {
                 setTotal(t)
                 let p=((c-t)/t)*100;
                 setCurrentTotal(p)
-                setLoader(false)
+                
               }
+              setLoader(false)
           })
-          .catch(error => console.log('error', error));
+          .catch(error => {console.log('error', error)
+          setLoader(false)});
     }
 
 
@@ -222,9 +225,9 @@ const InverstmentTracker = () => {
                 </div>
                 <div className="pb-10 md:pb-12 flex overflow-scroll w-full md:grid md:grid-rows-2 md:grid-flow-col md:gap-4 md:p-4 Flipped mt-4 pt-4 p-4 ">
                     {
-                 listOfTrackersData?.map((item) => {
+                 listOfTrackersData?.map((item,index) => {
                             return (
-                                <div className={item.name !== changeTracker?.name ? "flex m-2 min-w-[300px] bg-[#2B2B2B] rounded-2xl	md:w-44 hover:cursor-pointer Content h-[150px]" : "flex m-2 min-w-[300px] bg-[#2B2B2B] rounded-2xl	md:w-44 border border-[#F1CA00] Content h-[150px]"} onClick={() => { onChangeTracker(item) }}>
+                                <div key={index} className={item.name !== changeTracker?.name ? "flex m-2 min-w-[300px] bg-[#2B2B2B] rounded-2xl	md:w-44 hover:cursor-pointer Content h-[150px]" : "flex m-2 min-w-[300px] bg-[#2B2B2B] rounded-2xl	md:w-44 border border-[#F1CA00] Content h-[150px]"} onClick={() => { onChangeTracker(item) }}>
 
                                     {getImage(item)}
                                     <div className="text-white pt-2 pb-2 flex flex-col  justify-around">
@@ -243,7 +246,7 @@ const InverstmentTracker = () => {
 
                 </div>
             </div>
-            <div className="md:col-span-2 md:p-10 h-full flex items-center md:justify-center md:border-l md:border-white">
+            <div className="md:col-span-2 md:p-12 h-full flex items-center md:justify-center md:border-l md:border-white">
                 {
                     addTracker ? <NewTracker navugateToOldView={()=>{changeTooldView()}} /> : renderTrackerDetail(changeTracker)
                 }

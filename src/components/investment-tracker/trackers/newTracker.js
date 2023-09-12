@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import TextField from '@mui/material/TextField';
 import { Backdrop, CircularProgress } from "@mui/material";
 import {Button} from "@mui/material";
+import {api} from '../../utils/constant'
+const baseUrl=api.baseUrl 
 const NewTracker = (props) => {
 
   const [trackerName, setTrackerName] = useState("")
@@ -38,7 +40,7 @@ const NewTracker = (props) => {
       redirect: 'follow'
     };
 
-    fetch("http://3.237.3.113:3000/customTracker/addTracker", requestOptions)
+    fetch(`${baseUrl}/customTracker/addTracker`, requestOptions)
       .then(response => response.json())
       .then(result => {
         console.log(result)

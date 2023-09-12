@@ -7,7 +7,9 @@ import { useNavigate } from "react-router-dom";
 import Snackbar from '@mui/material/Snackbar';
 import { Button, IconButton } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
-const baseUrl='http://3.237.3.113:3000'
+import {api} from '../utils/constant';
+
+const baseUrl=api.baseUrl
 
 const SignUp = () => {
 

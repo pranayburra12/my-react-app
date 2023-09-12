@@ -5,9 +5,10 @@ import { useNavigate  } from "react-router-dom";
 import { GenerateNewToken } from "../../utils/api";
 import ModalComponent from "../../../modal/modal";
 import { Backdrop, CircularProgress } from "@mui/material";
-
+import {api} from '../../utils/constant'
+const baseUrl=api.baseUrl 
 const CustomTracker = (props) => {
-  const baseUrl='http://3.237.3.113:3000'
+  // const baseUrl='http://3.237.3.113:3000'
 
   const navigate = useNavigate();
   const [show,setShow] = useState(false)
@@ -41,7 +42,7 @@ const totalSavings = () =>{
         redirect: 'follow'
       };
 
-      fetch(`http://3.237.3.113:3000/customTracker/getTrackerData/${props?.changeTracker?.id}`, requestOptions)
+      fetch(`${baseUrl}/customTracker/getTrackerData/${props?.changeTracker?.id}`, requestOptions)
         .then(response => response.json())
         .then(result => {console.log(result)
             if( result?.message === "Token Invalid/Expired"){
@@ -89,7 +90,7 @@ const totalSavings = () =>{
       redirect: 'follow'
     };
 
-    fetch("http://3.237.3.113:3000/customTracker/editTrackerData", requestOptions)
+    fetch(`${baseUrl}/customTracker/editTrackerData`, requestOptions)
       .then(response => response.json())
       .then(result => {
         console.log(result)
@@ -117,7 +118,7 @@ const totalSavings = () =>{
       redirect: 'follow'
     };
 
-    fetch("http://3.237.3.113:3000/customTracker/editTrackerName", requestOptions)
+    fetch(`${baseUrl}/customTracker/editTrackerName`, requestOptions)
       .then(response => response.json())
       .then(result => {
         console.log(result)
@@ -145,7 +146,7 @@ const totalSavings = () =>{
       redirect: 'follow'
     };
 
-    fetch("http://3.237.3.113:3000/customTracker/deleteTracker", requestOptions)
+    fetch(`${baseUrl}/customTracker/deleteTracker`, requestOptions)
       .then(response => response.json())
       .then(result => {
         console.log(result)

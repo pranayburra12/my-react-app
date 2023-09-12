@@ -16,11 +16,12 @@ import {
 import Snackbar from '@mui/material/Snackbar';
 import {  IconButton } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
+import {api} from './utils/constant'
 
 const ForgetPassword = (props) => {
 
 
-  const baseUrl='http://3.237.3.113:3000' 
+  const baseUrl=api.baseUrl
 
   const [open, setOpen] = React.useState(false);
   const [meassage,setMessage] = useState("")

@@ -322,7 +322,7 @@ setDoughnutData(
     </div>
                     <div className="sip-section1-3">
                       <h4>Investment Duration</h4>
-    <Box sx={{padding:'30px'}}>
+    <Box sx={{padding:'30px',minWidth:'200px'}}>
       <Slider
         defaultValue={10}
         // getAriaValueText={valuetext}

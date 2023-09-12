@@ -6,9 +6,12 @@ import ModalComponent from "../../../modal/modal";
 import { Backdrop, CircularProgress } from "@mui/material";
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
+import {api} from '../../utils/constant'
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
+
+const baseUrl=api.baseUrl 
 const Savings = (props) => {
 
     const navigate = useNavigate();
@@ -56,7 +59,7 @@ const Savings = (props) => {
             redirect: 'follow'
           };
     
-          fetch("http://3.237.3.113:3000/saving/getTotalSavings", requestOptions)
+          fetch(`${baseUrl}/saving/getTotalSavings`, requestOptions)
             .then(response => response.json())
             .then(result => {console.log(result)
                 if( result?.message === "Token Invalid/Expired"){
@@ -120,7 +123,7 @@ const Savings = (props) => {
             redirect: 'follow'
           };
     
-          fetch("http://3.237.3.113:3000/saving/addSavings", requestOptions)
+          fetch(`${baseUrl}/saving/addSavings`, requestOptions)
             .then(response => response.json())
             .then(result => {console.log(result)
                 totalSavings()
@@ -174,7 +177,7 @@ const Savings = (props) => {
             redirect: 'follow'
           };
     
-          fetch("http://3.237.3.113:3000/saving/removeSavings", requestOptions)
+          fetch(`${baseUrl}/saving/removeSavings`, requestOptions)
             .then(response => response.json())
             .then(result => {console.log(result)
                 totalSavings()

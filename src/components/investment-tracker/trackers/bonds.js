@@ -7,11 +7,12 @@ import { Button } from "@mui/material";
 import ModalComponent from "../../../modal/modal";
 import { Backdrop, CircularProgress } from "@mui/material";
 
-
+import {api} from '../../utils/constant'
+const baseUrl=api.baseUrl 
 const Bonds = (props) => {
   
-  const baseUrl='http://3.237.3.113:3000';
-
+  // const baseUrl='http://3.237.3.113:3000';
+  
     const navigate = useNavigate();
     const [show,setShow] = useState(false)
     const [loader,setLoader]=useState(false);
